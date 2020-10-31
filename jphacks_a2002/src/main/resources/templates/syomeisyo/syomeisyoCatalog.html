@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+<meta charset="UTF-8">
+<title>就活Portal Main</title>
+
+<!-- モバイル設定 -->
+<meta id="viewport" name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="manifest" th:href="@{/css/manifest.json}"
+	crossorigin="use-credentials">
+<meta name="application-name" content="SCC">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="SCC">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<!-- アイコン設定 -->
+<link rel="icon" th:href="@{/css/SCC.jpg}" sizes="192x192"
+	href="../static/css/SCC.jpg">
+<link rel="shortcut icon" th:href="@{/css/SCC.jpg}">
+<link rel="apple-touch-icon" th:href="@{/css/SCC.jpg}">
+<link rel="apple-touch-icon" th:href="@{/css/SCC.jpg}" sizes="192x192">
+<link rel="apple-touch-icon" th:href="@{/css/SCC.jpg}" sizes="58x58">
+
+<!-- スタイル設定 -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/ress.css}"
+	href="../static/css/ress.css">
+<link rel="stylesheet" th:href="@{/css/home.css}"
+	href="../static/css/home.css">
+</head>
+
+<body th:classappend="${session.isDarkmode} ? 'mode-dark'">
+
+	<!-- 共通ヘッダ -->
+	<nav class="navbar navbar-expand-lg navbar-dark btn-primary">
+		<h1>
+			<a class="navbar-brand title-font" th:href="@{/}">就活Portal.com</a>
+		</h1>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarToggler" aria-controls="navbarToggler"
+			aria-expanded="false" aria-label="Toggle navigation	">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarToggler">
+			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+				<li class="nav-item active"><a class="nav-link"
+					th:href="@{/userProfile}"> <img class="config-img"
+						th:src="@{/css/config.png}" src="../static/css/config.png">
+				</a></li>
+				<li>
+					<form class="my-2 my-lg-0" method="post" th:action="@{/logout}">
+						<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<!-- コンテンツ -->
+	<div class="content-box">
+		<h2 style="text-align: center">証明書発行一覧</h2>
+		<form method="post" th:action="@{/syomeisyo/syomeisyoCatalog}"
+			class="narrow">
+			<div class="container">
+
+				<div class="row">
+					<div class="col-sm-6">
+						<!-- 絞り込み検索 -->
+						<!-- ラジオボタン -->
+						<label for="money_status" style="text-align: center;"><strong>状態</strong></label>
+						<div class="form-group input-box">
+							<div>
+								<input type="radio" name="money_status" value="1"
+									id="money_status">未発行<br> <input type="radio"
+									name="money_status" value="2" id="money_status">発行済み<br>
+								<input type="radio" name="money_status" value="3"
+									id="money_status">未払い<br> <input type="radio"
+									name="money_status" value="4">支払い済み<br>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6" align="center">
+						<div class="form-group input-box">
+							<p>
+								氏名　　　<input type="text" style="background-color: white"
+									name="stname">
+							</p>
+							<p>
+								学籍番号　<input type="text" style="background-color: white"
+									name="stno">
+							</p>
+							<p>
+								証明書ID　<input type="text" style="background-color: white"
+									name="syomeisyo_id">
+							</p>
+
+							<div class="input-group2">
+								<button type="submit" class="btn btn-primary">絞り込み検索</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<br> <br>
+		<table border="2" style="margin-left: auto; margin-right: auto">
+			<tr>
+				<th>証明書ID</th>
+				<th>登録ユーザ</th>
+				<th>受験報告書の状態</th>
+				<th>詳細</th>
+			</tr>
+			<ul th:each="user : ${syomeisyoEntity.syomeisyolist}"
+				th:object="${user}">
+				<tr>
+					<td><span th:text="*{syomeisyo_id}"></span></td>
+					<td><span th:text="*{stno}"></span></td>
+					<td><div th:switch="*{money_status}">
+							<span th:case="1" th:text="未発行"></span> <span th:case="2"
+								th:text="発行済み"></span> <span th:case="3" th:text="未払い"></span> <span
+								th:case="4" th:text="支払い済み"></span>
+						</div></td>
+					<td>
+						<form method="post"
+							th:action="@{/syomeisyo/syomeisyoDetail/} + *{syomeisyo_id}">
+							<button class="btn btn-success" type="submit">詳細</button>
+						</form>
+					</td>
+				</tr>
+			</ul>
+		</table>
+		<br>
+		<form method="get" th:action="@{/syomeisyo/SyomeisyoRegister}"
+			style="text-align: center">
+			<button class="btn btn-success" type="submit">新規発行</button>
+		</form>
+		<br>
+	</div>
+
+
+
+
+	<!-- 共通スクリプト -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script th:src="@{/js/portal.js}"></script>
+
+</body>
+</html>

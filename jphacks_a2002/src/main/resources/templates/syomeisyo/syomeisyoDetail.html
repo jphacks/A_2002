@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+<meta charset="UTF-8">
+<title>就活Portal Main</title>
+
+<!-- モバイル設定 -->
+<meta id="viewport" name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="manifest" th:href="@{/css/manifest.json}"
+	crossorigin="use-credentials">
+<meta name="application-name" content="SCC">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="SCC">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<!-- アイコン設定 -->
+<link rel="icon" th:href="@{/css/SCC.jpg}" sizes="192x192"
+	href="../static/css/SCC.jpg">
+<link rel="shortcut icon" th:href="@{/css/SCC.jpg}">
+<link rel="apple-touch-icon" th:href="@{/css/SCC.jpg}">
+<link rel="apple-touch-icon" th:href="@{/css/SCC.jpg}" sizes="192x192">
+<link rel="apple-touch-icon" th:href="@{/css/SCC.jpg}" sizes="58x58">
+
+<!-- スタイル設定 -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/ress.css}"
+	href="../static/css/ress.css">
+<link rel="stylesheet" th:href="@{/css/home.css}"
+	href="../static/css/home.css">
+
+</head>
+
+<body th:classappend="${session.isDarkmode} ? 'mode-red'">
+
+	<!-- 共通ヘッダ -->
+	<nav class="navbar navbar-expand-lg navbar-dark btn-primary">
+		<h1>
+			<a class="navbar-brand title-font" th:href="@{/}">就活Portal.com</a>
+
+		</h1>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarToggler" aria-controls="navbarToggler"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarToggler">
+			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+				<li class="nav-item active"><a class="nav-link"
+					th:href="@{/userProfile}"> <img class="config-img"
+						th:src="@{/css/config.png}" src="../static/css/config.png">
+				</a></li>
+				<li>
+					<form class="my-2 my-lg-0" method="post" th:action="@{/logout}">
+						<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="content-box">
+		<h2 style="text-align: center">証明書発行詳細</h2>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3" align="center">
+
+					<label for="department"><strong>学科</strong></label>
+					<div class="form-group ">
+						<p th:text="${data.department}"></p>
+					</div>
+				</div>
+				<div class="col-sm-3" align="center">
+					<label for="user_id"><strong>学年</strong></label>
+					<div class="form-group">
+						<p th:text="${data.schoolyear}"></p>
+					</div>
+				</div>
+				<div class="col-sm-3" align="center">
+					<label for="user_id"><strong>クラス</strong></label>
+					<div class="form-group ">
+						<p th:text="${data.stclass}"></p>
+					</div>
+				</div>
+				<div class="col-sm-3" align="center">
+					<label for="user_name"><strong>氏名</strong></label>
+					<div class="form-group ">
+						<p th:text="${data.stname}"></p>
+					</div>
+				</div>
+				<div class="col-sm-6" align="center">
+					<label for="user_id"><strong>学籍番号</strong></label>
+					<div class="form-group ">
+						<p th:text="${data.stno}"></p>
+					</div>
+				</div>
+				<div class="col-sm-6" align="center">
+					<label for="user_id"><strong>生年月日</strong></label>
+					<div class="form-group ">
+						<p th:text="${data.birthdate}"></p>
+					</div>
+				</div>
+				<div class="col-sm-12" align="center">
+					<label for="user_id"><strong>就活3点セット</strong></label>
+					<div class="form-group ">
+						<p th:text="${data.fullset}"></p>
+					</div>
+				</div>
+				<div class="col-sm-12" align="center">
+					<label for="user_id"><strong>在学証明書</strong></label>
+					<div class="form-group ">
+						<p th:text="${data.enrolled_cnt}"></p>
+					</div>
+				</div>
+				<div class="col-sm-12" align="center">
+					<label for="user_id"><strong>成績証明書</strong></label>
+					<div class="form-group ">
+						<p th:text="${data.record_cnt}"></p>
+					</div>
+				</div>
+				<div class="col-sm-12" align="center">
+					<label for="user_id"><strong>卒業見込み証明書</strong></label>
+					<div class="form-group ">
+						<p th:text="${data.graduation_cnt}"></p>
+					</div>
+				</div>
+				<div class="col-sm-12" align="center">
+					<label for="user_id"><strong>健康診断証明書</strong></label>
+					<div class="form-group ">
+						<p th:text="${data.health}"></p>
+					</div>
+				</div>
+				<div class="col-sm-12" align="center">
+					<label for="user_id"><strong>その他証明書</strong></label>
+					<div class="form-group ">
+						<p th:text="${data.other_name}"></p>
+						<p th:text="${data.other_cnt}"></p>
+					</div>
+				</div>
+				<div class="col-sm-6" align="center">
+					<label for="user_id"><strong>郵便番号</strong></label>
+					<div class="form-group ">
+						<p th:text="${data.zipcode}"></p>
+					</div>
+				</div>
+				<div class="col-sm-6" align="center">
+					<label for="user_id"><strong>宛名</strong></label>
+					<div class="form-group ">
+						<p th:text="${data.address_name}"></p>
+					</div>
+				</div>
+				<div class="col-sm-12" align="center">
+					<label for="user_id"><strong>住所</strong></label>
+					<div class="form-group ">
+						<p th:text="${data.address}"></p>
+					</div>
+				</div>
+				<div class="col-sm-6" align="center">
+					<label for="user_id"><strong>領収月日</strong></label>
+					<div class="form-group ">
+						<p th:text="${data.receipt_date}"></p>
+					</div>
+				</div>
+				<div class="col-sm-6" align="center">
+					<label for="user_id"><strong>領収者</strong></label>
+					<div class="form-group ">
+						<p th:text="${data.receipt_name}"></p>
+					</div>
+				</div>
+				<div class="col-sm-6" align="center">
+					<label for="user_id"><strong>発行月日</strong></label>
+					<div class="form-group ">
+						<p th:text="${data.issue_date}"></p>
+					</div>
+				</div>
+				<div class="col-sm-6" align="center">
+					<label for="user_id"><strong>発行者</strong></label>
+					<div class="form-group ">
+						<p th:text="${data.issue_name}"></p>
+					</div>
+				</div>
+				<div class="col-sm-12" align="center">
+					<label for="total_money"><strong>交付代金</strong></label>
+					<p th:text="${data.total_money}"></p>
+					<input type="hidden" name="money_status" value="0">
+				</div>
+				<br>
+				<div class="col-sm-4" align="center">
+
+					<a th:href="@{'/syomeisyo/syomeisyoFix/'} + ${data.syomeisyo_id}"><button
+							class="btn btn-warning" type="submit">
+							<strong>修正する</strong>
+						</button></a>
+				</div>
+
+				<div class="col-sm-4" align="center">
+
+					<form method="get" th:action="@{/syomeisyo/syomeisyoCatalog}">
+						<div class="input-group">
+							<button type="submit" class="btn btn-dark" style="margin: auto">一覧</button>
+						</div>
+					</form>
+				</div>
+
+
+
+				<div class="col-sm-4" align="center">
+				<div sec:authorize="hasAuthority('STUFF')">
+					<a
+						th:href="@{/syomeisyo/syomeisyoRecognition/} + ${data.syomeisyo_id}"><button
+							class="btn btn-success" type="submit">
+							<strong>状態変更</strong>
+						</button></a>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+
+	<!-- 共通スクリプト -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script th:src="@{/js/portal.js}"></script>
+</body>
+</html>
