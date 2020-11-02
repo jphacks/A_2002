@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Controller
-public class RequestController {
+public class MangaController {
 
 	@Autowired
 	MangaService mangaService;
@@ -41,7 +41,7 @@ public class RequestController {
 	 * @return
 	 */
 	@PostMapping("/top")
-	public String getRequestList(Principal principal, Model model) {
+	public String getMangaListDisplay(Principal principal, Model model) {
 		MangaEntity mangaEntity = mangaService./*一覧取得のメソッド*/();
 		model.addAttribute("mangaEntity", mangaEntity);
 		return /*漫画一覧画面*/;
@@ -54,38 +54,22 @@ public class RequestController {
 	 * @param request_id
 	 * @return
 	 */
-	@RequestMapping("/top/create/{漫画のID}")
-	public String selectStudentDetailID(Principal principal, Model model, @PathVariable("漫画のID") int /*漫画のID*/) {
+	@RequestMapping("/top/artwork/{漫画のID}")
+	public String selectMangaDisplay(Principal principal, Model model, @PathVariable("漫画のID") int /*漫画のID*/) {
 		MangaEntity mangaEntity = mangaService.requestDetailDisplay(/*漫画のID*/);
 		model.addAttribute("mangaEntity", mangaEntity);
 		return //漫画の詳細画面を表示するメソッド(principal, model);
 	}
 
-
 	/**
-	 * 詳細画面を表示する際に生徒か先生かで分岐する
-	 * @param principal
-	 * @param model
-	 * @return
-	 */
-	@PostMapping("/request/Detail")
-	private String getDetailDisplay(Principal principal, Model model) {
-		String user_authority = mangaService.judgeAuthority(principal.getName());
-		if (user_authority.equals("TEACHER")) {
-			return "request/requestDetailTeacher";
-		} else {
-			return "request/requestDetailStudent";
-		}
-	}
-	/**
-	 * 追加画面を表示する
+	 * 新規作成画面を表示する
 	 * @param form
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/request/requestInsert")
-	public String getInsertDisplay(RequestForm form, Model model) {
-		return "request/requestInsert";
+	@GetMapping("/top/createManga")
+	public String getCreateDisplay(Principal principal, Model model) {
+		return "top/create";
 	}
 
 	/**
