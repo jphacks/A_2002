@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jphacks_a2002.PreviewEntity;
 import jphacks_a2002.frame.FrameData;
+import jphacks_a2002.frame.FrameRepository;
 import jphacks_a2002.frame.FrameService;
 
 @Transactional
@@ -17,26 +19,29 @@ public class MangaService {
 	@Autowired
 	MangaRepository mangaRepository;
 	@Autowired
+	FrameRepository frameRepository;
+	@Autowired
 	FrameService frameService;
 
 	//データベースから既に完成した漫画のリストをランダムに10件取得する
 	//処理の内容が漫画の登録件数によってかなり左右されるためあとで修正の必要あり
-	public MangaEntity selectRandomManga() {
+	public PreviewEntity selectRandomManga() {
 		//漫画マスタのstatusが4になってるやつだけ頂戴
-		MangaEntity mangaEntityAll = mangaRepository.selectAll();
-		Collections.shuffle(mangaEntityAll.getMangaList());
-		MangaEntity mangaEntity = new MangaEntity();
+		PreviewEntity previewEntityAll = frameRepository.selectAll();
+		Collections.shuffle(previewEntityAll.getPreviewList());
+		PreviewEntity previewEntity = new PreviewEntity();
 		int index = 0;
-		while(mangaEntity.getMangaList().size() < 10) {
+		while(previewEntity.getPreviewList().size() < 10) {
 			index++;
-			mangaEntity.getMangaList().add(mangaEntityAll.getMangaList().get(index));
+			previewEntity.getPreviewList().add(previewEntityAll.getPreviewList().get(index));
 		}
-		return mangaEntity;
+		return previewEntity;
 	}
 
 	//データベースから既に完成した漫画を作成者で検索して取得する
-	public MangaEntity searchMangaCreater(String Creater) {
-		return mangaRepository.searchCreater(Creater);
+	public PreviewEntity searchMangaCreater(String Creater) {
+		//Frameベースで検索を行うためFrameRepositoryに問い合わせを行う
+		return frameRepository.searchCreater(Creater);
 	}
 
 	//新規に作成された漫画をデータベースに登録（一応登録件数を返す）
@@ -44,7 +49,7 @@ public class MangaService {
 	//Controller側でテーマIDとコマのデータ頂戴
 	public int addNewManga(int themeId,FrameData frameData) {
 		//漫画ごとの一意なIDの割り振りは話し合ってからRepositoryかこっちに記述
-		int FrameId = frameService.AddNewFrame(frameData);
+		int FrameId = frameService.addNewFrame(frameData);
 		return mangaRepository.insertManga(themeId,FrameId);
 	}
 
@@ -63,9 +68,8 @@ public class MangaService {
 	//正直このやり方が最良かはよくわかんね
 	public int addNewFrame(int mangaId,FrameData frameData) {
 		//リポジトリ側でコマFlagみたいなやつ1進めるように作っとてん
-		MangaData mangaData = this.getOneManga(mangaId);
-		int frameId = frameService.AddNewFrame(frameData);
-		return mangaRepository.updateManga(mangaData,frameId);
+		frameService.addNewFrame(frameData);
+		return mangaRepository.updateManga(mangaId);
 	}
 
 	//トップ画面で一覧から漫画選択または最終コマの作成が完了した時点で漫画ページへ遷移
