@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS frame_table (
     creater VARCHAR(50),
     path VARCHAR(254) NOT NULL,
     create_date DATE NOT NULL,
-    manga_id INT FOREIGN KEY(manga_id) REFERENCES(manga_table),
+    manga_id INT,
     frame_no int NOT NULL
 );
 
