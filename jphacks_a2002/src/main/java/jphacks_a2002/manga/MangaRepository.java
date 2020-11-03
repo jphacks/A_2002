@@ -39,6 +39,16 @@ public class MangaRepository {
 			mangaData.setManga_id((Integer) map.get("m.manga_id"));
 			mangaData.setTheme_id((Integer)map.get("m.theme_id"));
 
+			//これに置き換えたら超短くなってきもちンゴかもしんね
+			/*String prstmtStrList[] = {"m.frame_ID%d","f%d.creater","f%d.path","f%d.create_date"};
+			for( int i = 0; i < 4;i++ ) {
+				frameData.setFrameID((Integer)map.get(String.format(prstmtStrList[0],i)));
+				frameData.setCreater((String)map.get(String.format(prstmtStrList[0],i)));
+				frameData.setPath((String)map.get(String.format(prstmtStrList[0],i)));
+				frameData.setCreateDate((Date)map.get(String.format(prstmtStrList[0],i)));
+				mangaData.getFramelist().add(frameData);
+			}*/
+
 			frameData.setFrameID((Integer)map.get("m.frame_ID1"));
 			frameData.setCreater((String)map.get("f1.creater"));
 			frameData.setPath((String)map.get("f1.path"));
