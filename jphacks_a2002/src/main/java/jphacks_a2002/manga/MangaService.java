@@ -34,9 +34,9 @@ public class MangaService {
 		return mangaEntity;
 	}
 
-	//データベースから既に完成した漫画をテーマ名で検索して取得する
+	//データベースから既に完成した漫画を作成者で検索して取得する
 	public MangaEntity searchMangaCreater(String Creater) {
-		return mangaRepository.searchTheme(Creater);
+		return mangaRepository.searchCreater(Creater);
 	}
 
 	//新規に作成された漫画をデータベースに登録（一応登録件数を返す）
