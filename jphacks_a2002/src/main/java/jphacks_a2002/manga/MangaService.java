@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jphacks_a2002.frame.FrameData;
+import jphacks_a2002.frame.FrameRepository;
 import jphacks_a2002.frame.FrameService;
 
 @Transactional
@@ -16,6 +17,8 @@ public class MangaService {
 
 	@Autowired
 	MangaRepository mangaRepository;
+	@Autowired
+	FrameRepository frameRepository;
 	@Autowired
 	FrameService frameService;
 
@@ -36,7 +39,8 @@ public class MangaService {
 
 	//データベースから既に完成した漫画を作成者で検索して取得する
 	public MangaEntity searchMangaCreater(String Creater) {
-		return mangaRepository.searchCreater(Creater);
+		//Frameベースで検索を行うためFrameRepositoryに問い合わせを行う
+		return frameRepository.searchCreater(Creater);
 	}
 
 	//新規に作成された漫画をデータベースに登録（一応登録件数を返す）
