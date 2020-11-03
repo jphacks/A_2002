@@ -43,8 +43,8 @@ public class MangaService {
 		//未完成漫画のリストを作成
 		//漫画マスタのstatusが4以外のものを抽出
 		MangaEntity undoneMangaEntity = mangaRepository.selectUndoneAll();
-		int randGetIndex = new Random().randInt(undoneMangaEntity.size());
-		return undoneMangaEntity.getRandomManga(randGetIndex);
+		int randGetIndex = new Random().nextInt(undoneMangaEntity.getMangaList().size());
+		return undoneMangaEntity.getMangaList().get(randGetIndex);
 	}
 
 	//ここの処理については明日先生に聞くかも
