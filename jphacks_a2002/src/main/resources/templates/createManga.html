@@ -11,7 +11,7 @@
         <link href="img/favicon.ico" rel="icon">
 
         <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet"> 
 
         <!-- CSS Libraries -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -25,8 +25,8 @@
 
     <body>
         <!-- Top Bar Start -->
-
-
+        
+        
 
         <!-- Nav Bar Start -->
         <div class="nav-bar">
@@ -56,8 +56,8 @@
                 </nav>
             </div>
         </div>
-        <!-- Nav Bar End -->
 
+        <!-- Nav Bar End -->
         <div class="container pt-3">
             <div class="row align-items-center">
                 <div class="col-lg-3 col-md-4">
@@ -67,26 +67,37 @@
                 </div>
             </div>
         </div>
+
         <!-- Brand Start -->
         <div class="brand">
             <div class="container">
-                <canvas id="canvas" width="1024" height="768" style="border: solid 1px #000;box-sizing: border-box;"></canvas>
-                    <div class="option">
-                        <div class="color">
-                        色：
-                        <a href="" class="black" data-color="0, 0, 0, 1"></a>
-                        <a href="" class="red" data-color="255, 0, 0, 1"></a>
-                        <a href="" class="blue" data-color="0, 0, 255, 1"></a>
-                        </div>
-                        <div class="bold">
-                        太さ：
-                        <a href="" class="small" data-bold="1">小</a>
-                        <a href="" class="middle" data-bold="5">中</a>
-                        <a href="" class="large" data-bold="10">大</a>
-                        </div>
+                <canvas id="canvas" width="1024" height="768" style="border: solid 5px rgb(121, 121, 121);box-sizing: border-box;"></canvas>
+                <div class="row">
+                  <div class="col-5 rounded-lg" style="background-color: rgb(197, 197, 197); padding:5px;">
+                    <div class="color float-right">
+                      <label class="h5">色：</label>
+                      <a href="" class="black" data-color="0, 0, 0, 1"></a>
+                      <a href="" class="red" data-color="255, 0, 0, 1"></a>
+                      <a href="" class="blue" data-color="0, 0, 255, 1"></a>
+                      <a href="" class="yellow" data-color="255, 255, 0, 1"></a>
+                      <a href="" class="white" data-color="255, 255, 255, 1"></a>
                     </div>
-                <input type="button" value="全消し" id="clear">
-                <a id="download" href="#" download="canvas.png">ダウンロード</a>
+                    <div class="bold">
+                      <label class="h5">太さ：</label>
+                      <a href="" class="little" data-bold="1">小</a>
+                      <a href="" class="middle" data-bold="10">中</a>
+                      <a href="" class="large" data-bold="20">大</a>
+                      <a href="" class="mechalarge" data-bold="50">特大</a>
+                    </div>
+                    <input class="btn btn-danger" type="button" value="全消し" id="clear">
+                    <a class="btn btn-primary" id="download" href="#" download="canvas.png">ダウンロード</a>
+                </div>
+                <div class="col-3">
+                  <label class="mangamoji">サクシャ：</label>
+                  <input type="text" value="">
+                  <form action=""></form>
+                </div>
+              </div>    
             </div>
         </div>
         <!-- Brand End -->
@@ -105,18 +116,18 @@
             // canvas
             var cnvs = document.getElementById('canvas');
             var ctx = cnvs.getContext('2d');
-
+         
             // 変数宣言
             const cnvWidth = 1024;
             const cnvHeight = 768;
-            var cnvColor = "255, 0, 0, 1";  // 線の色
+            var cnvColor = "0, 0, 0, 1";  // 線の色
             var cnvBold = 5;  // 線の太さ
             var clickFlg = 0;  // クリック中の判定 1:クリック開始 2:クリック中
             var bgColor = "rgb(255,255,255)";
-
+         
             // canvasの背景色を設定(指定がない場合にjpeg保存すると背景が黒になる)
             setBgColor();
-
+         
             // canvas上でのイベント
             $("#canvas").mousedown(function(){
               clickFlg = 1; // マウス押下開始
@@ -127,7 +138,7 @@
               if(!clickFlg) return false;
               draw(e.offsetX, e.offsetY);
             });
-
+         
             // 描画処理
             function draw(x, y) {
               ctx.lineWidth = cnvBold;
@@ -143,32 +154,32 @@
               }
               ctx.stroke();
             };
-
+         
             // 色の変更
             $(".color a").click(function(){
               cnvColor = $(this).data("color");
               return false;
             });
-
+         
             // 線の太さ変更
             $(".bold a").click(function(){
               cnvBold = $(this).data("bold");
               return false;
             });
-
+         
             // 描画クリア
             $("#clear").click(function(){
               ctx.clearRect(0,0,cnvWidth,cnvHeight);
               setBgColor();
             });
-
+         
             // canvasを画像で保存
             $("#download").click(function(){
               canvas = document.getElementById('canvas');
               var base64 = canvas.toDataURL("image/png");
               document.getElementById("download").href = base64;
             });
-
+         
             function setBgColor(){
               // canvasの背景色を設定(指定がない場合にjpeg保存すると背景が黒になる)
               ctx.fillStyle = bgColor;

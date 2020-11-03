@@ -13,7 +13,7 @@
 
 .mangamoji {
     font-family: 'toroman', sans-serif;
-    font-size: 300px;
+    font-size: 30px;
 }
 .mangamoji2 {
     font-family: 'yasaan', sans-serif;
@@ -1399,4 +1399,10 @@ button.btn:hover {
   }
   .blue{
     background-color: #0000ff;
+  }
+  .yellow{
+    background-color: #ffff00;
+  }
+  .white{
+    background-color: #ffffff;
   }
