@@ -23,15 +23,15 @@ public class MangaService {
 	//処理の内容が漫画の登録件数によってかなり左右されるためあとで修正の必要あり
 	public MangaEntity selectRandomManga() {
 		//漫画マスタのstatusが4になってるやつだけ頂戴
-		MangaEntity mangaEntityAll = mangaRepository.selectAll();
-		Collections.shuffle(mangaEntityAll.getMangaList());
-		MangaEntity mangaEntity = new MangaEntity();
+		PreviewEntity previewEntityAll = mangaRepository.selectAll();
+		Collections.shuffle(previewEntityAll.getMangaList());
+		PreviewEntity previewEntity = new PreviewEntity();
 		int index = 0;
-		while(mangaEntity.getMangaList().size() < 10) {
+		while(previewEntity.getPreviewList().size() < 10) {
 			index++;
-			mangaEntity.getMangaList().add(mangaEntityAll.getMangaList().get(index));
+			previewEntity.getPreviewList().add(previewEntityAll.getPreviewList().get(index));
 		}
-		return mangaEntity;
+		return previewEntity;
 	}
 
 	//データベースから既に完成した漫画を作成者で検索して取得する
