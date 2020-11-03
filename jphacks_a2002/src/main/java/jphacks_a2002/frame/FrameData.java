@@ -14,4 +14,8 @@ public class FrameData {
 	String path;
 
 	Date createDate;
+
+	int mangaID;
+
+	int frameNo;
 }

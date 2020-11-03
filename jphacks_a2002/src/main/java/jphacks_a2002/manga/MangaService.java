@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jphacks_a2002.PreviewEntity;
 import jphacks_a2002.frame.FrameData;
 import jphacks_a2002.frame.FrameRepository;
 import jphacks_a2002.frame.FrameService;
@@ -24,10 +25,10 @@ public class MangaService {
 
 	//データベースから既に完成した漫画のリストをランダムに10件取得する
 	//処理の内容が漫画の登録件数によってかなり左右されるためあとで修正の必要あり
-	public MangaEntity selectRandomManga() {
+	public PreviewEntity selectRandomManga() {
 		//漫画マスタのstatusが4になってるやつだけ頂戴
-		PreviewEntity previewEntityAll = mangaRepository.selectAll();
-		Collections.shuffle(previewEntityAll.getMangaList());
+		PreviewEntity previewEntityAll = frameRepository.selectAll();
+		Collections.shuffle(previewEntityAll.getPreviewList());
 		PreviewEntity previewEntity = new PreviewEntity();
 		int index = 0;
 		while(previewEntity.getPreviewList().size() < 10) {
@@ -38,7 +39,7 @@ public class MangaService {
 	}
 
 	//データベースから既に完成した漫画を作成者で検索して取得する
-	public MangaEntity searchMangaCreater(String Creater) {
+	public PreviewEntity searchMangaCreater(String Creater) {
 		//Frameベースで検索を行うためFrameRepositoryに問い合わせを行う
 		return frameRepository.searchCreater(Creater);
 	}
@@ -65,16 +66,16 @@ public class MangaService {
 	//コントローラでコマテーブルの情報を作成した後こっちを呼び出して欲しい
 	//コマのパッケージの方でコマIDをコントローラに返すように記述する
 	//正直このやり方が最良かはよくわかんね
-	public int addNewFrame(int mangaId,FrameData frameData) {
-		//リポジトリ側でコマFlagみたいなやつ1進めるように作っとてん
-		MangaData mangaData = this.getOneManga(mangaId);
-		int frameId = frameService.addNewFrame(frameData);
-		return mangaRepository.updateManga(mangaData,frameId);
-	}
-
-	//トップ画面で一覧から漫画選択または最終コマの作成が完了した時点で漫画ページへ遷移
-	//渡す項目がIdでいいかは正直わかんね
-	public MangaData getOneManga(int mangaId) {
-		return mangaRepository.getOneManga(mangaId);
-	}
+//	public int addNewFrame(int mangaId,FrameData frameData) {
+//		//リポジトリ側でコマFlagみたいなやつ1進めるように作っとてん
+//		MangaData mangaData = this.getOneManga(mangaId);
+//		int frameId = frameService.addNewFrame(frameData);
+//		return mangaRepository.updateManga(mangaData,frameId);
+//	}
+//
+//	//トップ画面で一覧から漫画選択または最終コマの作成が完了した時点で漫画ページへ遷移
+//	//渡す項目がIdでいいかは正直わかんね
+//	public MangaData getOneManga(int mangaId) {
+//		return mangaRepository.getOneManga(mangaId);
+//	}
 }
