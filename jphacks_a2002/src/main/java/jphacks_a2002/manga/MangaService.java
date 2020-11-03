@@ -44,7 +44,7 @@ public class MangaService {
 	//Controller側でテーマIDとコマのデータ頂戴
 	public int addNewManga(int themeId,FrameData frameData) {
 		//漫画ごとの一意なIDの割り振りは話し合ってからRepositoryかこっちに記述
-		int FrameId = frameService.AddNewFrame(frameData);
+		int FrameId = frameService.addNewFrame(frameData);
 		return mangaRepository.insertManga(themeId,FrameId);
 	}
 
@@ -64,7 +64,7 @@ public class MangaService {
 	public int addNewFrame(int mangaId,FrameData frameData) {
 		//リポジトリ側でコマFlagみたいなやつ1進めるように作っとてん
 		MangaData mangaData = this.getOneManga(mangaId);
-		int frameId = frameService.AddNewFrame(frameData);
+		int frameId = frameService.addNewFrame(frameData);
 		return mangaRepository.updateManga(mangaData,frameId);
 	}
 
