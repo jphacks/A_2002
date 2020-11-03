@@ -9,14 +9,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class FrameService {
 
 	@Autowired
-	FrameRepositrory frameRepository;
+	FrameRepository frameRepository;
 
 	//コマの追加時に呼び出される
 	//MangaControllerから呼び出される予定だが、ちょっと微妙かもと思っている
 	//返り値はコマID
 	//このやり方だとFrameControllerがいらないのよな
 	public int AddNewFrame(FrameData frameData) {
-		return frameRepository.InsertFrame(frameData);
+		return frameRepository.insertOneFrame(frameData);
 	}
 
 }
