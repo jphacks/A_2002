@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jphacks_a2002.PreviewEntity;
+
 
 /**
  * HTMLから受け取ったパラメータを扱うクラス
@@ -32,8 +34,8 @@ public class MangaController {
 	 */
 	@PostMapping("/top")
 	public String getMangaListDisplay(Principal principal, Model model) {
-		MangaEntity mangaEntity = mangaService.selectRandomManga();
-		model.addAttribute("mangaEntity", mangaEntity);
+		PreviewEntity previewEntity = mangaService.selectRandomManga();
+		model.addAttribute("previewEntity", previewEntity);
 		return "/top";
 	}
 
@@ -86,8 +88,8 @@ public class MangaController {
 	 */
 	@PostMapping("/top/serch")
 	public String serchMangaListWithCreater(Principal principal, Model model, @RequestParam("creater") String creater) {
-			MangaEntity mangaEntity = mangaService.searchMangaCreater(creater);
-			model.addAttribute("mangaEntity", mangaEntity);
+			PreviewEntity previewEntity = mangaService.searchMangaCreater(creater);
+			model.addAttribute("previewEntity", previewEntity);
 		return "/top";
 	}
 }
