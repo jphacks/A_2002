@@ -17,7 +17,12 @@ public class MangaRepository {
 	@Autowired
 	JdbcTemplate jdbc;
 
-	private static final String SELECT_PERFECT_MANGA = "SELECT * FORM mangatable WHERE flag = 4";
+	private static final String SELECT_PERFECT_MANGA = "SELECT * FROM manga_table as m ,frame_table as f1,frame_table as f2,frame_table as f3,frame_table as f4 "
+			+ "WHERE m.frame_ID1 = f1.frame_ID AND m.frame_ID2 = f2.frame_ID AND  m.frame_ID3 = f3.frame_ID AND m.frame_ID4 = f4.frame_ID AND status = 4 ORDER BY";
+	private static final String SELECT_SEARCH_MANGA = "SELECT * FROM manga_table as m ,frame_table as f1,frame_table as f2,frame_table as f3,frame_table as f4 "
+			+ "WHERE m.frame_ID1 = f1.frame_ID AND m.frame_ID2 = f2.frame_ID AND  m.frame_ID3 = f3.frame_ID AND m.frame_ID4 = f4.frame_ID AND status = 4 AND ("
+			+ "m.frame_ID1 IN(SELECT frame_ID FROM frame_table WHERE creater = ?) OR m.frame_ID2 IN(SELECT frame_ID FROM frame_table WHERE creater = ?) OR "
+			+ "m.frame_ID3 IN(SELECT frame_ID FROM frame_table WHERE creater = ?) OR m.frame_ID4 IN(SELECT frame_ID FROM frame_table WHERE creater = ?))";
 
 	public MangaEntity selectAll() {
 
@@ -79,5 +84,13 @@ public class MangaRepository {
 
 		}
 		return entity;
+	}
+
+	public MangaEntity searchTheme(String themeName) {
+
+		List<Map<String, Object>> resultList = jdbc.queryForList(SELECT_SEARCH_MANGA);
+
+		MangaEntity mangaEntity = mappingSelectResultEntity(resultList);
+		return mangaEntity;
 	}
 }
