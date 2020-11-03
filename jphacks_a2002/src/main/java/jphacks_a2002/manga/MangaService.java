@@ -7,12 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jphacks_a2002.frame.FrameData;
+import jphacks_a2002.frame.FrameService;
+
 @Transactional
 @Service
 public class MangaService {
 
 	@Autowired
 	MangaRepository mangaRepository;
+	@Autowired
+	FrameService frameService;
 
 	//データベースから既に完成した漫画のリストをランダムに10件取得する
 	//処理の内容が漫画の登録件数によってかなり左右されるためあとで修正の必要あり
@@ -33,9 +38,11 @@ public class MangaService {
 
 	//新規に作成された漫画をデータベースに登録（一応登録件数を返す）
 	//新規漫画作成時に必要なテーマなどはthemeパッケージにて記述
-	public int addNewManga(MangaData mangaData) {
+	//Controller側でテーマIDとコマのデータ頂戴
+	public int addNewManga(int themeId,FrameData frameData) {
 		//漫画ごとの一意なIDの割り振りは話し合ってからRepositoryかこっちに記述
-		return mangaRepository.insertManga(mangaData);
+		int FrameId = frameService.AddNewFrame(frameData);
+		return mangaRepository.insertManga(themeId,FrameId);
 	}
 
 	//コマ追加画面遷移時に未完成な漫画のデータを一つ取得する
