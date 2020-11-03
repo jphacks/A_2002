@@ -42,9 +42,9 @@ public class MangaController {
 	 */
 	@PostMapping("/top")
 	public String getMangaListDisplay(Principal principal, Model model) {
-		MangaEntity mangaEntity = mangaService./*一覧取得のメソッド*/();
+		MangaEntity mangaEntity = mangaService.selectRandomManga();
 		model.addAttribute("mangaEntity", mangaEntity);
-		return /*漫画一覧画面*/;
+		return "/top";
 	}
 
 	/**
