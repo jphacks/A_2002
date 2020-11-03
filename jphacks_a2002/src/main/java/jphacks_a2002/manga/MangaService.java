@@ -17,7 +17,7 @@ public class MangaService {
 	//データベースから既に完成した漫画のリストをランダムに10件取得する
 	//処理の内容が漫画の登録件数によってかなり左右されるためあとで修正の必要あり
 	public MangaEntity selectRandomManga() {
-		//漫画Flagが5になってるやつだけ頂戴
+		//漫画マスタのstatusが5になってるやつだけ頂戴
 		MangaEntity mangaEntity = mangaRepository.selectAll();
 		Collections.shuffle(mangaEntity.getMangaList());
 		while(mangaEntity.getMangaList().size() > 10) {
@@ -41,6 +41,7 @@ public class MangaService {
 	//コマ追加画面遷移時に未完成な漫画のデータを一つ取得する
 	public MangaData getRandomManga() {
 		//未完成漫画のリストを作成
+		//漫画マスタのstatusが5以外のものを抽出
 		MangaEntity undoneMangaEntity = mangaRepository.selectUndoneAll();
 		int randGetIndex = new Random().randInt(undoneMangaEntity.size());
 		return undoneMangaEntity.get(randGetIndex);
