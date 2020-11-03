@@ -15,7 +15,7 @@ public class FrameService {
 	//MangaControllerから呼び出される予定だが、ちょっと微妙かもと思っている
 	//返り値はコマID
 	//このやり方だとFrameControllerがいらないのよな
-	public int AddNewFrame(FrameData frameData) {
+	public int addNewFrame(FrameData frameData) {
 		return frameRepository.insertOneFrame(frameData);
 	}
 
