@@ -10,8 +10,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import jphacks_a2002.manga.MangaData;
-
 
 /**
  * HTMLから受け取ったパラメータを扱うクラス
@@ -34,9 +32,8 @@ public class FrameController {
 	@GetMapping("/createManga/cofirm")
 	public String confirmCreateManga(@ModelAttribute @Validated FrameData form, Principal principal, Model model) {
 		FrameData frameData = new FrameData();
-		MangaData mangaData = frameService.addNewFrame(frameData);
-		model.addAttribute("mangaData",mangaData);
-		return "top/join";
+		frameService.addNewFrame(frameData);
+		return "/top";
 	}
 
 }
