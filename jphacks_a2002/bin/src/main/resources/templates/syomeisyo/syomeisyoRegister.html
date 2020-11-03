@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+<meta charset="UTF-8">
+<title>就活Portal Main</title>
+
+<!-- モバイル設定 -->
+<meta id="viewport" name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="manifest" th:href="@{/css/manifest.json}"
+	crossorigin="use-credentials">
+<meta name="application-name" content="SCC">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="SCC">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<!-- アイコン設定 -->
+<link rel="icon" th:href="@{/css/SCC.jpg}" sizes="192x192"
+	href="../static/css/SCC.jpg">
+<link rel="shortcut icon" th:href="@{/css/SCC.jpg}">
+<link rel="apple-touch-icon" th:href="@{/css/SCC.jpg}">
+<link rel="apple-touch-icon" th:href="@{/css/SCC.jpg}" sizes="192x192">
+<link rel="apple-touch-icon" th:href="@{/css/SCC.jpg}" sizes="58x58">
+
+<!-- スタイル設定 -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/scc.css}"
+	href="../static/css/scc.css">
+<link rel="stylesheet" th:href="@{/css/home.css}"
+	href="../static/css/home.css">
+
+</head>
+
+<body th:classappend="${session.isDarkmode} ? 'mode-red'">
+
+	<!-- 共通ヘッダ -->
+	<nav class="navbar navbar-expand-lg navbar-dark btn-primary">
+		<h1>
+			<a class="navbar-brand title-font" th:href="@{/}">就活Portal.com</a>
+		</h1>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarToggler" aria-controls="navbarToggler"
+			aria-expanded="false" aria-label="Toggle navigation	">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarToggler">
+			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+				<li class="nav-item active"><a class="nav-link"
+					th:href="@{/userProfile}"> <img class="config-img"
+						th:src="@{/css/config.png}" src="../static/css/config.png">
+				</a></li>
+				<li>
+					<form class="my-2 my-lg-0" method="post" th:action="@{/logout}">
+						<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="content-box">
+		<div class="content1"
+			style="background-color: #FFFF99; margin-right: 100px; margin-left: 100px; margin-top: 100px; margin-bottom: 100px;">
+			<h2 style="text-align: center">証明書新規登録</h2>
+			<form method="post" th:action="@{/syomeisyo/syomeisyoRegister}"
+				name="syomeisyoForm" th:object="${syomeisyoForm}">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mozi_center">
+										<strong>学科コード</strong>
+									</p>
+									<select class="m_center" name="department" size="1">
+										<option value="1">S</option>
+										<option value="2">M</option>
+										<option value="3">R</option>
+										<option value="4">G</option>
+										<option value="5">J</option>
+										<option value="6">B</option>
+									</select>
+								</div>
+								<div class="col-sm-3">
+									<p class="mozi_center">
+										<strong>学年</strong>
+									</p>
+									<select class="m_center" name="schoolyear" size="1">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+									</select>
+								</div>
+								<div class="col-sm-3">
+									<label for="stclass"><strong class="mozi_center">クラス</strong></label>
+									<!-- <input type="text" style="width: 200px"  name="stclass" placeholder="S3A1">-->
+									<div class="form-group input-box"
+										th:classappend="${#fields.hasErrors('stclass')} ? 'has-error'">
+										<input type="text"
+											style="width: 200px; margin-right: auto; margin-left: auto;"
+											class="form-control" name="stclass" placeholder="S3A1"
+											th:field="*{stclass}"><span class="text-danger"
+											th:if="${#fields.hasErrors('stclass')}"
+											th:errors="*{stclass}">stclass error</span>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<label for="stname"><strong class="mozi_center">氏名</strong></label>
+									<!-- <input type="text" style="width: 200px"  name="user_name" placeholder="情報太郎">-->
+									<div class="form-group input-box"
+										th:classappend="${#fields.hasErrors('stname')} ? 'has-error'">
+										<input type="text"
+											style="width: 200px; margin-right: auto; margin-left: auto;"
+											class="form-control" name="stname" placeholder="情報太郎"
+											th:field="*{stname}"><span class="text-danger"
+											th:if="${#fields.hasErrors('stname')}" th:errors="*{stname}">stname
+											error</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<label for="stno"><strong class="mozi_center">学籍番号</strong></label>
+							<!-- <input type="text" style="width: 200px"  name="stno" placeholder="20183073">-->
+							<div class="form-group input-box"
+								th:classappend="${#fields.hasErrors('stno')} ? 'has-error'">
+								<input type="text"
+									style="width: 200px; margin-right: auto; margin-left: auto;"
+									class="form-control" name="stno" placeholder="20183073"><span class="text-danger"
+									th:if="${#fields.hasErrors('stno')}" th:errors="*{stno}">stno
+									error</span>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<label for="birthdate"><strong class="mozi_center">生年月日</strong></label>
+							<!-- <input type="text" style="width: 200px"  name="birthdate" placeholder="20183073">-->
+							<div class="form-group input-box"
+								th:classappend="${#fields.hasErrors('birthdate')} ? 'has-error'">
+								<input type="date"
+									style="width: 200px; margin-right: auto; margin-left: auto;"
+									class="form-control" name="birthdate" placeholder=""
+									th:field="*{birthdate}"><span class="text-danger"
+									th:if="${#fields.hasErrors('birthdate')}"
+									th:errors="*{birthdate}">birthdate error</span>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<label for="fullset">
+								<h3 style="margin-top: 80px; margin-right: auto; margin-left: auto;">就活３点セット</h3>
+							</label>
+							<div class="form-group input-box"
+								th:classappend="${#fields.hasErrors('fullset')} ? 'has-error'">
+								<input type="text"
+									style="width: 43px; margin-right: auto; margin-left: auto;"
+									class="form-control" name="fullset" placeholder="0"
+									th:field="*{fullset}" onChange="money()"><span
+									class="text-danger" th:if="${#fields.hasErrors('fullset')}"
+									th:errors="*{fullset}">fullset error</span>
+								<p style="margin-left: 50px;">通</p>
+								<br>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<label for="enrolled_cnt"><h3
+									style="margin-right: auto; margin-left: auto;">在学証明書</h3></label>
+							<div class="form-group input-box"
+								th:classappend="${#fields.hasErrors('enrolled_cnt')} ? 'has-error'">
+								<input type="text"
+									style="width: 43px; margin-right: auto; margin-left: auto;"
+									class="form-control" name="enrolled_cnt" placeholder="0"
+									th:field="*{enrolled_cnt}" onChange="money()"><span
+									class="text-danger"
+									th:if="${#fields.hasErrors('enrolled_cnt')}"
+									th:errors="*{enrolled_cnt}">enrolled_cnt error</span>
+								<p style="margin-left: 50px;">通</p>
+							</div>
+
+						</div>
+						<div class="col-sm-12">
+							<label for="record_cnt"><h3>成績証明書</h3></label>
+							<div class="form-group input-box"
+								th:classappend="${#fields.hasErrors('record_cnt')} ? 'has-error'">
+								<input type="text"
+									style="width: 43px; margin-right: auto; margin-left: auto;"
+									class="form-control" name="record_cnt" placeholder="0"
+									th:field="*{record_cnt}" onChange="money()"><span
+									class="text-danger" th:if="${#fields.hasErrors('record_cnt')}"
+									th:errors="*{record_cnt}">record_cnt error</span>
+								<p style="margin-left: 50px;">通</p>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<label for="graduation_cnt"><h3>卒業見込み証明書</h3></label>
+							<div class="form-group input-box"
+								th:classappend="${#fields.hasErrors('graduation_cnt')} ? 'has-error'">
+								<input type="text"
+									style="width: 43px; margin-right: auto; margin-left: auto;"
+									class="form-control margin-right: auto;margin-left:auto;"
+									name="graduation_cnt" placeholder="0"
+									th:field="*{graduation_cnt}" onChange="money()"><span
+									class="text-danger"
+									th:if="${#fields.hasErrors('graduation_cnt')}"
+									th:errors="*{graduation_cnt}">graduation_cnt error</span>
+								<p style="margin-left: 50px;">通</p>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<label for="health"><h3>健康診断証明書</h3></label>
+							<div class="form-group input-box"
+								th:classappend="${#fields.hasErrors('health')} ? 'has-error'">
+								<input type="text"
+									style="width: 43px; margin-right: auto; margin-left: auto;"
+									class="form-control" name="health" placeholder="0"
+									th:field="*{health}" onChange="money()"><span
+									class="text-danger" th:if="${#fields.hasErrors('health')}"
+									th:errors="*{health}">health error</span>
+								<p style="margin-left: 50px;">通</p>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<label for="other_name"><h3>その他証明書</h3></label>
+							<!-- <input type="text" style="width: 200px"  name="other_name" placeholder="0">-->
+							<div class="form-group input-box"
+								th:classappend="${#fields.hasErrors('other_name')} ? 'has-error'">
+								<input type="text"
+									style="width: 200px; margin-right: auto; margin-left: auto;"
+									class="form-control" name="other_name" placeholder="~証明書"
+									th:field="*{other_name}"><span class="text-danger"
+									th:if="${#fields.hasErrors('other_name')}"
+									th:errors="*{other_name}">other_name error</span>
+							</div>
+							<div class="form-group input-box"
+								th:classappend="${#fields.hasErrors('other_cnt')} ? 'has-error'">
+								<input type="text"
+									style="width: 43px; margin-right: auto; margin-left: auto;"
+									class="form-control" name="other_cnt" placeholder="0"
+									th:field="*{other_cnt}" onChange="money()"><span class="text-danger"
+									th:if="${#fields.hasErrors('other_cnt')}"
+									th:errors="*{other_cnt}">other_cnt error</span>
+								<p style="margin-left: 50px;">通</p>
+							</div>
+						</div>
+						<div class="col-sm-6" align="center">
+							<label for="zipcode"><strong>郵便番号</strong></label>
+							<!-- <input type="text" style="width: 200px"  name="zipcode" placeholder="0030806">-->
+							<div class="form-group input-box"
+								th:classappend="${#fields.hasErrors('zipcode')} ? 'has-error'">
+								<input type="text"
+									style="width: 200px; margin-right: auto; margin-left: auto;"
+									class="form-control" name="zipcode" placeholder="0030806"
+									th:field="*{zipcode}"><span class="text-danger"
+									th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}">zipcode
+									error</span>
+							</div>
+						</div>
+						<div class="col-sm-6" align="center">
+							<label for="address_name"><strong>宛名</strong></label>
+							<!-- <input type="text" style="width: 200px"  name="address_name" placeholder="">-->
+							<div class="form-group input-box"
+								th:classappend="${#fields.hasErrors('address_name')} ? 'has-error'">
+								<input type="text"
+									style="width: 200px; margin-right: auto; margin-left: auto;"
+									class="form-control" name="address_name" placeholder="情報太郎"
+									th:field="*{address_name}"><span class="text-danger"
+									th:if="${#fields.hasErrors('address_name')}"
+									th:errors="*{address_name}">address_name error</span>
+							</div>
+						</div>
+						<div class="col-sm-12" align="center">
+							<label for="address"><strong>住所</strong></label>
+							<!-- <input type="text" style="width: 200px"  name="address" placeholder="">-->
+							<div class="form-group input-box"
+								th:classappend="${#fields.hasErrors('address')} ? 'has-error'">
+								<input type="text"
+									style="width: 200px; margin-right: auto; margin-left: auto;"
+									class="form-control" name="address" placeholder="〇〇市××区"
+									th:field="*{address}"><span class="text-danger"
+									th:if="${#fields.hasErrors('address')}" th:errors="*{address}">address
+									error</span>
+							</div>
+						</div>
+						<div class="col-sm-6" align="center">
+							<label for="receipt_date"><strong>領収月日</strong></label>
+							<div class="form-group input-box"
+								th:classappend="${#fields.hasErrors('receipt_date')} ? 'has-error'">
+								<input type="date"
+									style="width: 200px; margin-right: auto; margin-left: auto;"
+									class="form-control" name="receipt_date" placeholder=""
+									th:field="*{receipt_date}"><span class="text-danger"
+									th:if="${#fields.hasErrors('receipt_date')}"
+									th:errors="*{receipt_date}">receipt_date error</span>
+							</div>
+						</div>
+						<div class="col-sm-6" align="center">
+							<label for="receipt_name"><strong>領収者</strong></label>
+							<!-- <input type="text" style="width: 200px"  name="receipt_name" placeholder="">-->
+							<div class="form-group input-box"
+								th:classappend="${#fields.hasErrors('receipt_name')} ? 'has-error'">
+								<input type="text"
+									style="width: 200px; margin-right: auto; margin-left: auto;"
+									class="form-control" name="receipt_name" placeholder="情報太郎"
+									th:field="*{receipt_name}"><span class="text-danger"
+									th:if="${#fields.hasErrors('receipt_name')}"
+									th:errors="*{receipt_name}">receipt_name error</span>
+							</div>
+						</div>
+						<div class="col-sm-6" align="center">
+							<label for="issue_date"><strong>発行月日</strong></label>
+							<div class="form-group input-box"
+								th:classappend="${#fields.hasErrors('issue_date')} ? 'has-error'">
+								<input type="date"
+									style="width: 200px; margin-right: auto; margin-left: auto;"
+									class="form-control" name="issue_date" placeholder=""
+									th:field="*{issue_date}"><span class="text-danger"
+									th:if="${#fields.hasErrors('issue_date')}"
+									th:errors="*{issue_date}">issue_date error</span>
+							</div>
+						</div>
+						<div class="col-sm-6" align="center">
+							<label for="issue_name"><strong>発行者</strong></label>
+							<!-- <input type="text" style="width: 200px"  name="issue_name" placeholder="">-->
+							<div class="form-group input-box"
+								th:classappend="${#fields.hasErrors('issue_name')} ? 'has-error'">
+								<input type="text"
+									style="width: 200px; margin-right: auto; margin-left: auto;"
+									class="form-control" name="issue_name" placeholder="情報太郎"
+									th:field="*{issue_name}"><span class="text-danger"
+									th:if="${#fields.hasErrors('issue_name')}"
+									th:errors="*{issue_name}">issue_name error</span>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<label for="total_money"><strong>交付代金</strong></label> <input
+								type="text" name="total_money" value="0"> <input
+								type="hidden" name="money_status" value="1">
+						</div>
+						<div class="col-sm-12">
+							<button type="submit"
+								style="margin-left: 70%; margin-bottom: 50px;"
+								class="btn btn-dark" onclick="return check()">新規発行</button>
+						</div>
+						<br>
+					</div>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+	<!-- 共通スクリプト -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script th:src="@{/js/portal.js}"></script>
+</body>
+</html>

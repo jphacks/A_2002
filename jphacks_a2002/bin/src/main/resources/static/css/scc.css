@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+/* コンテナ */
+
+body{
+	text-align:center;
+
+}
+
+.abs-p{
+	left: 0px;
+}
+
+.m_center {
+	margin-right:auto;
+	margin-left:auto;
+}
+
+.mozi_center {
+	text-align:center;
+}

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+<meta charset="UTF-8">
+<title>就活ポータル.com</title>
+
+<!-- モバイル設定 -->
+<meta id="viewport" name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="manifest" th:href="@{/css/manifest.json}"
+	crossorigin="use-credentials">
+<meta name="application-name" content="SCC">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="SCC">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<!-- アイコン設定 -->
+<link rel="icon" th:href="@{/css/SCC.jpg}" sizes="192x192"
+	href="../static/css/SCC.jpg">
+<link rel="shortcut icon" th:href="@{/css/SCC.jpg}">
+<link rel="apple-touch-icon" th:href="@{/css/SCC.jpg}">
+<link rel="apple-touch-icon" th:href="@{/css/SCC.jpg}" sizes="192x192">
+<link rel="apple-touch-icon" th:href="@{/css/SCC.jpg}" sizes="58x58">
+
+<!-- スタイル設定 -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/scc.css}"
+	href="../static/css/scc.css">
+<link rel="stylesheet" th:href="@{/css/ress.css}"
+	href="../static/css/ress.css">
+<link rel="stylesheet" th:href="@{/css/home.css}"
+	href="../static/css/home.css">
+
+</head>
+
+<body th:classappend="${session.isDarkmode} ? 'mode-red'">
+
+
+	<!-- 共通ヘッダ -->
+	<nav class="navbar navbar-expand-lg navbar-dark btn-primary">
+		<h1>
+			<a class="navbar-brand title-font" th:href="@{/}">就活Portal.com</a>
+		</h1>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarToggler" aria-controls="navbarToggler"
+			aria-expanded="false" aria-label="Toggle navigation	">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarToggler">
+			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+				<li class="nav-item active"><a class="nav-link"
+					th:href="@{/userProfile}"> <img class="config-img"
+						th:src="@{/css/config.png}" src="../static/css/config.png">
+				</a></li>
+				<li>
+					<form class="my-2 my-lg-0" method="post" th:action="@{/logout}">
+						<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<div class="content1"
+		style="background-color: #FFFF99; margin-right: 100px; margin-left: 100px; margin-top: 100px; margin-bottom: 100px;">
+		<h2>受験報告新規登録画面</h2>
+		<form method="post" name="register" th:action="@{/exam/register}"
+			th:object="${reportForm}">
+			<div class="container-fluid" style="margin-top:80px;">
+				<div class="row">
+					<div class="col-sm-4">
+						<!-- <h2 class="bottom">クラス番号</h2>  -->
+						<!-- <input type="text" style="width: 100px"  name="stclass" placeholder="SXAX">-->
+						<h2>
+							<label for="stclass">クラス番号</label>
+						</h2>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group input-box"
+									th:classappend="${#fields.hasErrors('stclass')} ? 'has-error'">
+									<input type="text" class="form-control" name="stclass"
+										style="width: 100px; margin-left: 80px;" placeholder="SXAX"
+										th:field="*{stclass}"><span class="text-danger"
+										th:if="${#fields.hasErrors('stclass')}" th:errors="*{stclass}">stclass
+										error</span>
+								</div>
+							</div>
+							<!-- <input type="text" style="width: 100px"  name="stno" placeholder="XX"> -->
+							<div class="col-sm-6">
+								<div class="form-group input-box"
+									th:classappend="${#fields.hasErrors('stno')} ? 'has-error'">
+									<input type="text" class="form-control" name="stno"
+										style="width: 60px" placeholder="XX" th:field="*{stno}"><span
+										class="text-danger" th:if="${#fields.hasErrors('stno')}"
+										th:errors="*{stno}">stno error</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4" style="margin-bottom: 100px;">
+						<h2 class="bottom">氏名</h2>
+						<div class="form-group input-box"
+							th:classappend="${#fields.hasErrors('user_name')} ? 'has-error'">
+							<input type="text"
+								style="width: 200px; margin-right: auto; margin-left: auto;"
+								class="form-control" name="user_name" placeholder="情報太郎"
+								th:field="*{user_name}"><span class="text-danger"
+								th:if="${#fields.hasErrors('user_name')}"
+								th:errors="*{user_name}">user_name error</span>
+						</div>
+						<br>
+					</div>
+					<div class="col-sm-4" style="margin-bottom: 100px;">
+						<h2 class="bottom">学籍番号</h2>
+						<div class="form-group input-box"
+							th:classappend="${#fields.hasErrors('gakuseki_no')} ? 'has-error'">
+							<input type="text"
+								style="width: 200px; margin-right: auto; margin-left: auto;"
+								class="form-control" name="user_name" placeholder="xxxxxxxx"
+								th:field="*{gakuseki_no}"><span class="text-danger"
+								th:if="${#fields.hasErrors('gakuseki_no')}"
+								th:errors="*{gakuseki_no}">user_name error</span>
+						</div>
+						<br>
+					</div>
+					<div class="col-sm-6">
+						<h2 class="bottom">求人番号</h2>
+						<!-- <input type="text" style="width: 200px"  name="entrance_exam_report_no" placeholder="求人番号"> -->
+						<div class="form-group input-box"
+							th:classappend="${#fields.hasErrors('entrance_exam_report_no')} ? 'has-error'">
+							<input type="text"
+								style="width: 200px; margin-left: auto; margin-right: auto;"
+								class="form-control" name="entrance_exam_report_no"
+								placeholder="求人番号" th:field="*{entrance_exam_report_no}"><span
+								class="text-danger"
+								th:if="${#fields.hasErrors('entrance_exam_report_no')}"
+								th:errors="*{entrance_exam_report_no}">entrance_exam_report_no
+								error</span>
+						</div>
+					</div>
+					<div class="col-sm-6" style="margin-bottom: 100px;">
+						<h2 class="bottom">企業名</h2>
+						<!--<input type="text" style="width: 200px"  name="company_name" placeholder="株式会社XXX">-->
+						<div class="form-group input-box"
+							th:classappend="${#fields.hasErrors('company_name')} ? 'has-error'">
+							<input type="text"
+								style="width: 200px; margin-left: auto; margin-right: auto;"
+								class="form-control" name="company_name" placeholder="企業名"
+								th:field="*{company_name}"><span class="text-danger"
+								th:if="${#fields.hasErrors('company_name')}"
+								th:errors="*{company_name}">company_name error</span>
+						</div>
+						<br>
+					</div>
+					<div class="col-sm-6">
+						<h2>学科コード</h2>
+						<select name="department_code" size="1" class="form-control"
+							style="width: 80px; margin-right: auto; margin-left: auto;">
+							<option value="1">S</option>
+							<option value="2">M</option>
+							<option value="3">R</option>
+							<option value="4">G</option>
+							<option value="5">J</option>
+							<option value="6">B</option>
+						</select>
+					</div>
+					<div class="col-sm-6" style="margin-bottom: 100px;">
+						<h2 class="bottom">企業名先頭カナ3文字</h2>
+						<!-- <input type="text" style="width: 100px"  name="kana" placeholder="XXX"> -->
+						<div class="form-group input-box"
+							th:classappend="${#fields.hasErrors('kana')} ? 'has-error'">
+							<input type="text"
+								style="width: 100px; margin-left: auto; margin-right: auto;"
+								class="form-control" name="kana" placeholder="XXX"
+								th:field="*{kana}"><span class="text-danger"
+								th:if="${#fields.hasErrors('kana')}" th:errors="*{kana}">kana
+								error</span>
+						</div>
+						<br>
+					</div>
+					<div class="col-sm-12">
+						<div class="row">
+							<div class="col-sm-4">
+								<h2 class="bottom">申請日</h2>
+								<input type="date" name="requestday" value="2020-07-01">
+							</div>
+							<div class="col-sm-4">
+								<h2 class="bottom">報告日</h2>
+								<input type="date" name="reportday" value="2020-07-01">
+							</div>
+							<div class="col-sm-4" style="margin-bottom: 100px;">
+								<h2 class="bottom">受験日時</h2>
+								<input type="date" name="entrance_exam_day" value="2020-07-01">
+								<input type="time" name="entrance_exam_time" value="12:30">
+							</div>
+						</div>
+						<br>
+
+					</div>
+					<div class="col-sm-6">
+						<h2 class="bottom">試験の申込経路</h2>
+						<div style="text-align: left; margin-left: 200px;">
+							<input type="radio" id ="kubun" name="kubun" value="1"
+								th:checked="*{kubun} == 1">学校斡旋<br> <input
+								type="radio" id ="kubun" name="kubun" value="2" th:checked="*{kubun} == 2">ネット-斡旋サイト<br>
+							<input type="radio" id ="kubun" name="kubun" value="3"
+								th:checked="*{kubun} == 3">ネット-企業HP<br> <input
+								type="radio" id ="kubun" name="kubun" value="4" th:checked="*{kubun} == 4">新聞・雑誌<br>
+							<input type="radio" id ="kubun" name="kubun" value="5"
+								th:checked="*{kubun} == 5">ジョブカフェ等<br> <input
+								type="radio" id ="kubun" name="kubun" value="6" th:checked="*{kubun} == 6">その他<input
+								type="text" style="background-color:white;" name="kubun_other"><br>
+						</div>
+					</div>
+					<div class="col-sm-6" style="margin-bottom: 100px;" th:classappend="${#fields.hasErrors('entrance_exam_location')} ? 'has-error'">
+						<h2 class="bottom">受験場所</h2>
+
+						<input type="text" style="width: 200px; background-color:white;"
+							name="entrance_exam_location" placeholder="受験場所入力" th:field="*{entrance_exam_location}"> <br>
+							<span class="text-danger"
+								th:if="${#fields.hasErrors('entrance_exam_location')}"
+								th:errors="*{entrance_exam_location}">entrance_exam_location error<br></span>
+
+						<div style="text-align: left; margin-left: 250px;">
+							<input type="radio" name="entrance_exam_location_kubun" value="1"
+								th:checked="*{entrance_exam_location_kubun} == 1" checked="checked">札幌・会社<br>
+							<input type="radio" name="entrance_exam_location_kubun" value="2"
+								th:checked="*{entrance_exam_location_kubun} == 2">札幌・外会場<br>
+							<input type="radio" name="entrance_exam_location_kubun" value="3"
+								th:checked="*{entrance_exam_location_kubun} == 3">札幌・HCS<br>
+							<input type="radio" name="entrance_exam_location_kubun" value="4"
+								th:checked="*{entrance_exam_location_kubun} == 4">東京・会社<br>
+							<input type="radio" name="entrance_exam_location_kubun" value="5"
+								th:checked="*{entrance_exam_location_kubun} == 5">東京・外会場<br>
+							<input type="radio" name="entrance_exam_location_kubun" style="background-color:white;" value="6"
+								th:checked="*{entrance_exam_location_kubun} == 6">その他 <input
+								type="text" name="entrance_exam_location_kubun_other" th:field="*{entrance_exam_location_kubun_other}"><br>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<div class="row">
+							<div class="col-sm-4">
+								<h2 class="bottom">試験区分</h2>
+
+								<div style="text-align: left; margin-left: 150px;">
+									<input type="radio" name="entrance_exam_detail_kubun" value="1"
+										th:checked="*{entrance_exam_detail_kubun} == 1" checked="checked">1次試験<br>
+									<input type="radio" name="entrance_exam_detail_kubun" value="2"
+										th:checked="*{entrance_exam_detail_kubun} == 2">2次試験<br>
+									<input type="radio" name="entrance_exam_detail_kubun" value="3"
+										th:checked="*{entrance_exam_detail_kubun} == 3">3次試験<br>
+									<input type="radio" name="entrance_exam_detail_kubun" value="4"
+										th:checked="*{entrance_exam_detail_kubun} == 4">4次試験<br>
+									<input type="radio" name="entrance_exam_detail_kubun" value="5"
+										th:checked="*{entrance_exam_detail_kubun} == 5"><input
+										type="text" style="width: 50px; background-color:white;"
+										name="entrance_exam_detail_kubun_other" th:field="*{entrance_exam_detail_kubun_other}">試験<br> <input
+										type="radio" name="entrance_exam_detail_kubun" value="6">最終試験<br>
+								</div>
+							</div>
+							<br>
+
+							<div class="col-sm-4">
+								<h2 class="bottom">試験内容</h2>
+								<div style="text-align: left; margin-left: 60px;" th:classappend="${#fields.hasErrors('entrance_exam_category')} ? 'has-error'">
+
+									<input type="checkbox" name="entrance_exam_category" value="1" th:checked="*{entrance_exam_category} == 1">適正<br>
+									<input type="checkbox" name="entrance_exam_category" value="2" th:checked="*{entrance_exam_category} == 2">筆記・作文<br>
+									<input type="checkbox" name="entrance_exam_category" value="3" th:checked="*{entrance_exam_category} == 3">ディスカッション<br>
+									<input type="checkbox" name="entrance_exam_category" value="4" th:checked="*{entrance_exam_category} == 4">グループワーク<br>
+									<input type="checkbox" name="entrance_exam_category" value="5" th:checked="*{entrance_exam_category} == 5">集団面接<br>
+									<input type="checkbox" name="entrance_exam_category" value="6" th:checked="*{entrance_exam_category} == 6">個人面接<br>
+									<input type="checkbox" name="entrance_exam_category" value="7" th:checked="*{entrance_exam_category} == 7">その他<input
+										type="text" style="background-color:white;" name="entrance_exam_category_other" th:field="*{entrance_exam_category_other}"><br>
+									<span class="text-danger"
+										th:if="${#fields.hasErrors('entrance_exam_category')}"
+										th:errors="*{entrance_exam_category}">entrance_exam_category
+										error</span>
+								</div>
+							</div>
+							<br>
+							<div class="col-sm-4" style="margin-bottom: 100px;" th:classappend="${#fields.hasErrors('result_cnt')} ? 'has-error'">
+								<h2 class="bottom">結果通知</h2>
+								<div style="text-align: left; margin-left: 100px;">
+									<input
+										style="width: 50px; background-color:white;" type="text" name="result_cnt" th:field="*{result_cnt}">日後(合格のみ<input
+										type="checkbox" name="pass_only" value="on">) <br>
+
+									<input type="checkbox" name="result_notification" value="1">本人<br>
+									<input type="checkbox" name="result_notification" value="2">学校<br>
+									<input type="checkbox" name="result_notification" value="3">電話<br>
+									<input type="checkbox" name="result_notification" value="4">郵送<br>
+									<input type="checkbox" name="result_notification" value="5">メール<br>
+									<input type="checkbox" name="result_notification" value="6">Web<br>
+									<span class="text-danger"
+										th:if="${#fields.hasErrors('result_cnt')}"
+										th:errors="*{result_cnt}">result_cnt
+										error<br></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="col-sm-6">
+						<h2 style="align: center">面接概要</h2>
+						<div class="row">
+							<div class="col-sm-4">
+								<p>形態</p>
+
+								<div
+									style="text-align: left; margin-left: 60px; margin-bottom: 80px;">
+									<input type="radio" name="interview_overview_style" value="1"
+										th:checked="*{interview_overview_style} == 1">個人<br>
+									<input type="radio" name="interview_overview_style" value="2"
+										th:checked="*{interview_overview_style} == 2">集団<br>
+									<input type="radio" name="interview_overview_style" value="3"
+										th:checked="*{interview_overview_style} == 3">その他 <input
+										type="text" style="width: 120px; background-color:white;"
+										name="interview_overview_style_other" placeholder="申込経路を入力" th:field="*{interview_overview_style_other}"><br>
+								</div>
+								<p>面接時間</p>
+								<div class="form-group input-box"
+									th:classappend="${#fields.hasErrors('interview_overview_time')} ? 'has-error'">
+									<input type="text" style="width: 100px; margin-left: 40px;"
+										class="form-control" name="interview_overview_time"
+										placeholder="面接時間" th:field="*{interview_overview_time}">
+									<p style="margin-left: 150px;">分</p>
+									<span class="text-danger"
+										th:if="${#fields.hasErrors('interview_overview_time')}"
+										th:errors="*{interview_overview_time}">interview_overview_time
+										error</span>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<p>名/回</p>
+								<select name="group_cnt" size="1" class="form-control">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+								</select>
+							</div>
+							<div class="col-sm-4">
+								<p>面接官</p>
+								<!-- <input type="text"   name="interview_overview_count" placeholder="試験官名"> -->
+								<div class="form-group input-box"
+									th:classappend="${#fields.hasErrors('interview_overview_count')} ? 'has-error'">
+									<input type="text" style="width: 200px" class="form-control"
+										name="interview_overview_count" placeholder="面接官"
+										th:field="*{interview_overview_count}"><span
+										class="text-danger"
+										th:if="${#fields.hasErrors('interview_overview_count')}"
+										th:errors="*{interview_overview_count}">interview_overview_count
+										error</span>
+								</div>
+								<br>
+								<p>役職</p>
+								<!-- <input type="text"   name="interview_overview_position" placeholder="役職"> -->
+								<div class="form-group input-box"
+									th:classappend="${#fields.hasErrors('interview_overview_position')} ? 'has-error'">
+									<input type="text" style="width: 200px" class="form-control"
+										name="interview_overview_position" placeholder="役職"
+										th:field="*{interview_overview_position}"><span
+										class="text-danger"
+										th:if="${#fields.hasErrors('interview_overview_position')}"
+										th:errors="*{interview_overview_position}">interview_overview_position
+										error</span>
+								</div>
+								<br>
+								<p>GD・GW時のテーマ</p>
+								<!-- <input type="text"   name="gd_gw" placeholder="役職"> -->
+								<div class="form-group input-box"
+									th:classappend="${#fields.hasErrors('gd_gw')} ? 'has-error'">
+									<input type="text" style="width: 200px" class="form-control"
+										name="gd_gw" placeholder="GD・GW時のテーマ" th:field="*{gd_gw}"><span
+										class="text-danger" th:if="${#fields.hasErrors('gd_gw')}"
+										th:errors="*{gd_gw}">gd_gw error</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6" style="margin-bottom: 100px;">
+						<h2 class="bottom">適正、筆記・作文の種類</h2>
+						<div class="hidari" style="text-align: left; margin-left: 200px;">
+							<input type="checkbox" name="appropriate" value="1" th:checked="*{appropriate} == 1">SPI<br>
+							<input type="checkbox" name="appropriate" value="2" th:checked="*{appropriate} == 2">CAB/GAB<br>
+							<input type="checkbox" name="appropriate" value="3" th:checked="*{appropriate} == 3">職業適性<br>
+							<input type="checkbox" name="appropriate" value="4" th:checked="*{appropriate} == 4">クレベリン<br>
+							<input type="checkbox" name="appropriate" value="5" th:checked="*{appropriate} == 5">その他適正<input
+								type="text" style="background-color:white;" name="appropriate_other" th:field="*{appropriate_other}"><br> <input
+								type="checkbox" name="appropriate" value="6" th:checked="*{appropriate} == 6">一般常識<br>
+							<input type="checkbox" name="appropriate" value="7" th:checked="*{appropriate} == 7">専門知識<br>
+							<input type="checkbox" name="appropriate" value="8" th:checked="*{appropriate} == 8">作文テーマ<input
+								type="text" style="background-color:white;" name="appropriate_sakubun" th:field="*{appropriate_sakubun}"><br>
+						</div>
+					</div>
+				</div>
+				<div class="col" style="text-align: center;">
+					<h2>出題内容</h2>
+					<!--<input type="text"   name="question_detail" placeholder="入力">-->
+					<div class="form-group input-box"
+						th:classappend="${#fields.hasErrors('question_detail')} ? 'has-error'">
+						<textarea rows="20"
+							style="width: 800px; margin-right: auto; margin-left: auto;"
+							class="form-control" name="question_detail"
+							th:field="*{question_detail}">
+						</textarea>
+						<span class="text-danger"
+								th:if="${#fields.hasErrors('question_detail')}"
+								th:errors="*{question_detail}">question_detail error<br></span>
+					</div>
+					<button type="submit"
+						style="margin-left: 70%; margin-bottom: 50px;"
+						class="btn btn-dark" onclick="return check()">登録</button>
+					<br>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- 共通スクリプト -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script th:src="@{/js/portal.js}"></script>
+</body>
+</html>
