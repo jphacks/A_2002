@@ -45,7 +45,7 @@ public class MangaController {
 	 * @param model
 	 * @return
 	 */
-	@PostMapping("/top")
+	@GetMapping("/top")
 	public String getMangaListDisplay(Principal principal, Model model) {
 		PreviewEntity previewEntity = mangaService.selectRandomManga();
 		model.addAttribute("previewEntity", previewEntity);
