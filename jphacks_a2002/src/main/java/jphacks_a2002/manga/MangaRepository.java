@@ -18,14 +18,14 @@ public class MangaRepository {
 	JdbcTemplate jdbc;
 
 
-	private static final String SELECT_UNDONE_MANGA = "SELECT * FROM manga_table as m ,frame_table as f1,frame_table as f2,frame_table as f3,frame_table as f4 "
-			+ "WHERE m.frame_ID1 = f1.frame_ID AND m.frame_ID2 = f2.frame_ID AND  m.frame_ID3 = f3.frame_ID AND m.frame_ID4 = f4.frame_ID AND status < 4";
+	private static final String SELECT_UNDONE_MANGA = "SELECT * FROM manga_table as m ,frame_table as f WHERE m.manga_id = f.manga_id AND m.status < 4";
+	private static final String SELECT_ONE_MANGA = "SELECT * FROM manga_table as m ,frame_table as f WHERE m.manga_id = f.manga_id AND m.manga_id = ?";
 //	private static final String SELECT_SEARCH_MANGA = "SELECT * FROM manga_table as m ,frame_table as f1,frame_table as f2,frame_table as f3,frame_table as f4 "
 //			+ "WHERE m.frame_ID1 = f1.frame_ID AND m.frame_ID2 = f2.frame_ID AND  m.frame_ID3 = f3.frame_ID AND m.frame_ID4 = f4.frame_ID AND status = 4 AND ("
 //			+ "m.frame_ID1 IN(SELECT frame_ID FROM frame_table WHERE creater = ?) OR m.frame_ID2 IN(SELECT frame_ID FROM frame_table WHERE creater = ?) OR "
 //			+ "m.frame_ID3 IN(SELECT frame_ID FROM frame_table WHERE creater = ?) OR m.frame_ID4 IN(SELECT frame_ID FROM frame_table WHERE creater = ?))";
 	private static final String INSERT_MANGA = "INSERT INTO manga_table(manga_id,theme_id,frame_id1,status) VALUES((SELECT MAX(manga_id) + 1 FROM manga_table),?,?,1)";
-	private static final String UPDATE_MANGA = "UPDATE manga_table SET  = ?,status = ? WHERE manga_id = ?";
+	private static final String UPDATE_MANGA = "UPDATE manga_table SET status = status + 1 WHERE manga_id = ?";
 
 
 //	public MangaEntity selectAll() {
@@ -171,6 +171,18 @@ public class MangaRepository {
 		mangaData.setStatus((Integer)map.get("m.status"));
 
 
+		return mangaData;
+	}
+
+	public int updateManga(int mangaID) {
+		int rowNumber = jdbc.update(UPDATE_MANGA,mangaID);
+		return rowNumber;
+	}
+
+	public MangaData getOneManga(int mangaId) {
+		List<Map<String, Object>> resultList = jdbc.queryForList(SELECT_ONE_MANGA,mangaId);
+
+		MangaData mangaData = mappingSelectResultData(resultList);
 		return mangaData;
 	}
 }

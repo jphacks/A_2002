@@ -66,16 +66,15 @@ public class MangaService {
 	//コントローラでコマテーブルの情報を作成した後こっちを呼び出して欲しい
 	//コマのパッケージの方でコマIDをコントローラに返すように記述する
 	//正直このやり方が最良かはよくわかんね
-//	public int addNewFrame(int mangaId,FrameData frameData) {
-//		//リポジトリ側でコマFlagみたいなやつ1進めるように作っとてん
-//		MangaData mangaData = this.getOneManga(mangaId);
-//		int frameId = frameService.addNewFrame(frameData);
-//		return mangaRepository.updateManga(mangaData,frameId);
-//	}
-//
-//	//トップ画面で一覧から漫画選択または最終コマの作成が完了した時点で漫画ページへ遷移
-//	//渡す項目がIdでいいかは正直わかんね
-//	public MangaData getOneManga(int mangaId) {
-//		return mangaRepository.getOneManga(mangaId);
-//	}
+	public int addNewFrame(int mangaId,FrameData frameData) {
+		//リポジトリ側でコマFlagみたいなやつ1進めるように作っとてん
+		frameService.addNewFrame(frameData);
+		return mangaRepository.updateManga(mangaId);
+	}
+
+	//トップ画面で一覧から漫画選択または最終コマの作成が完了した時点で漫画ページへ遷移
+	//渡す項目がIdでいいかは正直わかんね
+	public MangaData getOneManga(int mangaId) {
+		return mangaRepository.getOneManga(mangaId);
+	}
 }
