@@ -11,6 +11,7 @@ public class ThemeService {
 	@Autowired
 	ThemeRepository themeRepository;
 
+	//データベースからテーマ全部持ってきて一個分のデータだけ返す
 	public ThemeData getOneTheme() {
 		ThemeEntity themeEntity = themeRepository.selectAll();
 		int randThemeIndex = new Random().nextInt(themeEntity.getThemeList().size());
