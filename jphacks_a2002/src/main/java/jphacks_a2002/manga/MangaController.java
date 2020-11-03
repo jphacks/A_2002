@@ -86,7 +86,7 @@ public class MangaController {
 	 */
 	@PostMapping("/top/serch")
 	public String serchMangaListWithCreater(Principal principal, Model model, @RequestParam("creater") String creater) {
-			MangaEntity mangaEntity = mangaService.searchMangaTheme(creater);
+			MangaEntity mangaEntity = mangaService.searchMangaCreater(creater);
 			model.addAttribute("mangaEntity", mangaEntity);
 		return "/top";
 	}
