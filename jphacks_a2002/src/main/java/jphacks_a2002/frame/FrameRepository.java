@@ -47,8 +47,8 @@ public class FrameRepository {
 		for (Map<String, Object> map : resultList) {
 			PreviewData previewData = new PreviewData();
 
-			previewData.setMangaID((Integer)map.get("f.manga_id"));
-			previewData.setPath((String)map.get("f.path"));
+			previewData.setMangaID((Integer)map.get("manga_id"));
+			previewData.setPath((String)map.get("path"));
 
 			entity.getPreviewList().add(previewData);
 

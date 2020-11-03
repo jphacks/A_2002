@@ -31,9 +31,9 @@ public class MangaService {
 		Collections.shuffle(previewEntityAll.getPreviewList());
 		PreviewEntity previewEntity = new PreviewEntity();
 		int index = 0;
-		while(previewEntity.getPreviewList().size() < 10) {
-			index++;
+		while(previewEntity.getPreviewList().size() < 10 && previewEntityAll.getPreviewList().size() > index) {
 			previewEntity.getPreviewList().add(previewEntityAll.getPreviewList().get(index));
+			index++;
 		}
 		return previewEntity;
 	}
