@@ -8,5 +8,5 @@ import lombok.Data;
 @Data
 public class MangaEntity {
 
-	private List<MangaData> requestlist = new ArrayList<MangaData>();
+	private List<MangaData> mangaList = new ArrayList<MangaData>();
 }

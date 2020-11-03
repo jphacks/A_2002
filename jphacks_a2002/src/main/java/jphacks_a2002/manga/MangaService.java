@@ -15,18 +15,20 @@ public class MangaService {
 	MangaRepository mangaRepository;
 
 	//データベースから既に完成した漫画のリストをランダムに10件取得する
+	//処理の内容が漫画の登録件数によってかなり左右されるためあとで修正の必要あり
 	public MangaEntity selectRandomManga() {
+		//漫画Flagが5になってるやつだけ頂戴
 		MangaEntity mangaEntity = mangaRepository.selectAll();
-		Collections.shuffle(mangaEntity);
-		while(mangaEntity.size() > 10) {
-			mangaEntity.remove(mangaEntity.size() - 1);
+		Collections.shuffle(mangaEntity.getMangaList());
+		while(mangaEntity.getMangaList().size() > 10) {
+			mangaEntity.getMangaList().remove(mangaEntity.getMangaList().size() - 1);
 		}
 		return mangaEntity;
 	}
 
 	//データベースから既に完成した漫画をテーマ名で検索して取得する
-	public MangaEntity searchMangaTheme(Stirng ThemeName) {
-		return mangaRepository.searchTheme(TemeName);
+	public MangaEntity searchMangaTheme(String ThemeName) {
+		return mangaRepository.searchTheme(ThemeName);
 	}
 
 	//新規に作成された漫画をデータベースに登録（一応登録件数を返す）
@@ -51,5 +53,11 @@ public class MangaService {
 	public int addNewFrame(int mangaId,int frameId) {
 		//リポジトリ側でコマFlagみたいなやつ1進めるように作っとてん
 		return mangaRepository.insertFrame(mangaId,frameId);
+	}
+
+	//トップ画面で一覧から漫画選択または最終コマの作成が完了した時点で漫画ページへ遷移
+	//渡す項目がIdでいいかは正直わかんね
+	public MangaData getOneManga(int mangaId) {
+		return mangaRepository.getOneManga(mangaId);
 	}
 }
