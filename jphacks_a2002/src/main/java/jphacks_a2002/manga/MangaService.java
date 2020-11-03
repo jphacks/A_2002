@@ -44,7 +44,7 @@ public class MangaService {
 		//漫画マスタのstatusが4以外のものを抽出
 		MangaEntity undoneMangaEntity = mangaRepository.selectUndoneAll();
 		int randGetIndex = new Random().randInt(undoneMangaEntity.size());
-		return undoneMangaEntity.get(randGetIndex);
+		return undoneMangaEntity.getRandomManga(randGetIndex);
 	}
 
 	//ここの処理については明日先生に聞くかも
