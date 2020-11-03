@@ -23,10 +23,13 @@ public class MangaService {
 	//処理の内容が漫画の登録件数によってかなり左右されるためあとで修正の必要あり
 	public MangaEntity selectRandomManga() {
 		//漫画マスタのstatusが4になってるやつだけ頂戴
-		MangaEntity mangaEntity = mangaRepository.selectAll();
-		Collections.shuffle(mangaEntity.getMangaList());
-		while(mangaEntity.getMangaList().size() > 10) {
-			mangaEntity.getMangaList().remove(mangaEntity.getMangaList().size() - 1);
+		MangaEntity mangaEntityAll = mangaRepository.selectAll();
+		Collections.shuffle(mangaEntityAll.getMangaList());
+		MangaEntity mangaEntity = new MangaEntity();
+		int index = 0;
+		while(mangaEntity.getMangaList().size() < 10) {
+			index++;
+			mangaEntity.getMangaList().add(mangaEntityAll.getMangaList().get(index));
 		}
 		return mangaEntity;
 	}
