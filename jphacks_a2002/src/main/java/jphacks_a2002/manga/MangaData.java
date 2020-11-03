@@ -9,8 +9,8 @@ import lombok.Data;
 @Data
 public class MangaData {
 
-	int manga_id;
-	int theme_id;
+	int mangaID;
+	int themeID;
 	List<FrameData> framelist = new ArrayList<FrameData>();
 	int status;
 

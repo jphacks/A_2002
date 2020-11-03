@@ -11,7 +11,7 @@ INSERT INTO manga_table (manga_ID,theme_id,frame_id1,status)
 VALUES(1,1,1,1);
 
 INSERT INTO manga_table (manga_ID,theme_id,frame_id1,frame_id2,frame_id3,frame_id4,status)
-VALUES(1,1,2,3,4,5,1);
+VALUES(1,1,2,3,4,5,4);
 
 INSERT INTO frame_table
 VALUES(1,'hayakawa','/frame/1.png','2020-11-03');

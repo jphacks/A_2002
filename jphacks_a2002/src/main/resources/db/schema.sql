@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS frame_table (
     create_date DATE NOT NULL
 );
 
-/* ユーザマスタ */
+/* テーママスタ */
 CREATE TABLE IF NOT EXISTS theme_table (
     theme_id INT PRIMARY KEY,
     theme_name VARCHAR(100),
