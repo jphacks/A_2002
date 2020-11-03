@@ -35,8 +35,8 @@ public class MangaService {
 	}
 
 	//データベースから既に完成した漫画をテーマ名で検索して取得する
-	public MangaEntity searchMangaTheme(String ThemeName) {
-		return mangaRepository.searchTheme(ThemeName);
+	public MangaEntity searchMangaCreater(String Creater) {
+		return mangaRepository.searchTheme(Creater);
 	}
 
 	//新規に作成された漫画をデータベースに登録（一応登録件数を返す）
@@ -61,9 +61,11 @@ public class MangaService {
 	//コントローラでコマテーブルの情報を作成した後こっちを呼び出して欲しい
 	//コマのパッケージの方でコマIDをコントローラに返すように記述する
 	//正直このやり方が最良かはよくわかんね
-	public int addNewFrame(int mangaId,int frameId) {
+	public int addNewFrame(int mangaId,FrameData frameData) {
 		//リポジトリ側でコマFlagみたいなやつ1進めるように作っとてん
-		return mangaRepository.insertFrame(mangaId,frameId);
+		MangaData mangaData = this.getOneManga(mangaId);
+		int frameId = frameService.AddNewFrame(frameData);
+		return mangaRepository.updateManga(mangaData,frameId);
 	}
 
 	//トップ画面で一覧から漫画選択または最終コマの作成が完了した時点で漫画ページへ遷移
