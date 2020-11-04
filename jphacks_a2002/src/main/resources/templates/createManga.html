@@ -11,7 +11,7 @@
         <link href="img/favicon.ico" rel="icon">
 
         <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
 
         <!-- CSS Libraries -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -25,8 +25,8 @@
 
     <body>
         <!-- Top Bar Start -->
-        
-        
+
+
 
         <!-- Nav Bar Start -->
         <div class="nav-bar">
@@ -39,11 +39,11 @@
 
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
-                            <a href="top.html" class="nav-item nav-link mangamoji">ホーム！
+                            <a href="/top" class="nav-item nav-link mangamoji">ホーム！
                             </a>
-                            <a href="createManga.html" class="nav-item nav-link mangamoji">ツクル！
+                            <a href="/createManga" class="nav-item nav-link mangamoji">ツクル！
                             </a>
-                            <a href="single-page.html" class="nav-item nav-link mangamoji">サンカ！</a>
+                            <a href="/join" class="nav-item nav-link mangamoji">サンカ！</a>
                         </div>
                         <div class="social ml-auto">
                             <a href="https://twitter.com/gr_phenix"><i class="fab fa-twitter"></i></a>
@@ -97,7 +97,7 @@
                   <input type="text" value="">
                   <form action=""></form>
                 </div>
-              </div>    
+              </div>
             </div>
         </div>
         <!-- Brand End -->
@@ -116,7 +116,7 @@
             // canvas
             var cnvs = document.getElementById('canvas');
             var ctx = cnvs.getContext('2d');
-         
+
             // 変数宣言
             const cnvWidth = 1024;
             const cnvHeight = 768;
@@ -124,10 +124,10 @@
             var cnvBold = 5;  // 線の太さ
             var clickFlg = 0;  // クリック中の判定 1:クリック開始 2:クリック中
             var bgColor = "rgb(255,255,255)";
-         
+
             // canvasの背景色を設定(指定がない場合にjpeg保存すると背景が黒になる)
             setBgColor();
-         
+
             // canvas上でのイベント
             $("#canvas").mousedown(function(){
               clickFlg = 1; // マウス押下開始
@@ -138,7 +138,7 @@
               if(!clickFlg) return false;
               draw(e.offsetX, e.offsetY);
             });
-         
+
             // 描画処理
             function draw(x, y) {
               ctx.lineWidth = cnvBold;
@@ -154,32 +154,32 @@
               }
               ctx.stroke();
             };
-         
+
             // 色の変更
             $(".color a").click(function(){
               cnvColor = $(this).data("color");
               return false;
             });
-         
+
             // 線の太さ変更
             $(".bold a").click(function(){
               cnvBold = $(this).data("bold");
               return false;
             });
-         
+
             // 描画クリア
             $("#clear").click(function(){
               ctx.clearRect(0,0,cnvWidth,cnvHeight);
               setBgColor();
             });
-         
+
             // canvasを画像で保存
             $("#download").click(function(){
               canvas = document.getElementById('canvas');
               var base64 = canvas.toDataURL("image/png");
               document.getElementById("download").href = base64;
             });
-         
+
             function setBgColor(){
               // canvasの背景色を設定(指定がない場合にjpeg保存すると背景が黒になる)
               ctx.fillStyle = bgColor;

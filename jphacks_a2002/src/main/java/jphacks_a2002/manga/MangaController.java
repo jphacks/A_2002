@@ -58,9 +58,9 @@ public class MangaController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/top/createManga")
+	@GetMapping("/createManga")
 	public String getCreateDisplay(Principal principal, Model model) {
-		return "top/createManga";
+		return "/createManga";
 	}
 
 	/**
@@ -70,11 +70,11 @@ public class MangaController {
 	 * @param request_id
 	 * @return
 	 */
-	@RequestMapping("/top/artwork/{manga_id}")
+	@RequestMapping("/artwork/{manga_id}")
 	public String selectMangaDisplay(Principal principal, Model model, @PathVariable("manga_id") int manga_id) {
 		MangaData mangaData = mangaService.getOneManga(manga_id);
 		model.addAttribute("mangaData", mangaData);
-		return "top/artwork";
+		return "/artwork";
 	}
 
 	/**
@@ -83,11 +83,11 @@ public class MangaController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/top/join")
+	@GetMapping("/join")
 	public String getJoinDisplay(Principal principal, Model model) {
 		MangaData mangaData = mangaService.getRandomManga();
 		model.addAttribute("mangaData",mangaData);
-		return "top/join";
+		return "/join";
 	}
 
 
@@ -99,7 +99,7 @@ public class MangaController {
 	 * @param keyword
 	 * @return
 	 */
-	@PostMapping("/top/serch")
+	@PostMapping("/serch")
 	public String serchMangaListWithCreater(Principal principal, Model model, @RequestParam("creater") String creater) {
 			PreviewEntity previewEntity = mangaService.searchMangaCreater(creater);
 			model.addAttribute("previewEntity", previewEntity);
