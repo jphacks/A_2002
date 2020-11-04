@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 /**
@@ -29,8 +29,21 @@ public class FrameController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/createManga/cofirm")
+	@PostMapping("/createManga/cofirm")
 	public String confirmCreateManga(@ModelAttribute @Validated FrameData form, Principal principal, Model model) {
+		FrameData frameData = new FrameData();
+		frameService.addNewFrame(frameData);
+		return "/top";
+	}
+
+	/**
+	 * 漫画のコマを追加する
+	 * @param form
+	 * @param model
+	 * @return
+	 */
+	@PostMapping("/join/add")
+	public String addFrame(@ModelAttribute @Validated FrameData form, Principal principal, Model model) {
 		FrameData frameData = new FrameData();
 		frameService.addNewFrame(frameData);
 		return "/top";
