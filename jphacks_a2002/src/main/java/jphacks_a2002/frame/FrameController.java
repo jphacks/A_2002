@@ -46,6 +46,7 @@ public class FrameController {
 	public String addFrame(@ModelAttribute @Validated FrameData form, Principal principal, Model model) {
 		FrameData frameData = new FrameData();
 		frameService.addNewFrame(frameData);
+		//四コマ目だったら詳細へ
 		return "/top";
 	}
 
