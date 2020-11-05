@@ -51,57 +51,49 @@
         </div>
         <!-- Nav Bar End -->
         <div class="container pt-3">
-<!--            <div class="row align-items-center tinpo">-->
-            <div class="row align-items-center">
-                <div class="col-lg-9">
-                    <div class="b-logo">
-                        <h1  class="text-center"th:text="${mangaData.themeName}"></h1>
-                    </div>
-                </div>
-            </div>
+        	<h1  class="text-center"th:text="${mangaData.themeName}"></h1>
         </div>
         <!-- Brand Start -->
-        <div class="brand">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-4" >
-                        <img src="img/1024x768.png"alt="亀"title="亀"id="image1" width="720" height="480" style="padding-right: 20px;">
-                    </div>
-                    <div class="col-md-8">
-                        <canvas id="canvas" width="1024" height="768" style="border: solid 5px rgb(121, 121, 121);box-sizing: border-box;"></canvas>
-                        <div class="f-container">
-                            <div class="col-5 rounded-lg" style="background-color: rgb(197, 197, 197); padding:5px;">
-                                <div class="color float-right">
-                                  <label class="h5">色：</label>
-                                  <a href="" class="black" data-color="0, 0, 0, 1"></a>
-                                  <a href="" class="red" data-color="255, 0, 0, 1"></a>
-                                  <a href="" class="blue" data-color="0, 0, 255, 1"></a>
-                                  <a href="" class="yellow" data-color="255, 255, 0, 1"></a>
-                                  <a href="" class="white" data-color="255, 255, 255, 1"></a>
-                                </div>
-                                <div class="bold">
-                                  <label class="h5">太さ：</label>
-                                  <a href="" class="little" data-bold="1">小</a>
-                                  <a href="" class="middle" data-bold="10">中</a>
-                                  <a href="" class="large" data-bold="20">大</a>
-                                  <a href="" class="mechalarge" data-bold="50">特大</a>
-                                </div>
-                                <input class="btn btn-danger" type="button" value="全消し" id="clear">
-                                <a class="btn btn-primary" id="download" href="#" download="canvas.png">ダウンロード</a>
-                            </div>
-                            <div class="col-3 rounded-lg" >
-                                    <label class="mangamoji  m-0">サクシャ：</label>
-                                    <input type="text" value=""size="20"class="p-0">
-                            </div>
-                            <div class="rounded-lg">
-                              <a href="/createManga" class="mangamoji"style="">ツイカ！</a>
-                            </div>
-                              <form action=""></form>
-                        </div>
-                    </div>
-                </div>
+        <div class="container">
+        <div class="row">
+            <div class="col-md-2" >
+                <img src="img/1024x768.png"alt="亀"title="亀"id="image1" width="180" height="AUTO" style="padding-right: 20px;">
+            </div>
+            <div class="col-md-10">
+                <canvas id="canvas" width="800" height="600" style="border: solid 5px rgb(121, 121, 121);box-sizing: border-box;"></canvas>
             </div>
         </div>
+        <div class="row">
+         <div class="col-6 rounded-lg" style="background-color: rgb(197, 197, 197); padding:5px;">
+             <div class="color float-right">
+               <label class="h5">色：</label>
+               <a href="" class="black" data-color="0, 0, 0, 1"></a>
+               <a href="" class="red" data-color="255, 0, 0, 1"></a>
+               <a href="" class="blue" data-color="0, 0, 255, 1"></a>
+               <a href="" class="yellow" data-color="255, 255, 0, 1"></a>
+               <a href="" class="white" data-color="255, 255, 255, 1"></a>
+             </div>
+             <div class="bold">
+               <label class="h5">太さ：</label>
+               <a href="" class="little" data-bold="1">小</a>
+               <a href="" class="middle" data-bold="10">中</a>
+               <a href="" class="large" data-bold="20">大</a>
+               <a href="" class="mechalarge" data-bold="50">特大</a>
+         	</div>
+     		<input class="btn btn-danger" type="button" value="全消し" id="clear">
+      	<a class="btn btn-primary" id="download" href="#" download="canvas.png">ダウンロード</a>
+         </div>
+         <div class="rounded-lg col-6">
+         	<label class="mangamoji  m-0">サクシャ：</label>
+            	<input type="text" value=""size="20"class="p-0">
+            	<form method="post" action="/join/add">
+            	<button class="mangamoji"style="">ツイカ！</button>
+            	</form>
+            </div>
+            <form action=""></form>
+        </div>
+		</div>
+    </body>
         <!-- Brand End -->
         <!-- Back to Top -->
         <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
@@ -177,5 +169,4 @@
               ctx.fillRect(0,0,cnvWidth,cnvHeight);
             }
           </script>
-    </body>
 </html>

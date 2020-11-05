@@ -274,7 +274,7 @@ button.btn:hover {
         text-align: center;
         margin-bottom: 15px;
     }
-    
+
     .brand .b-search {
         margin-bottom: 0;
     }
@@ -327,11 +327,11 @@ button.btn:hover {
     .nav-bar .navbar {
         background: #ff2a2a !important;
     }
-    
+
     .nav-bar .navbar-brand {
         display: none;
     }
-    
+
     .nav-bar a.nav-link {
         padding: 8px 15px;
         font-size: 30px;
@@ -340,21 +340,21 @@ button.btn:hover {
     }
 }
 
-@media (max-width: 768px) {   
+@media (max-width: 768px) {
     .nav-bar,
     .nav-bar .navbar {
         padding: 3px 0;
         background: #b40000 !important;
     }
-    
+
     .nav-bar a.nav-link {
         padding: 5px;
     }
-    
+
     .nav-bar .dropdown-menu {
         box-shadow: none;
     }
-    
+
     .nav-bar .social {
         display: none;
     }
@@ -417,9 +417,9 @@ button.btn:hover {
 
 .top-news .tn-title {
     position: absolute;
-    top: 0; 
+    top: 0;
     right: 0;
-    bottom: 0; 
+    bottom: 0;
     left: 0;
     padding: 15px 10px 15px 20px;
     background-image: linear-gradient(rgba(0, 0, 0, .0), rgba(0, 0, 0, .3), rgba(0, 0, 0, .9));
@@ -538,9 +538,9 @@ button.btn:hover {
 
 .cat-news .cn-title {
     position: absolute;
-    top: 0; 
+    top: 0;
     right: 0;
-    bottom: 0; 
+    bottom: 0;
     left: 0;
     padding: 15px 10px 15px 20px;
     background-image: linear-gradient(rgba(0, 0, 0, .0), rgba(0, 0, 0, .3), rgba(0, 0, 0, .9));
@@ -695,9 +695,9 @@ button.btn:hover {
 
 .main-news .mn-title {
     position: absolute;
-    top: 0; 
+    top: 0;
     right: 0;
-    bottom: 0; 
+    bottom: 0;
     left: 0;
     padding: 15px 10px 15px 20px;
     background-image: linear-gradient(rgba(0, 0, 0, .0), rgba(0, 0, 0, .3), rgba(0, 0, 0, .9));
@@ -736,11 +736,11 @@ button.btn:hover {
 }
 
 .main-news .mn-list ul li {
-    margin: 0 0 12px 22px; 
+    margin: 0 0 12px 22px;
 }
 
 .main-news .mn-list ul li:last-child {
-    margin-bottom: 0; 
+    margin-bottom: 0;
 }
 
 .main-news .mn-list ul li a {
@@ -845,9 +845,9 @@ button.btn:hover {
 
 .single-news .sn-slider .sn-title {
     position: absolute;
-    top: 0; 
+    top: 0;
     right: 0;
-    bottom: 0; 
+    bottom: 0;
     left: 0;
     padding: 15px 10px 15px 20px;
     background-image: linear-gradient(rgba(0, 0, 0, .0), rgba(0, 0, 0, .3), rgba(0, 0, 0, .9));
@@ -1034,11 +1034,11 @@ button.btn:hover {
 }
 
 .sidebar .category ul li {
-    margin: 0 0 12px 22px; 
+    margin: 0 0 12px 22px;
 }
 
 .sidebar .category ul li:last-child {
-    margin-bottom: 0; 
+    margin-bottom: 0;
 }
 
 .sidebar .category ul li a {
@@ -1193,11 +1193,11 @@ button.btn:hover {
 }
 
 .footer .footer-widget ul li {
-    margin-bottom: 12px; 
+    margin-bottom: 12px;
 }
 
 .footer .footer-widget ul li:last-child {
-    margin-bottom: 0; 
+    margin-bottom: 0;
 }
 
 .footer .footer-widget ul li a {
@@ -1376,8 +1376,8 @@ button.btn:hover {
 @media (max-width: 768.98px) {
     .footer-bottom .copyright,
     .footer-bottom .template-by {
-        text-align: center; 
-    } 
+        text-align: center;
+    }
 }
 
 /**********************************/
@@ -1405,4 +1405,9 @@ button.btn:hover {
   }
   .white{
     background-color: #ffffff;
+  }
+  button{
+    border: none;  /* 枠線を消す */
+    outline: none; /* クリックしたときに表示される枠線を消す */
+    background: transparent; /* 背景の灰色を消す */
   }
