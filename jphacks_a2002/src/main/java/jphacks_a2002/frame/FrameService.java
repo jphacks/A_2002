@@ -18,5 +18,4 @@ public class FrameService {
 	public int addNewFrame(FrameData frameData) {
 		return frameRepository.insertOneFrame(frameData);
 	}
-
 }

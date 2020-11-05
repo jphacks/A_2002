@@ -8,7 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import jphacks_a2002.manga.MangaController;
+import jphacks_a2002.manga.MangaService;
+
 
 
 /**
@@ -21,17 +27,20 @@ public class FrameController {
 
 	@Autowired
 	FrameService frameService;
-
-
+	@Autowired
+	MangaService mangaService;
+	@Autowired
+	MangaController mangaController;
 	/**
 	 * 漫画作成を確定する
 	 * @param form
 	 * @param model
 	 * @return
 	 */
-	@PostMapping("/createManga/cofirm")
-	public String confirmCreateManga(@ModelAttribute @Validated FrameData form, Principal principal, Model model) {
+	@RequestMapping("/createManga/cofirm/{frameID}")
+	public String confirmCreateManga(@ModelAttribute @Validated FrameForm form , Principal principal, Model model  @PathVariable("frameID")) {
 		FrameData frameData = new FrameData();
+
 		frameService.addNewFrame(frameData);
 		return "/top";
 	}
@@ -43,11 +52,12 @@ public class FrameController {
 	 * @return
 	 */
 	@PostMapping("/join/add")
-	public String addFrame(@ModelAttribute @Validated FrameData form, Principal principal, Model model) {
-		FrameData frameData = new FrameData();
-		frameService.addNewFrame(frameData);
+	public String addFrame(@ModelAttribute @Validated FrameForm form, Principal principal, Model model) {
+		frameService.addNewFrame(form);
 		//四コマ目だったら詳細へ
-		return "/top";
+		int frameNumber = mangaService.getStatus(form.getMangaID());
+		return ((frameNumber == 4) ? mangaController.selectMangaDisplay(principal, model, form.getMangaID()) : "/top");
 	}
+
 
 }
