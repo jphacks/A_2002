@@ -20,7 +20,7 @@ public class FrameRepository {
 	private static final String SELECT_PREVIEW_MANGA = "SELECT f.manga_id,path FROM frame_table as f,manga_table as m WHERE m.manga_id = f.manga_id AND f.frame_no = 1 AND m.status = 4";
 	private static final String SELECT_SEARCH_PREVIEW_MANGA = "SELECT f.manga_id,path FROM frame_table as f,manga_table as m WHERE m.manga_id = f.manga_id AND f.frame_no = 1 AND m.status = 4 AND"
 															+ " manga_id IN(SELECT manga_id FROM frame_table WHERE creater = ?)";
-	private static final String SQL_INSERT_FRAME_ONE = "INSERT INTO frame_table (frame_id,creater,path,create_date,manga_id,frame_no) VALUES ((SELECT MAX(frame_id) + 1 FROM frame),?,?,?,?,?)";
+	private static final String SQL_INSERT_FRAME_ONE = "INSERT INTO frame_table (frame_id,creater,path,create_date,manga_id,frame_no) VALUES ((SELECT MAX(frame_id) + 1 FROM frame_table),?,?,?,?,?)";
 
 	public PreviewEntity selectAll() {
 
@@ -58,7 +58,6 @@ public class FrameRepository {
 
 	public int insertOneFrame(FrameData data) throws DataAccessException {
 		int rowNumber = jdbc.update(SQL_INSERT_FRAME_ONE,
-			data.getFrameID(),
 			data.getCreater(),
 			data.getPath(),
 			data.getCreateDate(),
