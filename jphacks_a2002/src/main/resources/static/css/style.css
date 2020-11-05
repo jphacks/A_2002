@@ -1411,3 +1411,32 @@ button.btn:hover {
     outline: none; /* クリックしたときに表示される枠線を消す */
     background: transparent; /* 背景の灰色を消す */
   }
+
+ /*モーダルウィンドウ*/
+#glayLayer {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: black;
+    filter: alpha(opacity=60);
+    opacity: 0.60;
+}
+
+#overLayer {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+
+    margin-top: -300px;
+    margin-left: -380px;
+
+}
+
+#overLayer img {
+    width: 760px;
+    height: 600px;
+}

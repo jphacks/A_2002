@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 @Configuration
@@ -41,32 +40,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		// ログイン不要ページの設定
-		http.authorizeRequests().antMatchers("/css/**").permitAll() // cssへアクセス許可
-				.antMatchers("/login").permitAll() // ログインページは直リンクOK
-				.antMatchers("/signup").permitAll() // 新規ユーザー登録画面は直リンクOK
-				.antMatchers("/user/**").hasAnyAuthority("TEACHER","STUFF") // ユーザ管理機能は管理権限ユーザに許可
-				.antMatchers("/user/").hasAnyAuthority("TEACHER","STUFF") //
-				//.antMatchers("/h2-console/**").permitAll() // XXX h2-console使用時は有効にする.
-				.anyRequest().authenticated(); // それ以外は直リンク禁止
-
-		//ログイン処理
-		http.formLogin().loginProcessingUrl("/login") // ログイン処理のパス
-				.loginPage("/login") // ログインページの指定
-				.failureUrl("/login") // ログイン失敗時の遷移先
-				.usernameParameter("user_id") // ログインページのユーザID
-				.passwordParameter("password") // ログインページのパスワード
-				.defaultSuccessUrl("/", true); // ログイン成功後の遷移先
-
-		//ログアウト処理
-		http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutUrl("/logout") //ログアウト処理のパス
-				.logoutSuccessUrl("/login"); //ログアウト成功後の遷移先
-
-		// (開発用)CSRF対策 無効設定
-		// XXX h2-console使用時は有効にする.
-		http.csrf().disable();
-		http.headers().frameOptions().disable();
+//		// ログイン不要ページの設定
+//		http.authorizeRequests().antMatchers("/css/**").permitAll() // cssへアクセス許可
+//				.antMatchers("/login").permitAll() // ログインページは直リンクOK
+//				.antMatchers("/signup").permitAll() // 新規ユーザー登録画面は直リンクOK
+//				.antMatchers("/user/**").hasAnyAuthority("TEACHER","STUFF") // ユーザ管理機能は管理権限ユーザに許可
+//				.antMatchers("/user/").hasAnyAuthority("TEACHER","STUFF") //
+//				//.antMatchers("/h2-console/**").permitAll() // XXX h2-console使用時は有効にする.
+//				.anyRequest().authenticated(); // それ以外は直リンク禁止
+//
+//		//ログイン処理
+//		http.formLogin().loginProcessingUrl("/login") // ログイン処理のパス
+//				.loginPage("/login") // ログインページの指定
+//				.failureUrl("/login") // ログイン失敗時の遷移先
+//				.usernameParameter("user_id") // ログインページのユーザID
+//				.passwordParameter("password") // ログインページのパスワード
+//				.defaultSuccessUrl("/", true); // ログイン成功後の遷移先
+//
+//		//ログアウト処理
+//		http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//				.logoutUrl("/logout") //ログアウト処理のパス
+//				.logoutSuccessUrl("/login"); //ログアウト成功後の遷移先
+//
+//		// (開発用)CSRF対策 無効設定
+//		// XXX h2-console使用時は有効にする.
+//		http.csrf().disable();
+//		http.headers().frameOptions().disable();
 	}
 
 	@Override
