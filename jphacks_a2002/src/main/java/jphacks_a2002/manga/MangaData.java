@@ -11,7 +11,7 @@ public class MangaData {
 
 	int mangaID;
 	int themeID;
-	String themeaName;
+	String themeName;
 	List<FrameData> framelist = new ArrayList<FrameData>();
 	int status;
 

@@ -49,7 +49,7 @@ public class MangaRepository {
 			FrameData frameData = new FrameData();
 			mangaData.setMangaID((Integer) map.get("manga_id"));
 			mangaData.setThemeID((Integer)map.get("theme_id"));
-			mangaData.setThemeaName((String)map.get("theme_name"));
+			mangaData.setThemeName((String)map.get("theme_name"));
 			frameData.setFrameID((Integer)map.get("frame_ID"));
 			frameData.setCreater((String)map.get("creater"));
 			frameData.setPath((String)map.get("path"));
