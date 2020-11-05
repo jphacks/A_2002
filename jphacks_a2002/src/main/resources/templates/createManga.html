@@ -60,10 +60,8 @@
         <!-- Nav Bar End -->
         <div class="container pt-3">
             <div class="row align-items-center">
-                <div class="col-lg-3 col-md-4">
-                    <div class="b-logo">
-                        <h1>「テーマ」</h1>
-                    </div>
+                <div class="col-lg-12 col-md-12">
+                      <h1  class="text-center"th:text="${mangaData.themeName}"></h1>
                 </div>
             </div>
         </div>
@@ -71,9 +69,13 @@
         <!-- Brand Start -->
         <div class="brand">
             <div class="container">
-                <canvas id="canvas" width="1024" height="768" style="border: solid 5px rgb(121, 121, 121);box-sizing: border-box;"></canvas>
+                <div id="canvas_wrapper">
+                  <canvas class="center-block" id="canvas" width="800" height="600" style="border: solid 5px rgb(121, 121, 121);box-sizing: border-box;"></canvas>
+                </div>
                 <div class="row">
-                  <div class="col-5 rounded-lg" style="background-color: rgb(197, 197, 197); padding:5px;">
+                  <div class="col-2">
+                  </div>
+                  <div class="col-4 rounded-lg" style="background-color: rgb(197, 197, 197); padding:5px;">
                     <div class="color float-right">
                       <label class="h5">色：</label>
                       <a href="" class="black" data-color="0, 0, 0, 1"></a>
@@ -92,10 +94,14 @@
                     <input class="btn btn-danger" type="button" value="全消し" id="clear">
                     <a class="btn btn-primary" id="download" href="#" download="canvas.png">ダウンロード</a>
                 </div>
-                <div class="col-3">
-                  <label class="mangamoji">サクシャ：</label>
-                  <input type="text" value="">
-                  <form action=""></form>
+                <div class="col-5">
+                  <form class="form-inline" method="post" action="/create/add"></form>
+                    <label class="mangamoji">サクシャ：</label>
+                    <input type="text" class="ml-1 col-3" value="">
+                  <button class="mangamoji ml-2 btn btn-warning">ソウシン！</button>
+                  </form>
+                </div>
+                <div class="col-1">
                 </div>
               </div>
             </div>
@@ -118,8 +124,8 @@
             var ctx = cnvs.getContext('2d');
 
             // 変数宣言
-            const cnvWidth = 1024;
-            const cnvHeight = 768;
+            const cnvWidth = 800;
+            const cnvHeight = 600;
             var cnvColor = "0, 0, 0, 1";  // 線の色
             var cnvBold = 5;  // 線の太さ
             var clickFlg = 0;  // クリック中の判定 1:クリック開始 2:クリック中
