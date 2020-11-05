@@ -26,6 +26,8 @@ public class MangaRepository {
 //			+ "m.frame_ID3 IN(SELECT frame_ID FROM frame_table WHERE creater = ?) OR m.frame_ID4 IN(SELECT frame_ID FROM frame_table WHERE creater = ?))";
 	private static final String INSERT_MANGA = "INSERT INTO manga_table(manga_id,theme_id,frame_id1,status) VALUES((SELECT MAX(manga_id) + 1 FROM manga_table),?,?,1)";
 	private static final String UPDATE_MANGA = "UPDATE manga_table SET status = status + 1 WHERE manga_id = ?";
+	private static final String SELECT_STATUS = "SELECT * FROM manga_table WHERE manga_id = ?";
+
 
 
 //	public MangaEntity selectAll() {
@@ -45,7 +47,7 @@ public class MangaRepository {
 		for (Map<String, Object> map : resultList) {
 			MangaData mangaData = new MangaData();
 			FrameData frameData = new FrameData();
-			mangaData.setMangaID((Integer) map.get("m.manga_id"));
+			mangaData.setMangaID((Integer) map.get("manga_id"));
 			mangaData.setThemeID((Integer)map.get("m.theme_id"));
 
 			//これに置き換えたら超短くなってきもちンゴかもしんね
@@ -184,5 +186,12 @@ public class MangaRepository {
 
 		MangaData mangaData = mappingSelectResultData(resultList);
 		return mangaData;
+	}
+
+	public int getStatus(int mangaId) {
+		List<Map<String, Object>> resultList = jdbc.queryForList(SELECT_STATUS,mangaId);
+
+		MangaData mangaData = mappingSelectResultData(resultList);
+		return mangaData.getStatus();
 	}
 }

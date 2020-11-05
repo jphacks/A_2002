@@ -77,4 +77,8 @@ public class MangaService {
 	public MangaData getOneManga(int mangaId) {
 		return mangaRepository.getOneManga(mangaId);
 	}
+
+	public int getStatus(int mangaId) {
+		return mangaRepository.getStatus(mangaId);
+	}
 }
