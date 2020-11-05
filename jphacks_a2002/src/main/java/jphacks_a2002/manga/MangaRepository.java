@@ -18,7 +18,7 @@ public class MangaRepository {
 	JdbcTemplate jdbc;
 
 
-	private static final String SELECT_UNDONE_MANGA = "SELECT * FROM manga_table as m ,frame_table as f WHERE m.manga_id = f.manga_id AND m.status < 4";
+	private static final String SELECT_UNDONE_MANGA = "SELECT * FROM manga_table as m JOIN frame_table as f on(m.manga_id = f.manga_id) JOIN theme_table as t on(m.theme_id = t.theme_id) WHERE m.status < 4";
 	private static final String SELECT_ONE_MANGA = "SELECT * FROM manga_table as m ,frame_table as f WHERE m.manga_id = f.manga_id AND m.manga_id = ?";
 //	private static final String SELECT_SEARCH_MANGA = "SELECT * FROM manga_table as m ,frame_table as f1,frame_table as f2,frame_table as f3,frame_table as f4 "
 //			+ "WHERE m.frame_ID1 = f1.frame_ID AND m.frame_ID2 = f2.frame_ID AND  m.frame_ID3 = f3.frame_ID AND m.frame_ID4 = f4.frame_ID AND status = 4 AND ("
@@ -48,43 +48,15 @@ public class MangaRepository {
 			MangaData mangaData = new MangaData();
 			FrameData frameData = new FrameData();
 			mangaData.setMangaID((Integer) map.get("manga_id"));
-			mangaData.setThemeID((Integer)map.get("m.theme_id"));
-
-			//これに置き換えたら超短くなってきもちンゴかもしんね
-			/*String prstmtStrList[] = {"m.frame_ID%d","f%d.creater","f%d.path","f%d.create_date"};
-			for( int i = 0; i < 4;i++ ) {
-				frameData.setFrameID((Integer)map.get(String.format(prstmtStrList[0],i)));
-				frameData.setCreater((String)map.get(String.format(prstmtStrList[0],i)));
-				frameData.setPath((String)map.get(String.format(prstmtStrList[0],i)));
-				frameData.setCreateDate((Date)map.get(String.format(prstmtStrList[0],i)));
-				mangaData.getFramelist().add(frameData);
-			}*/
-
-			frameData.setFrameID((Integer)map.get("m.frame_ID1"));
-			frameData.setCreater((String)map.get("f1.creater"));
-			frameData.setPath((String)map.get("f1.path"));
-			frameData.setCreateDate((Date)map.get("f1.create_date"));
+			mangaData.setThemeID((Integer)map.get("theme_id"));
+			mangaData.setThemeaName((String)map.get("theme_name"));
+			frameData.setFrameID((Integer)map.get("frame_ID"));
+			frameData.setCreater((String)map.get("creater"));
+			frameData.setPath((String)map.get("path"));
+			frameData.setCreateDate((Date)map.get("create_date"));
 			mangaData.getFramelist().add(frameData);
 
-			frameData.setFrameID((Integer)map.get("m.frame_ID2"));
-			frameData.setCreater((String)map.get("f2.creater"));
-			frameData.setPath((String)map.get("f2.path"));
-			frameData.setCreateDate((Date)map.get("f2.create_date"));
-			mangaData.getFramelist().add(frameData);
-
-			frameData.setFrameID((Integer)map.get("m.frame_ID3"));
-			frameData.setCreater((String)map.get("f3.creater"));
-			frameData.setPath((String)map.get("f3.path"));
-			frameData.setCreateDate((Date)map.get("f3.create_date"));
-			mangaData.getFramelist().add(frameData);
-
-			frameData.setFrameID((Integer)map.get("m.frame_ID4"));
-			frameData.setCreater((String)map.get("f4.creater"));
-			frameData.setPath((String)map.get("f4.path"));
-			frameData.setCreateDate((Date)map.get("f4.create_date"));
-			mangaData.getFramelist().add(frameData);
-
-			mangaData.setStatus((Integer)map.get("m.status"));
+			mangaData.setStatus((Integer)map.get("status"));
 
 			entity.getMangaList().add(mangaData);
 
