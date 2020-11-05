@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
     <head>
         <meta charset="utf-8">
         <title>キャンバス/ヨンコミ！</title>
@@ -34,7 +36,7 @@
                             </a>
                             <a href="/createManga" class="nav-item nav-link mangamoji">ツクル！
                             </a>
-                            <a href="/single-page" class="nav-item nav-link mangamoji">サンカ！</a>
+                            <a href="/join" class="nav-item nav-link mangamoji">サンカ！</a>
                         </div>
                         <div class="social ml-auto">
                             <a href="https://twitter.com/gr_phenix"><i class="fab fa-twitter"></i></a>
@@ -53,7 +55,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-9">
                     <div class="b-logo">
-                        <h1  class="text-center">「テーマ」</h1>
+                        <h1  class="text-center"th:text="${mangaData.themeName}"></h1>
                     </div>
                 </div>
             </div>
