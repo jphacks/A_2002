@@ -104,12 +104,13 @@ public class MangaRepository {
 
 		Map<String, Object> map = resultList.get(0);
 			MangaData mangaData = new MangaData();
-			FrameData frameData = new FrameData();
+
 			mangaData.setMangaID((Integer) map.get("manga_id"));
 			mangaData.setThemeID((Integer)map.get("theme_id"));
 
 			for (Map<String, Object> result : resultList) {
 			//これに置き換えたら超短くなってきもちンゴかもしんね
+				FrameData frameData = new FrameData();
 				frameData.setFrameID((Integer)result.get("frame_id"));
 				frameData.setCreater((String)result.get("creater"));
 				frameData.setPath((String)result.get("path"));
