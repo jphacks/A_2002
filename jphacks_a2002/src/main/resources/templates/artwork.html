@@ -20,7 +20,7 @@
         <link href="lib/slick/slick-theme.css" rel="stylesheet">
 
         <!-- Template Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
+        <link href="../css/style.css" rel="stylesheet">
     </head>
 
     <body>
@@ -62,8 +62,8 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 col-md-4">
                     <div class="b-logo">
-                        <h1>「テーマ」</h1>
-                    </div>
+        				<h1  class="text-center"th:text="${mangaData.themeName}"></h1>
+       				</div>
                 </div>
             </div>
         </div>
@@ -71,9 +71,13 @@
         <!-- Brand Start -->
         <div class="brand">
             <div class="container">
-                <div class="row" th:object="${mangaData}" th:each="mangaData : ${mangaData.framelist}">
-					<img th:src="*{path}">
-              	</div>
+            	<div class="row">
+            		<div class="col-md-12">
+						<div th:object="${mangaData}" th:each="mangaData : ${mangaData.framelist}">
+							<img style="position:center;"th:src="'../' + *{path}" >
+              			</div>
+            		</div>
+            	</div>
             </div>
         </div>
         <!-- Brand End -->
