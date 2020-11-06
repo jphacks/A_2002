@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <head>
         <meta charset="utf-8">
         <title>キャンバス/ヨンコミ！</title>
@@ -24,11 +25,6 @@
     </head>
 
     <body>
-        <!-- Top Bar Start -->
-
-
-
-        <!-- Nav Bar Start -->
         <div class="nav-bar">
             <div class="container">
                 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -60,10 +56,8 @@
         <!-- Nav Bar End -->
         <div class="container pt-3">
             <div class="row align-items-center">
-                <div class="col-lg-3 col-md-4">
-                    <div class="b-logo">
-                        <h1>「テーマ」</h1>
-                    </div>
+                <div class="col-lg-12 col-md-12">
+                      <h1  class="text-center"th:text="${themeData.theme_name}"></h1>
                 </div>
             </div>
         </div>
@@ -71,9 +65,13 @@
         <!-- Brand Start -->
         <div class="brand">
             <div class="container">
-                <canvas id="canvas" width="1024" height="768" style="border: solid 5px rgb(121, 121, 121);box-sizing: border-box;"></canvas>
+                <div id="canvas_wrapper">
+                  <canvas class="center-block" id="canvas" width="800" height="600" style="border: solid 5px rgb(121, 121, 121);box-sizing: border-box;"></canvas>
+                </div>
                 <div class="row">
-                  <div class="col-5 rounded-lg" style="background-color: rgb(197, 197, 197); padding:5px;">
+                  <div class="col-2">
+                  </div>
+                  <div class="col-4 rounded-lg" style="background-color: rgb(197, 197, 197); padding:5px;">
                     <div class="color float-right">
                       <label class="h5">色：</label>
                       <a href="" class="black" data-color="0, 0, 0, 1"></a>
@@ -90,17 +88,37 @@
                       <a href="" class="mechalarge" data-bold="50">特大</a>
                     </div>
                     <input class="btn btn-danger" type="button" value="全消し" id="clear">
-                    <a class="btn btn-primary" id="download" href="#" download="canvas.png">ダウンロード</a>
                 </div>
-                <div class="col-3">
-                  <label class="mangamoji">サクシャ：</label>
-                  <input type="text" value="">
-                  <form action=""></form>
+                <div class="col-5">
+                  <form class="form-inline" id="contents" method="post" action="/create/add">
+                    <label class="mangamoji">サクシャ：</label>
+                    <input type="text" class="ml-1 col-3" name="creater">
+                    <textarea class="d-none" name="imageDate" rows="40" cols="40" id="draw_data"></textarea>
+                  	<button type="button" class="mangamoji ml-2 btn" data-toggle="modal" data-target="#testModal" onclick="setCanvasData()">ソウシン！</button>
+                  </form>
+                </div>
+                <div class="col-1">
                 </div>
               </div>
             </div>
         </div>
-        <!-- Brand End -->
+        <!-- ボタン・リンククリック後に表示される画面の内容 -->
+	    <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+	        <div class="modal-dialog">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <h4 class="modal-title mangamoji2" id="myModalLabel">確認ッ！</h4>
+	                </div>
+	                <div class="modal-body mangamoji2">
+	                    <label class="h3">これで完成でいい？</label>
+	                </div>
+	                <div class="modal-footer">
+	                    <button type="button" class="btn btn-default mangamoji2" data-dismiss="modal">まだ描く</button>
+	                    <button type="submit" class="btn btn-danger mangamoji2" form="contents">これでいい</button>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
         <!-- Back to Top -->
         <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
@@ -109,8 +127,6 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
         <script src="lib/easing/easing.min.js"></script>
         <script src="lib/slick/slick.min.js"></script>
-
-        <!-- Template Javascript -->
         <script src="js/main.js"></script>
         <script>
             // canvas
@@ -118,8 +134,8 @@
             var ctx = cnvs.getContext('2d');
 
             // 変数宣言
-            const cnvWidth = 1024;
-            const cnvHeight = 768;
+            const cnvWidth = 800;
+            const cnvHeight = 600;
             var cnvColor = "0, 0, 0, 1";  // 線の色
             var cnvBold = 5;  // 線の太さ
             var clickFlg = 0;  // クリック中の判定 1:クリック開始 2:クリック中
@@ -173,12 +189,12 @@
               setBgColor();
             });
 
-            // canvasを画像で保存
-            $("#download").click(function(){
-              canvas = document.getElementById('canvas');
-              var base64 = canvas.toDataURL("image/png");
-              document.getElementById("download").href = base64;
-            });
+            // canvasをbase64変換してセット
+            function setCanvasData(){
+            	canvas = document.getElementById('canvas');
+                var base64 = canvas.toDataURL("image/png");
+                document.getElementById("draw_data").value = base64;
+             }
 
             function setBgColor(){
               // canvasの背景色を設定(指定がない場合にjpeg保存すると背景が黒になる)
