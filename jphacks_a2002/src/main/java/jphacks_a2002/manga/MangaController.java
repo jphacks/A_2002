@@ -95,4 +95,5 @@ public class MangaController {
 			model.addAttribute("previewEntity", previewEntity);
 		return "/top";
 	}
+
 }
