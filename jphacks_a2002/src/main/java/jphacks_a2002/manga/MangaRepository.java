@@ -28,7 +28,7 @@ public class MangaRepository {
 	private static final String INSERT_MANGA = "INSERT INTO manga_table(manga_id,theme_id,status) VALUES((SELECT MAX(manga_id) + 1 FROM manga_table),?,1)";
 	private static final String UPDATE_MANGA = "UPDATE manga_table SET status = status + 1 WHERE manga_id = ?";
 	private static final String SELECT_STATUS = "SELECT * FROM manga_table WHERE manga_id = ?";
-	private static final String GET_MANGA_DATA = "SELECT * FROM manga_table ORDER BY manga_id";
+	private static final String GET_MANGA_DATA = "SELECT * FROM manga_table as m JOIN frame_table as f on(m.manga_id = f.manga_id) ORDER BY manga_id";
 	private static final String SELECT_MANGA_DATA = "SELECT * FROM manga_table m JOIN frame_table f ON (m.manga_id = f.manga_id) WHERE f.frame_id = ?";
 
 
@@ -66,7 +66,7 @@ public class MangaRepository {
 			mangaData.setThemeID((Integer)map.get("theme_id"));
 			mangaData.setThemeName((String)map.get("theme_name"));
 			mangaData.setStatus((Integer)map.get("status"));
-			frameData.setFrameID((Integer)map.get("frame_ID"));
+			frameData.setFrameID((Integer)map.get("frame_id"));
 			frameData.setCreater((String)map.get("creater"));
 			frameData.setPath((String)map.get("path"));
 			frameData.setCreateDate((Date)map.get("create_date"));
@@ -89,7 +89,7 @@ public class MangaRepository {
 	public MangaData insertManga(int themeId) {
 		jdbc.update(INSERT_MANGA,themeId);
 		MangaEntity mangaEntity = mappingSelectResultEntity(jdbc.queryForList(GET_MANGA_DATA));
-		return mangaEntity.getMangaList().get(mangaEntity.getMangaList().size());
+		return mangaEntity.getMangaList().get(mangaEntity.getMangaList().size()-1);
 	}
 
 	public MangaEntity selectUndoneAll() {
