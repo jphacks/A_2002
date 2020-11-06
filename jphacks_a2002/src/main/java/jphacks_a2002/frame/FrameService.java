@@ -1,5 +1,6 @@
 package jphacks_a2002.frame;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -30,22 +31,29 @@ public class FrameService {
 	//このやり方だとFrameControllerがいらないのよな
 	public int addNewFrame(FrameForm frameForm,MangaData mangaData) throws IOException {
 		int frameNameLast = frameRepository.getLastFrameID();
-		this.writeImgFile(frameForm.getImageData(),Integer.toString(frameNameLast)+".png");
+		String path = this.writeImgFile(frameForm.getImageData(),Integer.toString(frameNameLast)+".png");
+		frameForm.setPath(path);
 		return frameRepository.insertOneFrame(this.createMangaFormToData(frameForm,mangaData));
 	}
 
 	public int addJoinFrame(FrameForm frameForm,int frameID) throws IOException {
 		int frameNameLast = frameRepository.getLastFrameID();
-		this.writeImgFile(frameForm.getImageData(),Integer.toString(frameNameLast)+".png");
+		String path = this.writeImgFile(frameForm.getImageData(),Integer.toString(frameNameLast)+".png");
 		MangaData mangaData = mangaService.getOneMangaData(frameID);
+		frameForm.setPath(path);
 		return frameRepository.insertOneFrame(this.createMangaFormToData(frameForm,mangaData));
 	}
 
-
-	private void writeImgFile(String imgStr,String imgName) throws IOException {
+	//返り値path
+	private String writeImgFile(String imgStr,String imgName) throws IOException {
+		imgStr = imgStr.split(",")[1];
+		System.out.println(imgName);
 		byte[] decodedImg = Base64.getDecoder().decode(imgStr.getBytes(StandardCharsets.UTF_8));
-		Path destinationFile = Paths.get("/img/frame", imgName);
+		Path destinationFile = Paths.get("src/main/resources/static/img/frame", imgName);
+		File newpng = new File(destinationFile.toString());
+		newpng.createNewFile();
 		Files.write(destinationFile, decodedImg);
+		return destinationFile.toString();
 	}
 
 	public FrameData createMangaFormToData(FrameForm frameForm,MangaData mangaData) {

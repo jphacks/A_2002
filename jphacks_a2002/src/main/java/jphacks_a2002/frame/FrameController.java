@@ -45,7 +45,8 @@ public class FrameController {
 	public String addNewFrame(@ModelAttribute @Validated FrameForm form, Principal principal, Model model,@PathVariable("themeID")int themeID ) throws IOException {
 		MangaData mangaData =  mangaService.addNewManga(themeID);
 		frameService.addNewFrame(form,mangaData);
-		return "/top";
+		//return "/top";
+		return mangaController.getMangaListDisplay(principal, model);
 	}
 
 	/**
@@ -60,7 +61,8 @@ public class FrameController {
 		frameService.addJoinFrame(form,frameID);
 		//四コマ目だったら詳細へ
 		int frameNumber = mangaService.getStatus(form.getMangaID());
-		return ((frameNumber == 4) ? mangaController.selectMangaDisplay(principal, model, form.getMangaID()) : "/top");
+//		return ((frameNumber == 4) ? mangaController.selectMangaDisplay(principal, model, form.getMangaID()) : "/top");
+		return ((frameNumber == 4) ? mangaController.selectMangaDisplay(principal, model, form.getMangaID()) : mangaController.getMangaListDisplay(principal, model));
 	}
 
 
