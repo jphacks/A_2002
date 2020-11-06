@@ -201,87 +201,6 @@ button.btn:hover {
 
 
 /**********************************/
-/*********** Brand CSS ************/
-/**********************************/
-.brand {
-    margin: 15px 0;
-    background: #ffffff;
-}
-
-.brand .b-logo {
-    text-align: left;
-    overflow: hidden;
-}
-
-.brand .b-logo a img {
-    max-width: 100%;
-    max-height: 500%
-}
-
-.brand .b-ads {
-    overflow: hidden;
-}
-
-.brand .b-ads a img {
-    max-width: 100%;
-    max-height: 100%;
-}
-
-.brand .b-search {
-    width: 100%;
-}
-
-.brand .b-search input[type=text] {
-    width: 100%;
-    height: 40px;
-    padding: 0 15px;
-    color: #666666;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-}
-
-.brand .b-search input[type=text]:focus {
-    border-color: #b40000;
-}
-
-.brand .b-search button {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    top: 0;
-    right: 15px;
-    border: none;
-    background: none;
-    color: #b40000;
-    border-radius: 0 4px 4px 0;
-}
-
-.brand .b-search button:hover {
-    background: #b40000;
-    color: #ffffff;
-}
-
-@media (min-width: 768px) {
-    .brand {
-        max-height: 90px;
-    }
-}
-
-@media (max-width: 767.98px) {
-    .brand .b-logo,
-    .brand .b-ads,
-    .brand .b-search {
-        text-align: center;
-        margin-bottom: 15px;
-    }
-
-    .brand .b-search {
-        margin-bottom: 0;
-    }
-}
-
-
-/**********************************/
 /*********** Nav Bar CSS **********/
 /**********************************/
 .nav-bar {
@@ -1439,4 +1358,44 @@ button.btn:hover {
 #overLayer img {
     width: 760px;
     height: 600px;
+}
+
+#grid {
+	width: auto;
+}
+li {
+	margin: 5px;
+	float: left;
+	list-style: none;
+}
+
+#canvas_wrapper{
+	width:800px;
+	margin:0 auto;
+}
+
+.modal-header {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-top-left-radius: calc(0.3rem - 1px);
+  border-top-right-radius: calc(0.3rem - 1px);
+}
+
+.modal-footer {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  padding: 0.75rem;
+  border-bottom-right-radius: calc(0.3rem - 1px);
+  border-bottom-left-radius: calc(0.3rem - 1px);
 }
