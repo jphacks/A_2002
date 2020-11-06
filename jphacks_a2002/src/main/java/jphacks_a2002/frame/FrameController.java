@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -38,8 +37,14 @@ public class FrameController {
 	 * @return
 	 */
 	@RequestMapping("/createManga/cofirm/{frameID}")
-	public String confirmCreateManga(@ModelAttribute @Validated FrameForm form , Principal principal, Model model  @PathVariable("frameID")) {
+	public String confirmCreateManga(@ModelAttribute @Validated FrameForm form , Principal principal, Model model) {
 		FrameData frameData = new FrameData();
+		/*
+		 * frameService.フォームの中とガッチャマン(form);
+			or
+		   frameservice.addNewFrame(form);
+		   に変更するか
+		*/
 
 		frameService.addNewFrame(frameData);
 		return "/top";
