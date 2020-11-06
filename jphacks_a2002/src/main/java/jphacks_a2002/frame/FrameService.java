@@ -18,4 +18,14 @@ public class FrameService {
 	public int addNewFrame(FrameData frameData) {
 		return frameRepository.insertOneFrame(frameData);
 	}
+	
+	public FrameData formToData(FrameForm frameForm) {
+		
+		frameForm.getFrameID();
+		frameForm.getCreater();
+		frameForm.getPath();
+		frameForm.getCreateDate();
+		frameForm.getMangaID();
+		frameForm.getFrameNo();
+	}
 }

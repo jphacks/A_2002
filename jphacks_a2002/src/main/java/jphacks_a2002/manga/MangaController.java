@@ -52,16 +52,6 @@ public class MangaController {
 		return "/top";
 	}
 
-	/**
-	 * 新規作成画面を表示する
-	 * @param form
-	 * @param model
-	 * @return
-	 */
-	@GetMapping("/createManga")
-	public String getCreateDisplay(Principal principal, Model model) {
-		return "/createManga";
-	}
 
 	/**
 	 * 漫画の詳細画面を表示する
