@@ -42,7 +42,7 @@ public class FrameController {
 	 * @throws IOException
 	 */
 	@RequestMapping("/create/manga/{themeID}")
-	public String addNewFrame(@ModelAttribute @Validated FrameForm form, Principal principal, Model model,@PathVariable("tehemeID")int themeID ) throws IOException {
+	public String addNewFrame(@ModelAttribute @Validated FrameForm form, Principal principal, Model model,@PathVariable("themeID")int themeID ) throws IOException {
 		MangaData mangaData =  mangaService.addNewManga(themeID);
 		frameService.addNewFrame(form,mangaData);
 		return "/top";
