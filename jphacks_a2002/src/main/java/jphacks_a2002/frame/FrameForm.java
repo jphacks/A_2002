@@ -13,6 +13,8 @@ public class FrameForm {
 
 	private String creater;
 
+	private String imageData;
+
 	private String path;
 
 	private Date createDate;
