@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <head>
         <meta charset="utf-8">
         <title>トップ/ヨンコミ！</title>
@@ -70,26 +71,9 @@
             <div class="row">
                 <div class="col-12">
                     <div id="grid">
-                        <ul>
+                        <ul th:object="${previewEntity}" th:each="previewEntity : ${previewEntity.previewList}">
                             <!-- 繰り返し処理で自動でグリッドに -->
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
+                            <li><a th:href="'/artwork/'+${previewEntity.mangaID}"><img th:src="'../' + *{path}" width="200" height="150" /></a></li>
                         </ul>
                     </div>
                 </div>
