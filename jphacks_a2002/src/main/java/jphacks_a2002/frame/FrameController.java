@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jphacks_a2002.manga.MangaController;
@@ -46,7 +45,7 @@ public class FrameController {
 		   に変更するか
 		*/
 
-		frameService.addNewFrame(frameData);
+		frameService.addNewFrame(form);
 		return "/top";
 	}
 
