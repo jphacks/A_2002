@@ -54,19 +54,6 @@ public class MangaController {
 
 
 	/**
-	 * 一覧画面を表示する
-	 * @param principal
-	 * @param model
-	 * @return
-	 */
-	@GetMapping("/createManga")
-	public String getCreateMangaDisplay(Principal principal, Model model) {
-		PreviewEntity previewEntity = mangaService.selectRandomManga();
-		model.addAttribute("previewEntity", previewEntity);
-		return "/top";
-	}
-
-	/**
 	 * 漫画の詳細画面を表示する
 	 * @param principal
 	 * @param model
