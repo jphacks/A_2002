@@ -84,7 +84,7 @@
                <input class="btn btn-danger" type="button" value="全消し" id="clear">
            </div>
            <div class="col-5">
-             <form class="form-inline" id="contents" method="post" th:action="'/create/add/'+${mangaData.frameID}">
+             <form class="form-inline" id="contents" method="post" action="/create/manga">
                <label class="mangamoji">サクシャ：</label>
                <input type="text" class="ml-1 col-3" name="creater">
                <textarea class="d-none" name="imageData" rows="40" cols="40" id="draw_data"></textarea>
