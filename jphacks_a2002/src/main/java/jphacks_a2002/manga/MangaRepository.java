@@ -44,23 +44,34 @@ public class MangaRepository {
 			throws DataAccessException{
 
 		MangaEntity entity = new MangaEntity();
-
 		for (Map<String, Object> map : resultList) {
 			MangaData mangaData = new MangaData();
 			FrameData frameData = new FrameData();
+			if(entity.getMangaList().size() > 0 ) {
+				if(entity.getMangaList().get(entity.getMangaList().size() - 1).getMangaID() == (Integer)map.get("manga_id")){
+					FrameData sameFrameData = new FrameData();
+					sameFrameData.setFrameID((Integer)map.get("frame_ID"));
+					sameFrameData.setCreater((String)map.get("creater"));
+					sameFrameData.setPath((String)map.get("path"));
+					sameFrameData.setCreateDate((Date)map.get("create_date"));
+					sameFrameData.setMangaID((Integer)map.get("manga_id"));
+					sameFrameData.setFrameNo((Integer)map.get("frame_no"));
+					entity.getMangaList().get(entity.getMangaList().size() - 1).getFramelist().add(sameFrameData);
+					continue;
+				}
+			}
 			mangaData.setMangaID((Integer) map.get("manga_id"));
 			mangaData.setThemeID((Integer)map.get("theme_id"));
 			mangaData.setThemeName((String)map.get("theme_name"));
+			mangaData.setStatus((Integer)map.get("status"));
 			frameData.setFrameID((Integer)map.get("frame_ID"));
 			frameData.setCreater((String)map.get("creater"));
 			frameData.setPath((String)map.get("path"));
 			frameData.setCreateDate((Date)map.get("create_date"));
+			frameData.setMangaID((Integer)map.get("manga_id"));
+			frameData.setFrameNo((Integer)map.get("frame_no"));
 			mangaData.getFramelist().add(frameData);
-
-			mangaData.setStatus((Integer)map.get("status"));
-
 			entity.getMangaList().add(mangaData);
-
 		}
 		return entity;
 	}
@@ -107,7 +118,7 @@ public class MangaRepository {
 
 			mangaData.setMangaID((Integer) map.get("manga_id"));
 			mangaData.setThemeID((Integer)map.get("theme_id"));
-
+			mangaData.setThemeName((String)map.get("theme_name"));
 			for (Map<String, Object> result : resultList) {
 			//これに置き換えたら超短くなってきもちンゴかもしんね
 				FrameData frameData = new FrameData();

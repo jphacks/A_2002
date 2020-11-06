@@ -76,6 +76,8 @@ public class MangaController {
 	@GetMapping("/join")
 	public String getJoinDisplay(Principal principal, Model model) {
 		MangaData mangaData = mangaService.getRandomManga();
+		System.out.println(mangaData.getMangaID());
+		System.out.println(mangaData.getFramelist());
 		model.addAttribute("mangaData",mangaData);
 		model.addAttribute("beforePath", mangaData.getFramelist().get(mangaData.status - 1 ));
 		return "/join";
