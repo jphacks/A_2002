@@ -22,8 +22,6 @@
 
     </head>
     <body>
-        <!-- Top Bar Start -->
-        <!-- Nav Bar Start -->
         <div class="nav-bar">
             <div class="container">
                 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -31,20 +29,16 @@
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
-                            <a href="/top" class="nav-item nav-link mangamoji">ホーム！
+                        	<a href="top" class="nav-item nav-link mangamoji"><img src="img/JPHACKS_logo.png"  width="50" height="50">
+                            </a>
+                            <a href="top" class="nav-item nav-link mangamoji">ホーム！
                             </a>
                             <a href="/createManga" class="nav-item nav-link mangamoji">ツクル！
                             </a>
                             <a href="/join" class="nav-item nav-link mangamoji">サンカ！</a>
-                        </div>
-                        <div class="social ml-auto">
-                            <a href="https://twitter.com/gr_phenix"><i class="fab fa-twitter"></i></a>
-                            <a href=""><i class="fab fa-facebook-f"></i></a>
-                            <a href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a href=""><i class="fab fa-instagram"></i></a>
-                            <a href=""><i class="fab fa-youtube"></i></a>
                         </div>
                     </div>
                 </nav>
@@ -58,7 +52,6 @@
         <div class="container">
         <div class="row">
             <div class="col-md-2" >
-
             <a th:href="${beforePath.path}"class="modal-view">
 				<img th:src="${beforePath.path}"alt="亀"title="亀"id="image1" width="180" height="AUTO" style="padding-right: 20px;">
             </a>
@@ -66,36 +59,39 @@
             <div class="col-md-10">
                 <canvas id="canvas" width="800" height="600" style="border: solid 5px rgb(121, 121, 121);box-sizing: border-box;"></canvas>
             </div>
+             <div class="row">
+                  <div class="col-2">
+                  </div>
+                  <div class="col-4 rounded-lg" style="background-color: rgb(197, 197, 197); padding:5px;">
+                    <div class="color float-right">
+                      <label class="h5">色：</label>
+                      <a href="" class="black" data-color="0, 0, 0, 1"></a>
+                      <a href="" class="red" data-color="255, 0, 0, 1"></a>
+                      <a href="" class="blue" data-color="0, 0, 255, 1"></a>
+                      <a href="" class="yellow" data-color="255, 255, 0, 1"></a>
+                      <a href="" class="white" data-color="255, 255, 255, 1"></a>
+                    </div>
+                    <div class="bold">
+                      <label class="h5">太さ：</label>
+                      <a href="" class="little" data-bold="1">小</a>
+                      <a href="" class="middle" data-bold="10">中</a>
+                      <a href="" class="large" data-bold="20">大</a>
+                      <a href="" class="mechalarge" data-bold="50">特大</a>
+                    </div>
+                    <input class="btn btn-danger" type="button" value="全消し" id="clear">
+                    <a class="btn btn-primary" id="download" href="#" download="canvas.png">ダウンロード</a>
+                </div>
+                <div class="col-5">
+                  <form class="form-inline" id="contents" method="post" action="/create/add">
+                    <label class="mangamoji">サクシャ：</label>
+                    <input type="text" class="ml-1 col-3" name="creater">
+                    <textarea class="d-none" name="imageDate" rows="40" cols="40" id="draw_data"></textarea>
+                  	<button type="button" class="mangamoji ml-2 btn" data-toggle="modal" data-target="#testModal" onclick="setCanvasData()">ソウシン！</button>
+                  </form>
+                </div>
+                <div class="col-1">
+                </div>
         </div>
-        <div class="row">
-         <div class="col-6 rounded-lg" style="background-color: rgb(197, 197, 197); padding:5px;">
-             <div class="color float-right">
-               <label class="h5">色：</label>
-               <a href="" class="black" data-color="0, 0, 0, 1"></a>
-               <a href="" class="red" data-color="255, 0, 0, 1"></a>
-               <a href="" class="blue" data-color="0, 0, 255, 1"></a>
-               <a href="" class="yellow" data-color="255, 255, 0, 1"></a>
-               <a href="" class="white" data-color="255, 255, 255, 1"></a>
-             </div>
-             <div class="bold">
-               <label class="h5">太さ：</label>
-               <a href="" class="little" data-bold="1">小</a>
-               <a href="" class="middle" data-bold="10">中</a>
-               <a href="" class="large" data-bold="20">大</a>
-               <a href="" class="mechalarge" data-bold="50">特大</a>
-         	</div>
-     		<input class="btn btn-danger" type="button" value="全消し" id="clear">
-      	<a class="btn btn-primary" id="download" href="#" download="canvas.png">ダウンロード</a>
-         </div>
-         <div class="rounded-lg col-6">
-         	<div style="display:inline-flex;">
-         		<label class="mangamoji  m-0">サクシャ：</label>
-            	<input type="text" value=""size="20"class="p-0">
-            	<form method="post" action="/join/add">
-            		<button class="mangamoji"style="">ツイカ！</button>
-            	</form>
-	        </div>
-          </div>
 
         </div>
 		</div>

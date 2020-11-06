@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <head>
         <meta charset="utf-8">
         <title>キャンバス/ヨンコミ！</title>
@@ -24,11 +25,6 @@
     </head>
 
     <body>
-        <!-- Top Bar Start -->
-
-
-
-        <!-- Nav Bar Start -->
         <div class="nav-bar">
             <div class="container">
                 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -39,18 +35,13 @@
 
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
-                            <a href="/top" class="nav-item nav-link mangamoji">ホーム！
+                        	<a href="top" class="nav-item nav-link mangamoji"><img src="img/JPHACKS_logo.png"  width="50" height="50">
+                            </a>
+                            <a href="top" class="nav-item nav-link mangamoji">ホーム！
                             </a>
                             <a href="/createManga" class="nav-item nav-link mangamoji">ツクル！
                             </a>
                             <a href="/join" class="nav-item nav-link mangamoji">サンカ！</a>
-                        </div>
-                        <div class="social ml-auto">
-                            <a href="https://twitter.com/gr_phenix"><i class="fab fa-twitter"></i></a>
-                            <a href=""><i class="fab fa-facebook-f"></i></a>
-                            <a href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a href=""><i class="fab fa-instagram"></i></a>
-                            <a href=""><i class="fab fa-youtube"></i></a>
                         </div>
                     </div>
                 </nav>
@@ -59,28 +50,22 @@
 
         <!-- Nav Bar End -->
         <div class="container pt-3">
+               	<h1  class="text-center"th:text="${mangaData.themeName}"></h1>
             <div class="row align-items-center">
                 <div class="col-lg-3 col-md-4">
-                    <div class="b-logo">
-        				<h1  class="text-center"th:text="${mangaData.themeName}"></h1>
-       				</div>
                 </div>
             </div>
         </div>
 
         <!-- Brand Start -->
-        <div class="brand">
-            <div class="container">
-            	<div class="row">
-            		<div class="col-md-1">
-            		</div>
-            		<div class="col-md-11">
-						<div th:object="${mangaData}" th:each="mangaData : ${mangaData.framelist}">
-							<img style="position:center;"th:src="'../' + *{path}" >
-              			</div>
-            		</div>
-            	</div>
-            </div>
+        <div class="container">
+        	<div class="row">
+        		<div class="col-12">
+					<div class="center-block" th:object="${mangaData}" th:each="mangaData : ${mangaData.framelist}">
+						<img class="mx-auto d-block frame-border mb-3" width="800" height="auto" th:src="'../' + *{path}" >
+          			</div>
+        		</div>
+        	</div>
         </div>
         <!-- Brand End -->
         <!-- Back to Top -->

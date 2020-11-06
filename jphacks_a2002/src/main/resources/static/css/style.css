@@ -1399,3 +1399,7 @@ li {
   border-bottom-right-radius: calc(0.3rem - 1px);
   border-bottom-left-radius: calc(0.3rem - 1px);
 }
+
+.frame-border {
+	border: 8px #000000 solid;
+}
