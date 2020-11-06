@@ -31,8 +31,16 @@ public class FrameService {
 	public int addNewFrame(FrameForm frameForm,MangaData mangaData) throws IOException {
 		int frameNameLast = frameRepository.getLastFrameID();
 		this.writeImgFile(frameForm.getImageData(),Integer.toString(frameNameLast)+".png");
-		return frameRepository.insertOneFrame(this.formToData(frameForm,mangaData));
+		return frameRepository.insertOneFrame(this.createMangaFormToData(frameForm,mangaData));
 	}
+
+	public int addJoinFrame(FrameForm frameForm,int frameID) throws IOException {
+		int frameNameLast = frameRepository.getLastFrameID();
+		this.writeImgFile(frameForm.getImageData(),Integer.toString(frameNameLast)+".png");
+		MangaData mangaData = mangaService.getOneMangaData(frameID);
+		return frameRepository.insertOneFrame(this.createMangaFormToData(frameForm,mangaData));
+	}
+
 
 	private void writeImgFile(String imgStr,String imgName) throws IOException {
 		byte[] decodedImg = Base64.getDecoder().decode(imgStr.getBytes(StandardCharsets.UTF_8));
@@ -40,7 +48,7 @@ public class FrameService {
 		Files.write(destinationFile, decodedImg);
 	}
 
-	public FrameData formToData(FrameForm frameForm,MangaData mangaData) {
+	public FrameData createMangaFormToData(FrameForm frameForm,MangaData mangaData) {
 		Date date = new Date();
 		//FrameIDはデータベースで採番するためここで割り振らない
 		FrameData data = new FrameData();
@@ -49,7 +57,7 @@ public class FrameService {
 		data.setCreateDate(date);
 		data.setMangaID(mangaData.getMangaID());
 		//これ画面から渡されるやつに1足すって処理でいいかわかんねえ
-		data.setFrameID(mangaData.getFrameNo() + 1 );
+		data.setFrameNo(mangaData.getStatus() + 1 );
 		return data;
 	}
 }

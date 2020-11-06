@@ -28,7 +28,8 @@ public class MangaRepository {
 	private static final String INSERT_MANGA = "INSERT INTO manga_table(manga_id,theme_id,status) VALUES((SELECT MAX(manga_id) + 1 FROM manga_table),?,1)";
 	private static final String UPDATE_MANGA = "UPDATE manga_table SET status = status + 1 WHERE manga_id = ?";
 	private static final String SELECT_STATUS = "SELECT * FROM manga_table WHERE manga_id = ?";
-	private static final String GET_MANGA_DATA = "SELECT * FROM manfa_table ORDER BY manga_id";
+	private static final String GET_MANGA_DATA = "SELECT * FROM manga_table ORDER BY manga_id";
+	private static final String SELECT_MANGA_DATA = "SELECT * FROM manga_table m JOIN frame_table f ON (m.manga_id = f.manga_id) WHERE f.frame_id = ?";
 
 
 
@@ -86,7 +87,7 @@ public class MangaRepository {
 //	}
 
 	public MangaData insertManga(int themeId) {
-		int rowNumber = jdbc.update(INSERT_MANGA,themeId);
+		jdbc.update(INSERT_MANGA,themeId);
 		MangaEntity mangaEntity = mappingSelectResultEntity(jdbc.queryForList(GET_MANGA_DATA));
 		return mangaEntity.getMangaList().get(mangaEntity.getMangaList().size());
 	}
@@ -137,15 +138,36 @@ public class MangaRepository {
 		return mangaData;
 	}
 
+	private MangaData mappingSelectResultMangaData(List<Map<String, Object>> resultList)
+			throws DataAccessException{
+
+
+		Map<String, Object> map = resultList.get(0);
+			MangaData mangaData = new MangaData();
+
+			mangaData.setMangaID((Integer)map.get("manga_id"));
+			mangaData.setThemeID((Integer)map.get("theme_id"));
+			mangaData.setThemeName((String)map.get("theme_name"));
+			mangaData.setStatus((Integer)map.get("status"));
+		return mangaData;
+	}
+
 	public int updateManga(int mangaID) {
 		int rowNumber = jdbc.update(UPDATE_MANGA,mangaID);
 		return rowNumber;
 	}
 
-	public MangaData getOneManga(int mangaId) {
-		List<Map<String, Object>> resultList = jdbc.queryForList(SELECT_ONE_MANGA,mangaId);
+	public MangaData getOneManga(int mangaID) {
+		List<Map<String, Object>> resultList = jdbc.queryForList(SELECT_ONE_MANGA,mangaID);
 
 		MangaData mangaData = mappingSelectResultData(resultList);
+		return mangaData;
+	}
+
+
+	public MangaData getMangaData(int frameID) {
+		List<Map<String, Object>> resultList = jdbc.queryForList(SELECT_ONE_MANGA,frameID);
+		MangaData mangaData = mappingSelectResultMangaData(resultList);
 		return mangaData;
 	}
 

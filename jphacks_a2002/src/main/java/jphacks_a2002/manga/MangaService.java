@@ -80,4 +80,8 @@ public class MangaService {
 	public int getStatus(int mangaId) {
 		return mangaRepository.getStatus(mangaId);
 	}
+
+	public MangaData getOneMangaData(int frameID) {
+		return mangaRepository.getMangaData(frameID);
+	}
 }
