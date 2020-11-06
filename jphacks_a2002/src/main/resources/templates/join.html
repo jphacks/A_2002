@@ -76,7 +76,7 @@
           			<div class="col-5">
                		<form class="form-inline" id="contents" method="post" th:action="@{'join/add/'}+${beforePath.frameID}">
 	                   	<label class="mangamoji">サクシャ：</label>
-			           	<input type="text" class="ml-1 col-3" name="creater">
+			           	<input type="text" class="ml-1 col-3" name="creater" required>
 			           	<textarea class="d-none" name="imageData" rows="40" cols="40" id="draw_data"></textarea>
 		    			<button type="button" class="mangamoji ml-2 btn" data-toggle="modal" data-target="#testModal" onclick="setCanvasData()">ソウシン！</button>
           			</form>
