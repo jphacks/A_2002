@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <head>
         <meta charset="utf-8">
         <title>キャンバス/ヨンコミ！</title>
@@ -18,17 +19,14 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
         <link href="lib/slick/slick.css" rel="stylesheet">
         <link href="lib/slick/slick-theme.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.4/css/all.css">
 
         <!-- Template Stylesheet -->
         <link href="../css/style.css" rel="stylesheet">
     </head>
 
     <body>
-        <!-- Top Bar Start -->
-
-
-
-        <!-- Nav Bar Start -->
         <div class="nav-bar">
             <div class="container">
                 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -38,18 +36,13 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
+                        	<a href="/top" class="nav-item nav-link mangamoji"><img src="../img/JPHACKS_logo.png"  width="50" height="50">
+                            </a>
                             <a href="/top" class="nav-item nav-link mangamoji">ホーム！
                             </a>
                             <a href="/createManga" class="nav-item nav-link mangamoji">ツクル！
                             </a>
                             <a href="/join" class="nav-item nav-link mangamoji">サンカ！</a>
-                        </div>
-                        <div class="social ml-auto">
-                            <a href="https://twitter.com/gr_phenix"><i class="fab fa-twitter"></i></a>
-                            <a href=""><i class="fab fa-facebook-f"></i></a>
-                            <a href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a href=""><i class="fab fa-instagram"></i></a>
-                            <a href=""><i class="fab fa-youtube"></i></a>
                         </div>
                     </div>
                 </nav>
@@ -58,33 +51,25 @@
 
         <!-- Nav Bar End -->
         <div class="container pt-3">
+               	<h1  class="text-center"th:text="${mangaData.themeName}"></h1>
             <div class="row align-items-center">
                 <div class="col-lg-3 col-md-4">
-                    <div class="b-logo">
-        				<h1  class="text-center"th:text="${mangaData.themeName}"></h1>
-       				</div>
                 </div>
             </div>
         </div>
 
         <!-- Brand Start -->
-        <div class="brand">
-            <div class="container">
-            	<div class="row">
-            		<div class="col-md-1">
-            		</div>
-            		<div class="col-md-11">
-						<div th:object="${mangaData}" th:each="mangaData : ${mangaData.framelist}">
-							<img style="position:center;"th:src="'../' + *{path}" >
-              			</div>
-            		</div>
-            	</div>
-            </div>
+        <div class="container">
+        	<div class="row">
+        		<div class="col-12">
+					<div class="center-block" th:object="${mangaData}" th:each="mangaData : ${mangaData.framelist}">
+						<img class="mx-auto d-block frame-border mb-3" width="800" height="auto" th:src="'../' + *{path}" >
+          			</div>
+        		</div>
+        	</div>
         </div>
-        <!-- Brand End -->
-        <!-- Back to Top -->
+        <div id="page_top" class="mr-5"><a href="#"></a></div>
         <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
@@ -92,6 +77,6 @@
         <script src="lib/slick/slick.min.js"></script>
 
         <!-- Template Javascript -->
-        <script src="js/main.js"></script>
+        <script src="../js/main.js"></script>
     </body>
 </html>
