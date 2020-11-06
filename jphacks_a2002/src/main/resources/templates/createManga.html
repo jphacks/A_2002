@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <head>
         <meta charset="utf-8">
         <title>キャンバス/ヨンコミ！</title>
@@ -81,7 +82,6 @@
                       <a href="" class="mechalarge" data-bold="50">特大</a>
                     </div>
                     <input class="btn btn-danger" type="button" value="全消し" id="clear">
-                    <a class="btn btn-primary" id="download" href="#" download="canvas.png">ダウンロード</a>
                 </div>
                 <div class="col-5">
                   <form class="form-inline" id="contents" method="post" action="/create/add">
