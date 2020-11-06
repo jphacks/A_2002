@@ -77,6 +77,7 @@ public class MangaController {
 	public String getJoinDisplay(Principal principal, Model model) {
 		MangaData mangaData = mangaService.getRandomManga();
 		model.addAttribute("mangaData",mangaData);
+		model.addAttribute("beforePath", mangaData.getFramelist().get(mangaData.status - 1 ));
 		return "/join";
 	}
 
@@ -95,4 +96,5 @@ public class MangaController {
 			model.addAttribute("previewEntity", previewEntity);
 		return "/top";
 	}
+
 }

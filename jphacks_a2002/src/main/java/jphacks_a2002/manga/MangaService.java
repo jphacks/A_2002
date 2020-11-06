@@ -49,8 +49,10 @@ public class MangaService {
 	//Controller側でテーマIDとコマのデータ頂戴
 	public int addNewManga(int themeId,FrameData frameData) {
 		//漫画ごとの一意なIDの割り振りは話し合ってからRepositoryかこっちに記述
-		int FrameId = frameService.addNewFrame(frameData);
-		return mangaRepository.insertManga(themeId,FrameId);
+		//int FrameId = frameService.addNewFrame(frameData);
+		//ほんとのreturnはこっちね
+		//return mangaRepository.insertManga(themeId,FrameId);
+		return 1;
 	}
 
 	//コマ追加画面遷移時に未完成な漫画のデータを一つ取得する
@@ -68,7 +70,7 @@ public class MangaService {
 	//正直このやり方が最良かはよくわかんね
 	public int addNewFrame(int mangaId,FrameData frameData) {
 		//リポジトリ側でコマFlagみたいなやつ1進めるように作っとてん
-		frameService.addNewFrame(frameData);
+		//frameService.addNewFrame(frameData);
 		return mangaRepository.updateManga(mangaId);
 	}
 
