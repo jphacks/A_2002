@@ -22,154 +22,161 @@
 
     </head>
     <body>
-        <div class="nav-bar">
-            <div class="container">
-                <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-                    <a href="#" class="navbar-brand">MENU</a>
-                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
+    	<div class="nav-bar">
+        	<div class="container">
+            	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                	<a href="#" class="navbar-brand">MENU</a>
+                	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                		<span class="navbar-toggler-icon"></span>
                     </button>
-
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <div class="navbar-nav mr-auto">
-                        	<a href="top" class="nav-item nav-link mangamoji"><img src="img/JPHACKS_logo.png"  width="50" height="50">
-                            </a>
-                            <a href="top" class="nav-item nav-link mangamoji">ホーム！
-                            </a>
-                            <a href="/createManga" class="nav-item nav-link mangamoji">ツクル！
-                            </a>
-                            <a href="/join" class="nav-item nav-link mangamoji">サンカ！</a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
+	                    <div class="navbar-nav mr-auto">
+	                    	<a href="top" class="nav-item nav-link mangamoji"><img src="img/JPHACKS_logo.png"  width="50" height="50"></a>
+	                        <a href="top" class="nav-item nav-link mangamoji">ホーム！</a>
+	                        <a href="/createManga" class="nav-item nav-link mangamoji">ツクル！</a>
+	                 		<a href="/join" class="nav-item nav-link mangamoji">サンカ！</a>
+	                    </div>
+                	</div>
+            	</nav>
+        	</div>
+    	</div>
         <!-- Nav Bar End -->
         <div class="container pt-3">
         	<h1  class="text-center"th:text="${mangaData.themeName}"></h1>
         </div>
-        <!-- Brand Start -->
         <div class="container">
-        <div class="row">
-            <div class="col-md-2" >
-            <a th:href="${beforePath.path}"class="modal-view">
-				<img class="frame-border" th:src="${beforePath.path}"alt="亀"title="亀"id="image1" width="160" height="120" style="padding-right: 20px;">
-            </a>
-            </div>
-            <div class="col-md-10">
-                <canvas class="frame-border" id="canvas" width="800" height="600" style="box-sizing: border-box;"></canvas>
-            </div>
-             <div class="row">
-                  <div class="col-2">
-                  </div>
-                  <div class="col-4 rounded-lg" style="background-color: rgb(197, 197, 197); padding:5px;">
-                    <div class="color float-right">
-                      <label class="h5">色：</label>
-                      <a href="" class="black" data-color="0, 0, 0, 1"></a>
-                      <a href="" class="red" data-color="255, 0, 0, 1"></a>
-                      <a href="" class="blue" data-color="0, 0, 255, 1"></a>
-                      <a href="" class="yellow" data-color="255, 255, 0, 1"></a>
-                      <a href="" class="white" data-color="255, 255, 255, 1"></a>
-                    </div>
+        	<div class="row">
+            	<div class="col-md-2" >
+            		<a th:href="${beforePath.path}"class="modal-view">
+						<img class="frame-border" th:src="${beforePath.path}"alt="亀"title="亀"id="image1" width="160" height="120" style="padding-right: 20px;">
+            		</a>
+            	</div>
+            	<div class="col-md-10">
+                	<canvas class="frame-border" id="canvas" width="800" height="600" style="box-sizing: border-box;"></canvas>
+            	</div>
+             	<div class="row">
+                	<div class="col-2"></div>
+                	<div class="col-4 rounded-lg" style="background-color: rgb(197, 197, 197); padding:5px;">
+                    	<div class="color float-right">
+                      		<label class="h5">色：</label>
+		                    <a href="" class="black" data-color="0, 0, 0, 1"></a>
+		                    <a href="" class="red" data-color="255, 0, 0, 1"></a>
+		                    <a href="" class="blue" data-color="0, 0, 255, 1"></a>
+		                    <a href="" class="yellow" data-color="255, 255, 0, 1"></a>
+		                    <a href="" class="white" data-color="255, 255, 255, 1"></a>
+                    	</div>
                     <div class="bold">
-                      <label class="h5">太さ：</label>
-                      <a href="" class="little" data-bold="1">小</a>
-                      <a href="" class="middle" data-bold="10">中</a>
-                      <a href="" class="large" data-bold="20">大</a>
-                      <a href="" class="mechalarge" data-bold="50">特大</a>
+	                    <label class="h5">太さ：</label>
+	                    <a href="" class="little" data-bold="1">小</a>
+	                    <a href="" class="middle" data-bold="10">中</a>
+	                    <a href="" class="large" data-bold="20">大</a>
+	                    <a href="" class="mechalarge" data-bold="50">特大</a>
                     </div>
                     <input class="btn btn-danger" type="button" value="全消し" id="clear">
                     <a class="btn btn-primary" id="download" href="#" download="canvas.png">ダウンロード</a>
                 </div>
                 <div class="col-5">
-                  <form class="form-inline" id="contents" method="post" th:action="@{'join/add/'}+${beforePath.frameID}">
-                    <label class="mangamoji">サクシャ：</label>
-                    <input type="text" class="ml-1 col-3" name="creater">
-                    <textarea class="d-none" name="imageDate" rows="40" cols="40" id="draw_data"></textarea>
-                  	<button type="button" class="mangamoji ml-2 btn" data-toggle="modal" data-target="#testModal" onclick="setCanvasData()">ソウシン！</button>
-                  </form>
+                	<form class="form-inline" id="contents" method="post" th:action="@{'join/add/'}+${beforePath.frameID}">
+                    	<label class="mangamoji">サクシャ：</label>
+                    	<input type="text" class="ml-1 col-3" name="creater">
+                    	<textarea class="d-none" name="imageDate" rows="40" cols="40" id="draw_data"></textarea>
+                  		<button type="button" class="mangamoji ml-2 btn" data-toggle="modal" data-target="#testModal" onclick="setCanvasData()">ソウシン！</button>
+                  	</form>
                 </div>
-                <div class="col-1">
-                </div>
-        </div>
-
-        </div>
+                <div class="col-1"></div>
+        		</div>
+        	</div>
+		</div>
+		<!-- ボタン・リンククリック後に表示される画面の内容 -->
+		<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <h4 class="modal-title mangamoji2" id="myModalLabel">確認ッ！</h4>
+		            </div>
+		            <div class="modal-body mangamoji2">
+		                <label class="h3">これで完成でいい？</label>
+		            </div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-default mangamoji2" data-dismiss="modal">まだ描く</button>
+		                <button type="submit" class="btn btn-danger mangamoji2" form="contents">これでいい</button>
+		            </div>
+		        </div>
+		    </div>
 		</div>
     </body>
-        <!-- Brand End -->
-        <!-- Back to Top -->
-        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/slick/slick.min.js"></script>
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script>
-        <script src="js/modal.js"></script>
-        <script>
-            // canvas
-            var cnvs = document.getElementById('canvas');
-            var ctx = cnvs.getContext('2d');
-            // 変数宣言
-            const cnvWidth = 1024;
-            const cnvHeight = 768;
-            var cnvColor = "0, 0, 0, 1";  // 線の色
-            var cnvBold = 5;  // 線の太さ
-            var clickFlg = 0;  // クリック中の判定 1:クリック開始 2:クリック中
-            var bgColor = "rgb(255,255,255)";
-            // canvasの背景色を設定(指定がない場合にjpeg保存すると背景が黒になる)
-            setBgColor();
-            // canvas上でのイベント
-            $("#canvas").mousedown(function(){
-              clickFlg = 1; // マウス押下開始
-            }).mouseup(function(){
-              clickFlg = 0; // マウス押下終了
-            }).mousemove(function(e){
-              // マウス移動処理
-              if(!clickFlg) return false;
-              draw(e.offsetX, e.offsetY);
-            });
-            // 描画処理
-            function draw(x, y) {
-              ctx.lineWidth = cnvBold;
-              ctx.strokeStyle = 'rgba('+cnvColor+')';
-              // 初回処理の判定
-              if (clickFlg == "1") {
-                clickFlg = "2";
-                ctx.beginPath();
-                ctx.lineCap = "round";  //　線を角丸にする
-                ctx.moveTo(x, y);
-              } else {
-                ctx.lineTo(x, y);
-              }
-              ctx.stroke();
-            };
-            // 色の変更
-            $(".color a").click(function(){
-              cnvColor = $(this).data("color");
-              return false;
-            });
-            // 線の太さ変更
-            $(".bold a").click(function(){
-              cnvBold = $(this).data("bold");
-              return false;
-            });
-            // 描画クリア
-            $("#clear").click(function(){
-              ctx.clearRect(0,0,cnvWidth,cnvHeight);
-              setBgColor();
-            });
-            // canvasを画像で保存
-            $("#download").click(function(){
-              canvas = document.getElementById('canvas');
-              var base64 = canvas.toDataURL("image/png");
-              document.getElementById("download").href = base64;
-            });
-            function setBgColor(){
-              // canvasの背景色を設定(指定がない場合にjpeg保存すると背景が黒になる)
-              ctx.fillStyle = bgColor;
-              ctx.fillRect(0,0,cnvWidth,cnvHeight);
-            }
-          </script>
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/slick/slick.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    <script src="js/modal.js"></script>
+    <script>
+	    // canvas
+	    var cnvs = document.getElementById('canvas');
+	    var ctx = cnvs.getContext('2d');
+	    // 変数宣言
+	    const cnvWidth = 1024;
+	    const cnvHeight = 768;
+	    var cnvColor = "0, 0, 0, 1";  // 線の色
+	    var cnvBold = 5;  // 線の太さ
+	    var clickFlg = 0;  // クリック中の判定 1:クリック開始 2:クリック中
+	    var bgColor = "rgb(255,255,255)";
+	    // canvasの背景色を設定(指定がない場合にjpeg保存すると背景が黒になる)
+	    setBgColor();
+	    // canvas上でのイベント
+	    $("#canvas").mousedown(function(){
+	      clickFlg = 1; // マウス押下開始
+	    }).mouseup(function(){
+	      clickFlg = 0; // マウス押下終了
+	    }).mousemove(function(e){
+	      // マウス移動処理
+	      if(!clickFlg) return false;
+	      draw(e.offsetX, e.offsetY);
+	    });
+	    // 描画処理
+	    function draw(x, y) {
+	      ctx.lineWidth = cnvBold;
+	      ctx.strokeStyle = 'rgba('+cnvColor+')';
+	      // 初回処理の判定
+	      if (clickFlg == "1") {
+	        clickFlg = "2";
+	        ctx.beginPath();
+	        ctx.lineCap = "round";  //　線を角丸にする
+	        ctx.moveTo(x, y);
+	      } else {
+	        ctx.lineTo(x, y);
+	      }
+	      ctx.stroke();
+	    };
+	    // 色の変更
+	    $(".color a").click(function(){
+	      cnvColor = $(this).data("color");
+	      return false;
+	    });
+	    // 線の太さ変更
+	    $(".bold a").click(function(){
+	      cnvBold = $(this).data("bold");
+	      return false;
+	    });
+	    // 描画クリア
+	    $("#clear").click(function(){
+	      ctx.clearRect(0,0,cnvWidth,cnvHeight);
+	      setBgColor();
+	    });
+	    // canvasを画像で保存
+	    $("#download").click(function(){
+	      canvas = document.getElementById('canvas');
+	      var base64 = canvas.toDataURL("image/png");
+	      document.getElementById("download").href = base64;
+	    });
+	    function setBgColor(){
+	      // canvasの背景色を設定(指定がない場合にjpeg保存すると背景が黒になる)
+	      ctx.fillStyle = bgColor;
+	      ctx.fillRect(0,0,cnvWidth,cnvHeight);
+     	}
+	</script>
 </html>
