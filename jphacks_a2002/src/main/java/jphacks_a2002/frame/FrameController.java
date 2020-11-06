@@ -56,13 +56,13 @@ public class FrameController {
 	 * @param model
 	 * @return
 	 */
-	@PostMapping("/join/add")
-	public String addFrame(@ModelAttribute @Validated FrameForm form, Principal principal, Model model) {
-		frameService.addNewFrame(form);
-		//四コマ目だったら詳細へ
-		int frameNumber = mangaService.getStatus(form.getMangaID());
-		return ((frameNumber == 4) ? mangaController.selectMangaDisplay(principal, model, form.getMangaID()) : "/top");
-	}
+//	@PostMapping("/join/add")
+//	public String addFrame(@ModelAttribute @Validated FrameForm form, Principal principal, Model model) {
+//		frameService.addNewFrame(form);
+//		//四コマ目だったら詳細へ
+//		int frameNumber = mangaService.getStatus(form.getMangaID());
+//		return ((frameNumber == 4) ? mangaController.selectMangaDisplay(principal, model, form.getMangaID()) : "/top");
+//	}
 
 
 }
