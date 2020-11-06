@@ -47,12 +47,9 @@ public class MangaService {
 	//新規に作成された漫画をデータベースに登録（一応登録件数を返す）
 	//新規漫画作成時に必要なテーマなどはthemeパッケージにて記述
 	//Controller側でテーマIDとコマのデータ頂戴
-	public int addNewManga(int themeId,FrameData frameData) {
+	public MangaData addNewManga(int themeID) {
 		//漫画ごとの一意なIDの割り振りは話し合ってからRepositoryかこっちに記述
-		//int FrameId = frameService.addNewFrame(frameData);
-		//ほんとのreturnはこっちね
-		//return mangaRepository.insertManga(themeId,FrameId);
-		return 1;
+		return mangaRepository.insertManga(themeID);
 	}
 
 	//コマ追加画面遷移時に未完成な漫画のデータを一つ取得する
