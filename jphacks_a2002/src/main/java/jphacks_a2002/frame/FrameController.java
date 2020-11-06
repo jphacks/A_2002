@@ -9,10 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jphacks_a2002.manga.MangaController;
+import jphacks_a2002.manga.MangaData;
 import jphacks_a2002.manga.MangaService;
 
 
@@ -31,23 +32,19 @@ public class FrameController {
 	MangaService mangaService;
 	@Autowired
 	MangaController mangaController;
+
+
 	/**
-	 * 漫画作成を確定する
+	 * 漫画を新規作成する
 	 * @param form
 	 * @param model
 	 * @return
 	 * @throws IOException
 	 */
-	@RequestMapping("/createManga/cofirm/{frameID}")
-	public String confirmCreateManga(@ModelAttribute @Validated FrameForm form , Principal principal, Model model) throws IOException {
-		FrameData frameData = new FrameData();
-		/*
-		 * frameService.フォームの中とガッチャマン(form);
-			or
-		   frameservice.addNewFrame(form);
-		   に変更するか
-		*/
-		frameService.addNewFrame(form);
+	@RequestMapping("/create/manga/{themeID}")
+	public String addNewFrame(@ModelAttribute @Validated FrameForm form, Principal principal, Model model,@PathVariable("tehemeID")int themeID ) throws IOException {
+		MangaData mangaData =  mangaService.addNewManga(themeID);
+		frameService.addNewFrame(form,mangaData);
 		return "/top";
 	}
 
@@ -58,9 +55,9 @@ public class FrameController {
 	 * @return
 	 * @throws IOException
 	 */
-	@PostMapping("/join/add")
-	public String addFrame(@ModelAttribute @Validated FrameForm form, Principal principal, Model model) throws IOException {
-		frameService.addNewFrame(form);
+	@RequestMapping("/join/add/{frameID}")
+	public String addJoinFrame(@ModelAttribute @Validated FrameForm form, Principal principal, Model model,@PathVariable("frameID")int frameID) throws IOException {
+		frameService.addJoinFrame(form,frameID);
 		//四コマ目だったら詳細へ
 		int frameNumber = mangaService.getStatus(form.getMangaID());
 		return ((frameNumber == 4) ? mangaController.selectMangaDisplay(principal, model, form.getMangaID()) : "/top");
