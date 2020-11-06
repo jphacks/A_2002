@@ -18,7 +18,7 @@ public class MangaRepository {
 	JdbcTemplate jdbc;
 
 
-	private static final String SELECT_UNDONE_MANGA = "SELECT * FROM manga_table as m JOIN frame_table as f on(m.manga_id = f.manga_id) JOIN theme_table as t on(m.theme_id = t.theme_id) WHERE m.status < 4";
+	private static final String SELECT_UNDONE_MANGA = "SELECT * FROM manga_table as m JOIN frame_table as f on(m.manga_id = f.manga_id) JOIN theme_table as t on(m.theme_id = t.theme_id) WHERE m.status < 4 ORDER BY f.frame_no";
 
 	private static final String SELECT_ONE_MANGA = "SELECT * FROM manga_table as m JOIN frame_table as f on(m.manga_id = f.manga_id) JOIN theme_table as t on(m.theme_id = t.theme_id) WHERE m.status = 4 AND f.manga_id = ? ORDER BY frame_no";
 //	private static final String SELECT_SEARCH_MANGA = "SELECT * FROM manga_table as m ,frame_table as f1,frame_table as f2,frame_table as f3,frame_table as f4 "

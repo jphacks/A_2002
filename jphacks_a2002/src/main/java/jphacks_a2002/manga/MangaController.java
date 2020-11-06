@@ -92,6 +92,7 @@ public class MangaController {
 		System.out.println(mangaData.getMangaID());
 		System.out.println(mangaData.getFramelist());
 		model.addAttribute("mangaData",mangaData);
+		model.addAttribute("provFrameData",mangaData.getFramelist().get(mangaData.getStatus()-1));
 		model.addAttribute("beforePath", mangaData.getFramelist().get(mangaData.status - 1 ));
 		return "/join";
 	}
