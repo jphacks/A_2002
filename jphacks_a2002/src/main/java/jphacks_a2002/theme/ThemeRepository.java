@@ -31,8 +31,8 @@ public class ThemeRepository {
 
 		for (Map<String, Object> map : resultList) {
 			ThemeData data = new ThemeData();
-			data.setTheme_id((Integer) map.get("theme_id"));
-			data.setTheme_name((String)map.get("theme_name"));
+			data.setThemeId((Integer) map.get("theme_id"));
+			data.setThemeName((String)map.get("theme_name"));
 
 			entity.getThemeList().add(data);
 		}

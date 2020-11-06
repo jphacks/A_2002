@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <head>
         <meta charset="utf-8">
         <title>トップ/ヨンコミ！</title>
@@ -39,9 +40,9 @@
 
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
-                        	<a href="top" class="nav-item nav-link mangamoji"><img src="img/JPHACKS_logo.png"  width="50" height="50">
+                        	<a href="/top" class="nav-item nav-link mangamoji"><img src="img/JPHACKS_logo.png"  width="50" height="50">
                             </a>
-                            <a href="top" class="nav-item nav-link mangamoji">ホーム！
+                            <a href="/top" class="nav-item nav-link mangamoji">ホーム！
                             </a>
                             <a href="/createManga" class="nav-item nav-link mangamoji">ツクル！
                             </a>
@@ -56,12 +57,11 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-12">
-                    <img src="img/logo-yoncomi.png" class="img-fluid" alt="Logo">
+                    <img src="img/logo-yoncomi.png" class="img-fluid pt-3" alt="Logo">
                 </div>
             </div>
         </div>
-        <hr>
-            <div class="container rounded-lg" style="background-color: rgb(255, 214, 214); padding:5px;">
+            <div class="container mt-3" style="background-color: rgb(255, 214, 214); padding:5px;">
                 <div class="row">
                 <div class="col-12">
                     <h1 class="pt-3 pl-5 mangamoji2">新着４コマ漫画ッ！！</h1>
@@ -70,26 +70,9 @@
             <div class="row">
                 <div class="col-12">
                     <div id="grid">
-                        <ul>
+                        <ul th:object="${previewEntity}" th:each="previewEntity : ${previewEntity.previewList}">
                             <!-- 繰り返し処理で自動でグリッドに -->
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
-                            <li><img src="img/img.jpg" width="200" height="150" /></li>
+                            <li><a th:href="'/artwork/'+${previewEntity.mangaID}"><img th:src="'../' + *{path}" width="200" height="150" /></a></li>
                         </ul>
                     </div>
                 </div>

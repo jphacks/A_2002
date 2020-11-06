@@ -1,6 +1,7 @@
 package jphacks_a2002.frame;
 
 
+import java.io.IOException;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +36,10 @@ public class FrameController {
 	 * @param form
 	 * @param model
 	 * @return
+	 * @throws IOException
 	 */
 	@RequestMapping("/createManga/cofirm/{frameID}")
-	public String confirmCreateManga(@ModelAttribute @Validated FrameForm form , Principal principal, Model model) {
+	public String confirmCreateManga(@ModelAttribute @Validated FrameForm form , Principal principal, Model model) throws IOException {
 		FrameData frameData = new FrameData();
 		/*
 		 * frameService.フォームの中とガッチャマン(form);
@@ -45,7 +47,6 @@ public class FrameController {
 		   frameservice.addNewFrame(form);
 		   に変更するか
 		*/
-
 		frameService.addNewFrame(form);
 		return "/top";
 	}
@@ -55,9 +56,10 @@ public class FrameController {
 	 * @param form
 	 * @param model
 	 * @return
+	 * @throws IOException
 	 */
 	@PostMapping("/join/add")
-	public String addFrame(@ModelAttribute @Validated FrameForm form, Principal principal, Model model) {
+	public String addFrame(@ModelAttribute @Validated FrameForm form, Principal principal, Model model) throws IOException {
 		frameService.addNewFrame(form);
 		//四コマ目だったら詳細へ
 		int frameNumber = mangaService.getStatus(form.getMangaID());
