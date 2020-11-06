@@ -19,6 +19,7 @@
         <link href="lib/slick/slick-theme.css" rel="stylesheet">
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+
     </head>
     <body>
         <!-- Top Bar Start -->
@@ -57,7 +58,10 @@
         <div class="container">
         <div class="row">
             <div class="col-md-2" >
-                <img src="img/1024x768.png"alt="亀"title="亀"id="image1" width="180" height="AUTO" style="padding-right: 20px;">
+            <a href="img/1024x768.png" class="modal-view">
+                  <img src="img/1024x768.png"alt="亀"title="亀"id="image1" width="180" height="AUTO" style="padding-right: 20px;">
+           	</a>
+
             </div>
             <div class="col-md-10">
                 <canvas id="canvas" width="800" height="600" style="border: solid 5px rgb(121, 121, 121);box-sizing: border-box;"></canvas>
@@ -84,13 +88,15 @@
       	<a class="btn btn-primary" id="download" href="#" download="canvas.png">ダウンロード</a>
          </div>
          <div class="rounded-lg col-6">
-         	<label class="mangamoji  m-0">サクシャ：</label>
+         	<div style="display:inline-flex;">
+         		<label class="mangamoji  m-0">サクシャ：</label>
             	<input type="text" value=""size="20"class="p-0">
             	<form method="post" action="/join/add">
-            	<button class="mangamoji"style="">ツイカ！</button>
+            		<button class="mangamoji"style="">ツイカ！</button>
             	</form>
-            </div>
-            <form action=""></form>
+	        </div>
+          </div>
+
         </div>
 		</div>
     </body>
@@ -104,6 +110,7 @@
         <script src="lib/slick/slick.min.js"></script>
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+        <script src="js/modal.js"></script>
         <script>
             // canvas
             var cnvs = document.getElementById('canvas');

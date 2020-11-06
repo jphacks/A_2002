@@ -14,25 +14,25 @@ INSERT INTO manga_table (manga_ID,theme_id,status)
 VALUES(3,2,2);
 
 INSERT INTO frame_table
-VALUES(1,'hayakawa','/frame/1.png','2020-11-03',1,1);
+VALUES(1,'hayakawa','img/frame/1.png','2020-11-03',1,1);
 
 INSERT INTO frame_table
-VALUES(2,'nishida','/frame/2.png','2020-11-03',1,2);
+VALUES(2,'nishida','img/frame/2.png','2020-11-03',1,2);
 
 INSERT INTO frame_table
-VALUES(3,'tiba','/frame/3.png','2020-11-03',1,3);
+VALUES(3,'tiba','img/frame/3.png','2020-11-03',1,3);
 
 INSERT INTO frame_table
-VALUES(4,'uemura','/frame/4.png','2020-11-03',1,4);
+VALUES(4,'uemura','img/frame/4.png','2020-11-03',1,4);
 
 INSERT INTO frame_table
-VALUES(5,'nakata','/frame/5.png','2020-11-03',2,1);
+VALUES(5,'nakata','img/frame/5.png','2020-11-03',2,1);
 
 INSERT INTO frame_table
-VALUES(6,'nakata','/frame/6.png','2020-11-03',3,1);
+VALUES(6,'nakata','img/frame/6.png','2020-11-03',3,1);
 
 INSERT INTO frame_table
-VALUES(7,'nakata','/frame/7.png','2020-11-03',3,2);
+VALUES(7,'nakata','img/frame/7.png','2020-11-03',3,2);
 
 INSERT INTO theme_table
 VALUES(1,'爆発');
