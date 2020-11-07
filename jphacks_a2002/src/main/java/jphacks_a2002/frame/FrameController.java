@@ -57,7 +57,7 @@ public class FrameController {
 	 * @throws IOException
 	 */
 	@RequestMapping("/join/add/{frameID}")
-	public String addJoinFrame(@ModelAttribute @Validated FrameForm form, Principal principal, Model model,@PathVariable("frameID")int frameID) throws IOException {
+	public String addJoinFrame(@PathVariable("frameID")int frameID, @ModelAttribute @Validated FrameForm form, Principal principal, Model model) throws IOException {
 		frameService.addJoinFrame(form,frameID);
 		//四コマ目だったら詳細へ
 		int frameNumber = mangaService.getStatus(form.getMangaID());

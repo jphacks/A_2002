@@ -40,6 +40,7 @@ public class FrameService {
 		int frameNameLast = frameRepository.getLastFrameID();
 		String path = this.writeImgFile(frameForm.getImageData(),Integer.toString(frameNameLast)+".png");
 		MangaData mangaData = mangaService.getOneMangaData(frameID);
+		mangaService.statusUpdate(mangaData.getMangaID());
 		frameForm.setPath(path);
 		return frameRepository.insertOneFrame(this.createMangaFormToData(frameForm,mangaData));
 	}

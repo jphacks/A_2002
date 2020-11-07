@@ -175,5 +175,11 @@
 	      ctx.fillStyle = bgColor;
 	      ctx.fillRect(0,0,cnvWidth,cnvHeight);
      	}
+        // canvasをbase64変換してセット
+        function setCanvasData(){
+        	canvas = document.getElementById('canvas');
+            var base64 = canvas.toDataURL("image/png");
+            document.getElementById("draw_data").value = base64;
+         }ß
 	</script>
 </html>

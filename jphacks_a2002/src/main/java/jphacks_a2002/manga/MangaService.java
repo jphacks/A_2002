@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jphacks_a2002.PreviewEntity;
-import jphacks_a2002.frame.FrameData;
 import jphacks_a2002.frame.FrameRepository;
 import jphacks_a2002.frame.FrameService;
 
@@ -65,7 +64,7 @@ public class MangaService {
 	//コントローラでコマテーブルの情報を作成した後こっちを呼び出して欲しい
 	//コマのパッケージの方でコマIDをコントローラに返すように記述する
 	//正直このやり方が最良かはよくわかんね
-	public int addNewFrame(int mangaId,FrameData frameData) {
+	public int statusUpdate(int mangaId) {
 		//リポジトリ側でコマFlagみたいなやつ1進めるように作っとてん
 		//frameService.addNewFrame(frameData);
 		return mangaRepository.updateManga(mangaId);
