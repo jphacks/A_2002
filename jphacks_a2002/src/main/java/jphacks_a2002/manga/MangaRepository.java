@@ -179,5 +179,11 @@ public class MangaRepository {
 		return mangaData.getStatus();
 	}
 
+	public int getMangaID(int frameID) {
+		List<Map<String, Object>> resultList = jdbc.queryForList(SELECT_ONE_MANGA,frameID);
+		MangaData mangaData = mappingSelectResultMangaData(resultList);
+		return mangaData.getMangaID();
+	}
+
 //	public manga
 }

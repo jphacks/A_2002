@@ -60,7 +60,8 @@ public class FrameController {
 	public String addJoinFrame(@PathVariable("frameID")int frameID, @ModelAttribute @Validated FrameForm form, Principal principal, Model model) throws IOException {
 		frameService.addJoinFrame(form,frameID);
 		//四コマ目だったら詳細へ
-		int frameNumber = mangaService.getStatus(form.getMangaID());
+		int mangaID = mangaService.getMangaID(frameID);
+		int frameNumber = mangaService.getStatus(mangaID);
 //		return ((frameNumber == 4) ? mangaController.selectMangaDisplay(principal, model, form.getMangaID()) : "/top");
 		return ((frameNumber == 4) ? mangaController.selectMangaDisplay(principal, model, form.getMangaID()) : "redirect:/");
 	}
