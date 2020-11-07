@@ -83,4 +83,9 @@ public class MangaService {
 	public MangaData getOneMangaData(int frameID) {
 		return mangaRepository.getMangaData(frameID);
 	}
+
+	public int getMangaID(int frameID) {
+
+		return mangaRepository.getMangaID(frameID);
+	}
 }
