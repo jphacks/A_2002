@@ -46,7 +46,7 @@ public class FrameController {
 		MangaData mangaData =  mangaService.addNewManga(themeID);
 		frameService.addNewFrame(form,mangaData);
 		//return "/top";
-		return mangaController.getMangaListDisplay(principal, model);
+		return "redirect:/";
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class FrameController {
 		//四コマ目だったら詳細へ
 		int frameNumber = mangaService.getStatus(form.getMangaID());
 //		return ((frameNumber == 4) ? mangaController.selectMangaDisplay(principal, model, form.getMangaID()) : "/top");
-		return ((frameNumber == 4) ? mangaController.selectMangaDisplay(principal, model, form.getMangaID()) : mangaController.getMangaListDisplay(principal, model));
+		return ((frameNumber == 4) ? mangaController.selectMangaDisplay(principal, model, form.getMangaID()) : "redirect:/");
 	}
 
 

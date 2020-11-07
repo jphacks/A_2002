@@ -45,7 +45,7 @@ public class FrameService {
 		return frameRepository.insertOneFrame(this.createMangaFormToData(frameForm,mangaData));
 	}
 
-	//返り値path
+	//返り値はDBで使うためdestinationFileとは別
 	private String writeImgFile(String imgStr,String imgName) throws IOException {
 		imgStr = imgStr.split(",")[1];
 		System.out.println(imgName);
@@ -54,7 +54,8 @@ public class FrameService {
 		File newpng = new File(destinationFile.toString());
 		newpng.createNewFile();
 		Files.write(destinationFile, decodedImg);
-		return destinationFile.toString();
+
+		return "img/frame/" + imgName;
 	}
 
 	public FrameData createMangaFormToData(FrameForm frameForm,MangaData mangaData) {

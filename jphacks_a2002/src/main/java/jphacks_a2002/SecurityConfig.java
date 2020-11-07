@@ -41,14 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 
 //		// ログイン不要ページの設定
-//		http.authorizeRequests().antMatchers("/css/**").permitAll() // cssへアクセス許可
-//				.antMatchers("/login").permitAll() // ログインページは直リンクOK
-//				.antMatchers("/signup").permitAll() // 新規ユーザー登録画面は直リンクOK
-//				.antMatchers("/user/**").hasAnyAuthority("TEACHER","STUFF") // ユーザ管理機能は管理権限ユーザに許可
-//				.antMatchers("/user/").hasAnyAuthority("TEACHER","STUFF") //
-//				//.antMatchers("/h2-console/**").permitAll() // XXX h2-console使用時は有効にする.
-//				.anyRequest().authenticated(); // それ以外は直リンク禁止
-//
+		http.authorizeRequests().antMatchers("/**").permitAll() .anyRequest().authenticated(); // それ以外は直リンク禁止
+
 //		//ログイン処理
 //		http.formLogin().loginProcessingUrl("/login") // ログイン処理のパス
 //				.loginPage("/login") // ログインページの指定
@@ -64,8 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //
 //		// (開発用)CSRF対策 無効設定
 //		// XXX h2-console使用時は有効にする.
-//		http.csrf().disable();
-//		http.headers().frameOptions().disable();
+		http.csrf().disable();
+		http.headers().frameOptions().disable();
 	}
 
 	@Override
