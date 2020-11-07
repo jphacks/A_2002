@@ -33,7 +33,9 @@ public class FrameService {
 		int frameNameLast = frameRepository.getLastFrameID();
 		String path = this.writeImgFile(frameForm.getImageData(),Integer.toString(frameNameLast)+".png");
 		frameForm.setPath(path);
-		return frameRepository.insertOneFrame(this.createMangaFormToData(frameForm,mangaData));
+		FrameData data = this.createMangaFormToData(frameForm,mangaData);
+		data.setFrameNo(1);
+		return frameRepository.insertOneFrame(data);
 	}
 
 	public int addJoinFrame(FrameForm frameForm,int frameID) throws IOException {
