@@ -1,6 +1,6 @@
 # 4コマ漫画作成サイト『ヨンコミ！』
 
-[![IMAGE ALT TEXT HERE](https://jphacks.com/wp-content/uploads/2020/09/JPHACKS2020_ogp.jpg)](https://www.youtube.com/watch?v=G5rULR53uMk)
+[![IMAGE ALT TEXT HERE](https://jphacks.com/wp-content/uploads/2020/09/JPHACKS2020_ogp.jpg)](https://youtu.be/ZvABtlvTHUU)
 
 ## 製品概要
 ### 4コマ漫画　×　Tech
