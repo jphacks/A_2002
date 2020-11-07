@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.Date;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,23 +26,25 @@ public class FrameService {
 	@Autowired
 	MangaService mangaService;
 
+	Random random = new Random();
+
 	//コマの追加時に呼び出される
 	//MangaControllerから呼び出される予定だが、ちょっと微妙かもと思っている
 	//返り値はコマID
 	//このやり方だとFrameControllerがいらないのよな
 	public int addNewFrame(FrameForm frameForm,MangaData mangaData) throws IOException {
 		int frameNameLast = frameRepository.getLastFrameID();
-		String path = this.writeImgFile(frameForm.getImageData(),Integer.toString(frameNameLast)+".png");
+		String path = this.writeImgFile(frameForm.getImageData(),random.nextInt()+".png");
 		frameForm.setPath(path);
 		FrameData data = this.createMangaFormToData(frameForm,mangaData);
 		data.setFrameNo(1);
 		return frameRepository.insertOneFrame(data);
 	}
 
-	public int addJoinFrame(FrameForm frameForm,int frameID) throws IOException {
+	public int addJoinFrame(FrameForm frameForm,int mangaID) throws IOException {
 		int frameNameLast = frameRepository.getLastFrameID();
-		String path = this.writeImgFile(frameForm.getImageData(),Integer.toString(frameNameLast)+".png");
-		MangaData mangaData = mangaService.getOneMangaData(frameID);
+		String path = this.writeImgFile(frameForm.getImageData(),random.nextInt()+".png");
+		MangaData mangaData = mangaService.getOneMangaData(mangaID);
 		mangaService.statusUpdate(mangaData.getMangaID());
 		frameForm.setPath(path);
 		return frameRepository.insertOneFrame(this.createMangaFormToData(frameForm,mangaData));
@@ -70,6 +73,29 @@ public class FrameService {
 		data.setMangaID(mangaData.getMangaID());
 		//これ画面から渡されるやつに1足すって処理でいいかわかんねえ
 		data.setFrameNo(mangaData.getStatus() + 1 );
+		return data;
+	}
+
+
+
+	public void addFrame(FrameForm form) throws IOException {
+		Date date = new Date();
+		form.setCreateDate(date);
+		int frameNameLast = frameRepository.getLastFrameID();
+		String path = this.writeImgFile(form.getImageData(),Integer.toString(frameNameLast)+".png");
+		form.setPath(path);
+		FrameData data = formToData(form);
+		frameRepository.insertOneFrameJoin(data);
+		mangaService.statusUpdate(data.getMangaID());
+	}
+
+	private FrameData formToData(FrameForm form) {
+		FrameData data = new FrameData();
+		data.setCreateDate(form.getCreateDate());
+		data.setCreater(form.getCreater());
+		data.setFrameNo(form.getFrameNo());
+		data.setMangaID(form.getMangaID());
+		data.setPath(form.getPath());
 		return data;
 	}
 }

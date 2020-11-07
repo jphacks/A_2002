@@ -18,9 +18,10 @@ public class MangaRepository {
 	JdbcTemplate jdbc;
 
 
-	private static final String SELECT_UNDONE_MANGA = "SELECT * FROM manga_table as m JOIN frame_table as f on(m.manga_id = f.manga_id) JOIN theme_table as t on(m.theme_id = t.theme_id) WHERE m.status < 4 ORDER BY f.frame_no";
+	private static final String SELECT_UNDONE_MANGA = "SELECT * FROM manga_table as m JOIN frame_table as f on(m.manga_id = f.manga_id) JOIN theme_table as t on(m.theme_id = t.theme_id) WHERE m.status < 4 ORDER BY m.manga_id";
 
 	private static final String SELECT_ONE_MANGA = "SELECT * FROM manga_table as m JOIN frame_table as f on(m.manga_id = f.manga_id) JOIN theme_table as t on(m.theme_id = t.theme_id) WHERE m.status = 4 AND f.manga_id = ? ORDER BY frame_no";
+	private static final String SELECT_ONE_MANGA_FRAMEID = "SELECT * FROM manga_table as m JOIN frame_table as f on(m.manga_id = f.manga_id) JOIN theme_table as t on(m.theme_id = t.theme_id) WHERE m.status = 4 AND f.frame_id = ? ORDER BY frame_no";
 //	private static final String SELECT_SEARCH_MANGA = "SELECT * FROM manga_table as m ,frame_table as f1,frame_table as f2,frame_table as f3,frame_table as f4 "
 //			+ "WHERE m.frame_ID1 = f1.frame_ID AND m.frame_ID2 = f2.frame_ID AND  m.frame_ID3 = f3.frame_ID AND m.frame_ID4 = f4.frame_ID AND status = 4 AND ("
 //			+ "m.frame_ID1 IN(SELECT frame_ID FROM frame_table WHERE creater = ?) OR m.frame_ID2 IN(SELECT frame_ID FROM frame_table WHERE creater = ?) OR "
@@ -62,10 +63,6 @@ public class MangaRepository {
 					continue;
 				}
 			}
-			mangaData.setMangaID((Integer) map.get("manga_id"));
-			mangaData.setThemeID((Integer)map.get("theme_id"));
-			mangaData.setThemeName((String)map.get("theme_name"));
-			mangaData.setStatus((Integer)map.get("status"));
 			frameData.setFrameID((Integer)map.get("frame_id"));
 			frameData.setCreater((String)map.get("creater"));
 			frameData.setPath((String)map.get("path"));
@@ -73,6 +70,11 @@ public class MangaRepository {
 			frameData.setMangaID((Integer)map.get("manga_id"));
 			frameData.setFrameNo((Integer)map.get("frame_no"));
 			mangaData.getFramelist().add(frameData);
+			mangaData.setMangaID((Integer) map.get("manga_id"));
+			mangaData.setThemeID((Integer)map.get("theme_id"));
+			mangaData.setThemeName((String)map.get("theme_name"));
+			mangaData.setStatus((Integer)map.get("status"));
+
 			entity.getMangaList().add(mangaData);
 		}
 		return entity;
@@ -166,8 +168,8 @@ public class MangaRepository {
 	}
 
 
-	public MangaData getMangaData(int frameID) {
-		List<Map<String, Object>> resultList = jdbc.queryForList(SELECT_ONE_MANGA,frameID);
+	public MangaData getMangaData(int mangaID) {
+		List<Map<String, Object>> resultList = jdbc.queryForList(SELECT_ONE_MANGA,mangaID);
 		MangaData mangaData = mappingSelectResultMangaData(resultList);
 		return mangaData;
 	}
@@ -175,12 +177,12 @@ public class MangaRepository {
 	public int getStatus(int mangaId) {
 		List<Map<String, Object>> resultList = jdbc.queryForList(SELECT_STATUS,mangaId);
 
-		MangaData mangaData = mappingSelectResultData(resultList);
+		MangaData mangaData = mappingSelectResultMangaData(resultList);
 		return mangaData.getStatus();
 	}
 
 	public int getMangaID(int frameID) {
-		List<Map<String, Object>> resultList = jdbc.queryForList(SELECT_ONE_MANGA,frameID);
+		List<Map<String, Object>> resultList = jdbc.queryForList(SELECT_ONE_MANGA_FRAMEID,frameID);
 		MangaData mangaData = mappingSelectResultMangaData(resultList);
 		return mangaData.getMangaID();
 	}

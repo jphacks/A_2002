@@ -56,15 +56,28 @@ public class FrameController {
 	 * @return
 	 * @throws IOException
 	 */
-	@RequestMapping("/join/add/{frameID}")
-	public String addJoinFrame(@PathVariable("frameID")int frameID, @ModelAttribute @Validated FrameForm form, Principal principal, Model model) throws IOException {
-		frameService.addJoinFrame(form,frameID);
+//	@RequestMapping("/join/add/{mangaID}")
+	public String addJoinFrame(@PathVariable("mangaID")int mangaID, @ModelAttribute @Validated FrameForm form, Principal principal, Model model) throws IOException {
+//		int mangaID = mangaService.getMangaID(mangaID);
+		form.setMangaID(mangaID);
+		frameService.addJoinFrame(form,mangaID);
 		//四コマ目だったら詳細へ
-		int mangaID = mangaService.getMangaID(frameID);
+
 		int frameNumber = mangaService.getStatus(mangaID);
 //		return ((frameNumber == 4) ? mangaController.selectMangaDisplay(principal, model, form.getMangaID()) : "/top");
 		return ((frameNumber == 4) ? mangaController.selectMangaDisplay(principal, model, form.getMangaID()) : "redirect:/");
 	}
 
+	@RequestMapping("/join/add/{mangaID}")
+	public String addJoinFram(@PathVariable("mangaID")int mangaID, @ModelAttribute @Validated FrameForm form, Principal principal, Model model) throws IOException {
+
+		int frameNumber = mangaService.getStatus(mangaID) + 1;
+		System.out.println(frameNumber);
+		form.setFrameNo(frameNumber);
+		frameService.addFrame(form);
+
+		//四コマ目だったら詳細へ
+		return ((frameNumber == 4) ? "redirect:/artwork/{mangaID}": "redirect:/");
+	}
 
 }
