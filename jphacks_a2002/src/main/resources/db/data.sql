@@ -153,22 +153,22 @@ INSERT INTO frame_table
 VALUES(39,'nakata','img/frame/39.png','2020-11-03',11,4);
 
 INSERT INTO theme_table
-VALUES(1,'爆発');
+VALUES(1,'JPHACKS');
 INSERT INTO theme_table
-VALUES(2,'猫');
+VALUES(2,'JPHACKS');
 INSERT INTO theme_table
-VALUES(3,'パフォーマンス');
+VALUES(3,'JPHACKS');
 INSERT INTO theme_table
-VALUES(4,'かつおぶし');
+VALUES(4,'JPHACKS');
 INSERT INTO theme_table
 VALUES(5,'JPHACKS');
 INSERT INTO theme_table
-VALUES(6,'体操');
+VALUES(6,'JPHACKS');
 INSERT INTO theme_table
-VALUES(7,'股間');
+VALUES(7,'JPHACKS');
 INSERT INTO theme_table
-VALUES(8,'怪人');
+VALUES(8,'JPHACKS');
 INSERT INTO theme_table
-VALUES(9,'神');
+VALUES(9,'JPHACKS');
 INSERT INTO theme_table
-VALUES(10,'ユダヤ教');
+VALUES(10,'JPHACKS');

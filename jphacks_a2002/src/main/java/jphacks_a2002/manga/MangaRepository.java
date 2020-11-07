@@ -121,6 +121,7 @@ public class MangaRepository {
 			mangaData.setMangaID((Integer) map.get("manga_id"));
 			mangaData.setThemeID((Integer)map.get("theme_id"));
 			mangaData.setThemeName((String)map.get("theme_name"));
+			mangaData.setStatus((Integer)map.get("status"));
 			for (Map<String, Object> result : resultList) {
 			//これに置き換えたら超短くなってきもちンゴかもしんね
 				FrameData frameData = new FrameData();
@@ -132,7 +133,7 @@ public class MangaRepository {
 			}
 
 
-			mangaData.setStatus((Integer)map.get("status"));
+
 
 
 		return mangaData;
